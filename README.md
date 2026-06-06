@@ -1,7 +1,7 @@
 # GOAT Cup 2026
 
 <p align="center">
-  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnRhczU2NGx4aXNwampmNGZoNWlzNGM4bXlqZzF0Y2Q1aTEyNGN0bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1WkmI67HxcmAyDnXZX/giphy.gif" alt="Messi wink GIF" width="650">
+  <img src="twin-chess.jpg" alt="Messi and Ronaldo chess match" width="780">
 </p>
 
 <p align="center">
