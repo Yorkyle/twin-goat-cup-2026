@@ -1,7 +1,7 @@
 # GOAT Cup 2026
 
 <p align="center">
-  <img src="./assets/messi-ronaldo.jpg" alt="Messi and Ronaldo together" width="780">
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnRhczU2NGx4aXNwampmNGZoNWlzNGM4bXlqZzF0Y2Q1aTEyNGN0bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1WkmI67HxcmAyDnXZX/giphy.gif" alt="Messi wink GIF" width="650">
 </p>
 
 <p align="center">
@@ -111,6 +111,7 @@ For the full official tournament view, visit FIFA:
 ---
 
 ## 👑 Final Word
+GIF via GIPHY.
 
 Messi. Ronaldo.  
 Xavier. William.  
