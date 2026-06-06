@@ -111,7 +111,6 @@ For the full official tournament view, visit FIFA:
 ---
 
 ## 👑 Final Word
-GIF via GIPHY.
 
 Messi. Ronaldo.  
 Xavier. William.  
