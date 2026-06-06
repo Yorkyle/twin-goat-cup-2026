@@ -42,9 +42,9 @@ The dashboard keeps the tournament front and center, while each player side give
 
 ## 🎓 Built For
 
-- **Graduation season**
-- **World Cup season**
-- **Twin rivalry season**
+- **Graduation**
+- **World Cup 2026**
+- **Twin rivalry**
 
 A perfect mix of:
 **celebration, competition, soccer history, and personal memory.**
