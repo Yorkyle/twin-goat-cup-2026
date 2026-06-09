@@ -1,7 +1,7 @@
 # GOAT Cup 2026
 
 <p align="center">
-  <img src="twin-chess.jpg" alt="Messi and Ronaldo chess match" width="780">
+  <img src="icon.png" alt="GOAT Cup 2026" width="780">
 </p>
 
 <p align="center">
