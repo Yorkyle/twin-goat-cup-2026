@@ -1,0 +1,2918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Clash Cup 2026 - Cinematic Faceoff</title>
+<link rel="apple-touch-icon" sizes="180x180" href="icon.png?v=1">
+<link rel="icon" type="image/png" href="icon.png?v=1">
+<meta name="apple-mobile-web-app-title" content="Clash Cup">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#07101d">
+<style>
+:root{--bg:#07101d;--panel:#0c203a;--panel2:#14375e;--gold:#ffd257;--ink:#f8fbff;--muted:#b7c7dc;--red:#ff6471;--blue:#67caff;--green:#44e08d;--bad:#fb7185;--good:#4ade80;--warn:#facc15;--dark:#020611}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% -20%,#1b4c7d 0,#07101d 48%,#02050b 100%);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;user-select:none;touch-action:manipulation;overscroll-behavior:none}
+#app{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:8px}
+.screen{width:min(1220px,100%);min-height:min(780px,calc(100vh - 16px));border:3px solid #2c5d8f;border-radius:18px;background:linear-gradient(180deg,rgba(13,32,58,.98),rgba(3,9,20,.99));box-shadow:0 0 36px rgba(98,199,255,.18),inset 0 0 0 1px rgba(255,255,255,.06);overflow:hidden;position:relative}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:linear-gradient(90deg,#071426,#143961,#071426);border-bottom:2px solid #2c5d8f}
+.title{font-weight:1000;color:var(--gold);letter-spacing:.07em;text-transform:uppercase;text-shadow:3px 3px #000;font-size:clamp(18px,4vw,32px)}
+.subtitle{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);text-align:right}
+.content{padding:14px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;min-height:560px;gap:16px;background:radial-gradient(circle at 20% 10%,rgba(255,210,87,.16),transparent 30%),radial-gradient(circle at 80% 25%,rgba(98,199,255,.17),transparent 33%),linear-gradient(120deg,#081525,#09243c 60%,#081525)}
+.logoBox{display:flex;flex-direction:column;justify-content:center;padding:30px}
+.bigLogo{font-size:clamp(42px,9vw,82px);font-weight:1000;line-height:.88;text-transform:uppercase;color:var(--gold);text-shadow:5px 5px #000}
+.tagline{font-size:clamp(16px,3vw,24px);font-weight:900;margin-top:12px;text-shadow:2px 2px #000}
+.menuButtons{display:flex;flex-direction:column;justify-content:center;gap:12px;padding:26px}
+.modeNote{line-height:1.5;color:#dbeafe}
+.grid{display:grid;grid-template-columns:1.08fr .92fr;gap:14px}
+.card{background:linear-gradient(180deg,rgba(21,55,95,.96),rgba(5,16,32,.98));border:2px solid #315f90;border-radius:14px;padding:14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+.card.gold{border-color:#8a6e25;box-shadow:0 0 18px rgba(255,210,87,.12),inset 0 0 0 1px rgba(255,255,255,.06)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.small{font-size:12px;color:var(--muted)}
+.pill{display:inline-block;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.28);padding:4px 9px;border-radius:999px;font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase}
+.scoreboard{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:12px}
+.scoreTeam{border:2px solid #315f90;border-radius:12px;padding:10px;background:rgba(0,0,0,.25)}
+.scoreNum{font-size:clamp(28px,6vw,44px);font-weight:1000;color:var(--gold);text-shadow:2px 2px #000;text-align:center}
+.meter{height:8px;background:#07101e;border:1px solid rgba(255,255,255,.15);border-radius:99px;overflow:hidden;margin-top:6px}
+.meter span{display:block;height:100%;background:linear-gradient(90deg,#3be489,#ffd257)}
+.field{height:172px;border:3px solid #e9f7ff;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,.14) 0 2px,transparent 2px 20px),linear-gradient(180deg,#16803d,#0c5d2a);position:relative;overflow:hidden;box-shadow:inset 0 0 50px rgba(0,0,0,.35)}
+.field:before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:3px dashed rgba(255,255,255,.65)}
+.box{position:absolute;top:34px;width:105px;height:104px;border:3px solid rgba(255,255,255,.65);background:rgba(255,255,255,.04)}
+.box.left{left:0;border-left:0} .box.right{right:0;border-right:0}
+.goal{position:absolute;top:58px;width:22px;height:58px;border:3px solid rgba(255,255,255,.85);background:rgba(255,255,255,.08)}
+.goal.left{left:-2px;border-left:0} .goal.right{right:-2px;border-right:0}
+.zoneLabel{position:absolute;top:8px;left:50%;transform:translateX(-50%);padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.55);font-size:12px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em}
+.token{position:absolute;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:1000;font-size:12px;border:2px solid #fff;box-shadow:0 3px 0 rgba(0,0,0,.45),0 0 12px rgba(255,255,255,.25);transition:left .35s,top .35s}
+.token.red{background:linear-gradient(180deg,#ff5e66,#a80c17)} .token.blue{background:linear-gradient(180deg,#62c7ff,#1269c4)}
+.token.keeper{border-radius:8px;width:28px;height:36px} .token.active{outline:4px solid var(--gold);box-shadow:0 0 22px var(--gold),0 3px 0 rgba(0,0,0,.5)}
+.ball{position:absolute;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#eee 55%,#111 56%,#111 62%,#fff 63%);border:2px solid #111;box-shadow:0 0 14px rgba(255,255,255,.9);transition:left .35s,top .35s}
+.zones{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}
+.zone{height:28px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.22);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--muted);text-transform:uppercase;text-align:center}
+.zone.active{background:linear-gradient(180deg,#ffd257,#c78316);color:#1d1100;box-shadow:0 0 14px rgba(255,210,87,.32)}
+.portraitCard{border:3px solid #8a6e25;border-radius:16px;background:#030814;overflow:hidden;box-shadow:0 0 24px rgba(255,210,87,.14),inset 0 0 0 1px rgba(255,255,255,.08)}
+.portraitCrop{aspect-ratio:16/7;background-size:cover;background-position:center top;background-repeat:no-repeat;border-bottom:2px solid #8a6e25;position:relative}
+.portraitCrop:after{content:"";position:absolute;inset:auto 0 0 0;height:46px;background:linear-gradient(transparent,rgba(2,6,17,.98))}
+.dialogueBox{padding:12px 14px 14px;background:linear-gradient(180deg,#07162d,#020814)}
+.nameplate{display:inline-block;margin-bottom:8px;padding:4px 10px;background:#061224;border:2px solid var(--gold);color:var(--gold);font-weight:1000;text-transform:uppercase;letter-spacing:.06em}
+.dialogueText{font-size:clamp(17px,2.5vw,23px);line-height:1.35;font-weight:800;white-space:pre-wrap;text-shadow:2px 2px #000;min-height:82px}
+.choiceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.penGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.btn{border:0;border-radius:12px;min-height:56px;padding:12px 14px;background:linear-gradient(180deg,#2e86e4,#14518f);color:#fff;font-weight:1000;text-transform:uppercase;letter-spacing:.03em;box-shadow:0 5px 0 #082b50,inset 0 0 0 2px rgba(255,255,255,.12);cursor:pointer;font-size:15px}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #082b50}
+.btn.gold{background:linear-gradient(180deg,#ffe071,#c88210);color:#211100;box-shadow:0 5px 0 #704100,inset 0 0 0 2px rgba(255,255,255,.23)}
+.btn.red{background:linear-gradient(180deg,#ef6670,#a31423);box-shadow:0 5px 0 #510814}
+.btn.gray{background:linear-gradient(180deg,#64748b,#334155);box-shadow:0 5px 0 #111827}
+.btn:disabled,.disabled{opacity:.45;filter:grayscale(1);box-shadow:none;transform:none}
+.moveName{font-size:17px;font-weight:1000} .moveDesc{font-size:12px;color:var(--muted);margin-top:4px;text-transform:none;letter-spacing:0}
+.eventLog{max-height:220px;overflow:auto;font-size:13px;color:#d9e7ff} .logItem{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08)} .logItem b{color:var(--gold)}
+.footerBtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px} .footerBtns .btn{flex:1;min-width:160px}
+.overlay{position:absolute;inset:0;background:rgba(1,4,10,.86);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}
+.cineCard{width:min(1100px,100%);background:linear-gradient(180deg,#07162d,#020814);border:3px solid #8a6e25;border-radius:18px;overflow:hidden;box-shadow:0 0 36px rgba(255,210,87,.18)}
+.cineCard.slim{width:min(760px,100%)}
+.cineImage{aspect-ratio:16/9;background-size:cover;background-position:center center;position:relative}
+.cineImage.vertical{aspect-ratio:3/4;background-size:contain;background-repeat:no-repeat;background-position:center center;background-color:#020814}
+.cineImage:after{content:"";position:absolute;inset:auto 0 0 0;height:110px;background:linear-gradient(transparent,rgba(2,8,20,.94))}
+.cineText{padding:14px 18px 18px;background:linear-gradient(180deg,rgba(7,22,45,.96),rgba(2,8,20,.99))}
+.cineTitle{font-size:clamp(20px,3vw,34px);font-weight:1000;color:var(--gold);text-transform:uppercase;text-shadow:3px 3px #000;margin-bottom:8px}
+.cineBody{font-size:clamp(18px,2.3vw,26px);line-height:1.35;font-weight:900;white-space:pre-wrap;text-shadow:2px 2px #000}
+.tapNote{margin-top:10px;color:#dbeafe;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+.locked{font-size:44px;font-weight:1000;color:var(--gold);text-shadow:4px 4px #000;text-align:center}
+
+.campaignGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.campaignCard{border:2px solid rgba(255,210,87,.55);border-radius:16px;background:linear-gradient(180deg,#07162d,#020814);padding:14px;box-shadow:0 0 20px rgba(37,99,235,.12)}
+.campaignCard.locked{opacity:.55;filter:grayscale(.55);pointer-events:auto}
+.flagThumb{aspect-ratio:16/7;border-radius:12px;background-size:cover;background-position:center;border:2px solid rgba(255,255,255,.13);margin-bottom:10px}
+.starThumb{aspect-ratio:3/4;border-radius:12px;background-size:cover;background-position:center top;border:2px solid rgba(255,210,87,.45);margin-bottom:10px;box-shadow:0 0 18px rgba(255,210,87,.12)}
+.campaignTitle{font-size:24px;font-weight:1000;color:var(--gold);text-transform:uppercase;text-shadow:2px 2px #000}
+.campaignMeta{font-size:13px;color:var(--muted);line-height:1.35;margin:6px 0 12px}
+.stageList{display:grid;gap:10px;margin-top:12px}
+.stageRow{display:grid;grid-template-columns:72px 1fr auto;gap:10px;align-items:center;padding:8px;border:2px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.04)}
+.stageFlag{height:46px;border-radius:8px;background-size:cover;background-position:center;border:1px solid rgba(255,255,255,.18)}
+.bigEnd{font-size:clamp(42px,8vw,86px);text-align:center;color:#ffdf6c;text-shadow:5px 5px #000;text-transform:uppercase;font-weight:1000;letter-spacing:.05em}
+.centerBottom{display:flex;justify-content:center;margin-top:18px}
+
+@media(max-width:900px){.hero,.grid{grid-template-columns:1fr} .screen{min-height:calc(100vh - 8px)}}
+@media(max-width:820px){#app{padding:4px} .screen{border-width:2px;border-radius:10px;min-height:calc(100vh - 8px)} .topbar{padding:8px 10px} .content{padding:10px} .logoBox,.menuButtons{padding:14px} .choiceGrid,.penGrid{grid-template-columns:1fr} .zones{grid-template-columns:1fr} .zone{height:24px} .field{height:146px} .dialogueText{font-size:16px} .subtitle{text-align:left} .footerBtns .btn{min-width:130px} }
+
+/* Field animation bug-fix + mobile landscape polish */
+.grid{grid-template-columns:1.08fr .92fr}
+.field{width:100%;max-width:760px;margin:0 auto;aspect-ratio:700/172;height:auto;min-height:172px;display:flex;align-items:center;justify-content:center;padding:0;background:linear-gradient(180deg,#16803d,#0c5d2a)}
+.fieldWrap{position:relative;width:100%}
+.pitchSvg{width:100%;height:100%;display:block}
+.svgToken{filter:drop-shadow(0 3px 1px rgba(0,0,0,.55))}
+.svgToken.active circle.outer,.svgToken.active rect.outer{stroke:var(--gold);stroke-width:5;filter:drop-shadow(0 0 8px rgba(255,210,87,.9))}
+.svgToken text{font-size:12px;font-weight:1000;fill:#fff;text-anchor:middle;dominant-baseline:middle;text-shadow:1px 1px #000;pointer-events:none}
+.svgKeeper rect{stroke:#fff;stroke-width:2.5}
+.svgBall{filter:drop-shadow(0 0 7px rgba(255,255,255,.95))}
+.svgTrail{stroke:rgba(255,210,87,.88);stroke-width:5;stroke-linecap:round;animation:trailFade .72s ease-out 1 forwards}
+.svgArrow{font-size:38px;font-weight:1000;fill:rgba(255,255,255,.24);text-anchor:middle;dominant-baseline:middle}
+.goalName{font-size:10px;font-weight:1000;text-anchor:middle;letter-spacing:.06em;text-shadow:1px 1px #000}.goalName.red{fill:#ffd6da}.goalName.blue{fill:#d9f2ff}
+.playBanner{position:absolute;left:10px;bottom:8px;right:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;z-index:8;pointer-events:none}
+.playChip{padding:5px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.24);background:rgba(0,0,0,.58);font-size:11px;font-weight:1000;text-transform:uppercase;color:#eaf6ff;box-shadow:0 3px 0 rgba(0,0,0,.35)}
+.possChip.red{color:#ffd6da;border-color:rgba(255,100,113,.65)} .possChip.blue{color:#d9f2ff;border-color:rgba(103,202,255,.68)}
+.miniLegend{display:flex;justify-content:space-between;gap:8px;margin:8px auto 0;max-width:960px;color:var(--muted);font-size:11px;font-weight:800}.miniLegend span{background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 8px}
+@keyframes trailFade{from{opacity:.9}to{opacity:0}}
+.screen{min-height:calc(100vh - 4px);border-radius:8px}.topbar{padding:6px 10px}.title{font-size:16px}.subtitle{font-size:11px}.content{padding:8px}.grid{grid-template-columns:1.5fr .5fr;gap:8px}.card{padding:8px;border-radius:10px}.scoreboard{margin-bottom:6px}.scoreTeam{padding:6px}.scoreNum{font-size:26px}.meter{height:6px}.field{max-width:none;min-height:170px}.portraitCrop{aspect-ratio:16/4.2}.dialogueBox{padding:8px}.dialogueText{font-size:14px;min-height:44px}.choiceGrid,.penGrid{gap:6px}.btn{min-height:42px;padding:8px 10px;font-size:12px}.moveName{font-size:13px}.moveDesc{display:none}.eventLog{max-height:82px;font-size:11px}.logItem{padding:4px 0}.zones{gap:4px}.zone{height:22px;font-size:9px}.footerBtns{display:flex}
+}
+
+
+/* Vertical phone-first layout */
+html,body{min-height:100%;height:auto;overflow:auto;}
+#app{min-height:100vh;align-items:flex-start;justify-content:center;padding:6px;overflow:visible;}
+.screen{width:min(760px,100%);min-height:auto;overflow:visible;border-radius:14px;}
+.topbar{position:sticky;top:0;z-index:20;}
+.content{padding:10px;}
+.verticalMatch{display:flex;flex-direction:column;gap:10px;}
+.scoreCard{padding:10px;}
+.scoreboard{margin-bottom:8px;gap:6px;grid-template-columns:1fr auto 1fr;}
+.scoreTeam{padding:7px;min-width:0;}
+.scoreTeam .row{gap:5px;}
+.scoreTeam .small{font-size:10px;line-height:1.1;}
+.scoreTeam .pill{font-size:9px;padding:3px 6px;}
+.scoreNum{font-size:clamp(25px,9vw,40px);}
+.field{max-width:100%;min-height:150px;}
+.zones{grid-template-columns:repeat(5,1fr);gap:4px;margin-top:6px;}
+.zone{height:24px;font-size:9px;padding:2px;}
+.controlsDock{position:sticky;bottom:0;z-index:18;border-width:3px;box-shadow:0 -10px 24px rgba(2,6,17,.55),0 0 18px rgba(255,210,87,.14);}
+.controlsDock .small{font-size:12px;line-height:1.25;}
+.controlsDock p.small{margin:6px 0 10px;}
+.choiceGrid,.penGrid{grid-template-columns:1fr;gap:8px;}
+.btn{width:100%;min-height:58px;font-size:15px;}
+.moveName{font-size:16px;}
+.moveDesc{font-size:12px;}
+.portraitCard{order:3;}
+.portraitCrop{aspect-ratio:16/6;background-position:center top;}
+.dialogueBox{padding:10px 12px;}
+.nameplate{font-size:12px;margin-bottom:6px;}
+.dialogueText{font-size:clamp(16px,4.7vw,21px);min-height:auto;}
+.logDetails{border:2px solid #315f90;border-radius:14px;background:linear-gradient(180deg,rgba(21,55,95,.96),rgba(5,16,32,.98));overflow:hidden;}
+.logDetails summary{cursor:pointer;padding:12px 14px;font-weight:1000;color:var(--gold);list-style:none;}
+.logDetails summary::-webkit-details-marker{display:none;}
+.logDetails summary:after{content:' +';float:right;color:var(--muted);}
+.logDetails[open] summary:after{content:' –';}
+.logDetails .eventLog{max-height:190px;padding:0 14px 12px;}
+.footerBtns{gap:8px;margin-top:8px;}
+.footerBtns .btn{min-width:0;min-height:48px;}
+@media(min-width:900px){
+  .screen{width:min(860px,100%);} 
+  .field{min-height:190px;}
+  .choiceGrid,.penGrid{grid-template-columns:repeat(3,1fr);} 
+}
+@media(max-width:380px){
+  .title{font-size:15px}.subtitle{font-size:10px}.topbar{padding:8px}
+  .scoreTeam .pill{display:none}.zone{font-size:8px}.btn{min-height:54px;font-size:14px}.moveDesc{display:none}
+}
+
+
+.carrierArrow{font-size:18px;font-weight:1000;fill:#ffd257;text-anchor:middle;dominant-baseline:middle;filter:drop-shadow(0 2px 2px #000)}
+.svgBall,.svgTrail{display:none!important}
+
+.choiceGrid.two{grid-template-columns:repeat(2,1fr)}
+
+/* Campaign v1 display-fix pass: fit normal browser zoom better */
+#app{align-items:flex-start;padding:4px}
+.screen{width:min(1020px,100%);min-height:auto;border-width:2px;border-radius:10px}
+.topbar{padding:6px 10px}
+.title{font-size:18px}
+.subtitle{font-size:10px;line-height:1.2}
+.content{padding:8px}
+.verticalMatch{gap:8px}
+.card{padding:8px;border-radius:10px}
+.scoreboard{gap:8px;margin-bottom:6px;grid-template-columns:1fr 48px 1fr}
+.scoreTeam{padding:6px;border-radius:9px}
+.scoreNum{font-size:32px}
+.row{gap:6px}
+.small{font-size:10px}
+.pill{font-size:10px;padding:2px 6px}
+.meter{height:6px;margin-top:4px}
+.field{height:142px!important;min-height:0!important;max-width:760px!important;aspect-ratio:auto!important;border-radius:10px}
+.zones{gap:4px;margin-top:4px}
+.zone{height:22px;font-size:9px}
+.miniLegend{font-size:10px;margin-top:4px}
+.controlsDock{position:relative;bottom:auto;padding:8px;border-width:2px}
+.controlsDock p.small{margin:4px 0 8px}
+.btn{min-height:44px;padding:8px 10px;font-size:13px;border-radius:10px}
+.footerBtns{gap:8px;margin-top:8px}
+.footerBtns .btn{min-height:42px;min-width:0}
+.choiceGrid,.penGrid{gap:8px}
+.moveName{font-size:14px}
+.moveDesc{font-size:10px}
+.logDetails summary{padding:9px 12px}
+.logDetails .eventLog{max-height:120px}
+.portraitCard{display:none}
+.eventLog{max-height:140px}
+.campaignTitle{font-size:22px}
+.stageList{gap:8px}
+.stageRow{grid-template-columns:60px 1fr auto;padding:7px;gap:8px}
+.stageFlag{height:40px}
+.bigEnd{font-size:clamp(34px,7vw,62px)}
+/* Cinematics now stay inside viewport and advance by tapping anywhere */
+.overlay{position:fixed;inset:0;padding:10px;z-index:999;overflow:hidden;align-items:center}
+.cineCard{width:min(680px,96vw);max-height:92vh;border-width:2px;border-radius:14px;display:flex;flex-direction:column}
+.cineCard.slim{width:min(460px,94vw)}
+.cineImage{height:min(42vh,300px);aspect-ratio:auto;background-size:contain;background-repeat:no-repeat;background-color:#020814;flex:0 0 auto}
+.cineImage.vertical{height:min(52vh,360px);aspect-ratio:auto;background-size:contain}
+.cineImage:after{height:45px}
+.cineText{padding:10px 14px 12px;flex:0 0 auto}
+.cineTitle{font-size:clamp(18px,3vw,26px);margin-bottom:5px}
+.cineBody{font-size:clamp(15px,2.5vw,20px);line-height:1.25}
+.cineText .footerBtns{display:none}
+.tapNote{margin-top:8px;font-size:11px}
+@media(max-height:760px){
+  .field{height:126px!important}
+  .scoreNum{font-size:28px}
+  .btn{min-height:40px}
+  .card{padding:7px}
+  .cineImage{height:min(36vh,250px)}
+  .cineImage.vertical{height:min(44vh,300px)}
+}
+
+
+/* Scoreboard redesign + commentary-first layout */
+.screen{width:min(960px,100%)}
+.topbar{padding:5px 10px}
+.content{padding:6px}
+.verticalMatch{gap:6px}
+.scoreCard{padding:6px}
+.compactMatch{display:flex;flex-direction:column;gap:5px}
+.commentaryStrip{display:grid;grid-template-columns:minmax(120px,.32fr) 1fr;gap:8px;align-items:center;padding:6px 9px;border:2px solid #315f90;border-radius:10px;background:linear-gradient(90deg,rgba(6,18,36,.98),rgba(16,48,84,.9));min-height:42px}
+.commentarySpeaker{color:var(--gold);font-weight:1000;text-transform:uppercase;font-size:12px;text-shadow:2px 2px #000;letter-spacing:.04em}
+.commentaryLine{font-weight:850;font-size:13px;line-height:1.22;color:#eef6ff;text-shadow:1px 1px #000;white-space:pre-wrap}
+.field{height:118px!important;position:relative}
+.miniScoreHud{position:absolute;left:9px;top:7px;z-index:15;display:flex;align-items:center;gap:6px;padding:4px 7px;border-radius:999px;border:2px solid rgba(255,210,87,.8);background:rgba(1,8,18,.86);box-shadow:0 2px 0 rgba(0,0,0,.55);font-weight:1000;letter-spacing:.05em;text-shadow:1px 1px #000;pointer-events:none}
+.miniScoreHud b{font-size:17px;color:var(--gold)}
+.hudTeam{font-size:11px}.hudTeam.red{color:#ffd6da}.hudTeam.blue{color:#d9f2ff}.hudMinute{font-size:13px;color:#fff;background:rgba(255,255,255,.12);padding:1px 5px;border-radius:999px}
+.matchStatusStrip{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:900;padding:0 2px}.matchStatusStrip span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.compactZones{margin-top:0}.zone{height:19px;font-size:8px}
+.controlsDock{padding:7px}.btn{min-height:38px;padding:7px 9px;font-size:12px}.controlsDock p.small{margin:3px 0 6px}.moveName{font-size:13px}.moveDesc{font-size:9px}.logDetails summary{padding:8px 10px}.footerBtns .btn{min-height:38px}.footerBtns{margin-top:6px}.scoreboard{display:none}
+@media(max-height:760px){.field{height:108px!important}.commentaryStrip{min-height:38px;padding:5px 8px}.commentaryLine{font-size:12px}.btn{min-height:36px}.zone{height:18px}.miniScoreHud b{font-size:15px}}
+@media(max-width:760px){.commentaryStrip{grid-template-columns:1fr}.commentarySpeaker{font-size:11px}.commentaryLine{font-size:12px}.matchStatusStrip{font-size:9px;flex-direction:column;align-items:flex-start}.field{height:112px!important}}
+
+
+/* Final feature-scope pass: play-by-play, team colors, proper time */
+.playPanel{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.playBox{border:2px solid #315f90;border-radius:10px;background:rgba(0,0,0,.22);padding:8px 10px;min-height:52px}
+.playLabel{font-size:10px;font-weight:1000;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.playText{font-size:14px;line-height:1.22;font-weight:850;color:#eaf6ff;text-shadow:1px 1px #000}
+.hudMinute{min-width:52px;text-align:center}
+.svgToken.active circle.outer,.svgToken.active rect.outer{stroke:var(--teamGlow,var(--gold));stroke-width:5;filter:drop-shadow(0 0 8px var(--teamGlow,rgba(255,210,87,.9)))}
+@media(max-height:760px){
+  .playPanel{gap:6px;margin-bottom:6px}
+  .playBox{padding:6px 8px;min-height:44px}
+  .playText{font-size:12px}
+  .playLabel{font-size:9px}
+}
+@media(max-width:760px){.playPanel{grid-template-columns:1fr}}
+
+
+/* Field clarity tuning: simple colors, clean labels, universal gold possession glow */
+.svgToken text{font-size:13px!important;font-weight:1000;paint-order:stroke;stroke:rgba(0,0,0,.55);stroke-width:2px;text-shadow:none!important}
+.svgToken .captainStar{font-size:15px!important;stroke-width:1.5px}
+.svgToken circle.outer{stroke:#ffffff;stroke-width:2.5}
+.svgKeeper text{font-size:10px!important;letter-spacing:-.03em}
+.svgToken.active circle.outer,.svgToken.active rect.outer{stroke:#ffd257!important;stroke-width:5!important;filter:drop-shadow(0 0 8px rgba(255,210,87,.95))!important}
+.carrierArrow{fill:#ffd257!important}
+
+
+/* Halftime report polish */
+.halftimeCard{display:grid;gap:10px;max-width:880px}
+.halfScore{display:flex;align-items:center;gap:12px;font-size:clamp(30px,5vw,54px);font-weight:1000;letter-spacing:.04em;color:#fff;text-shadow:3px 3px #000}
+.halfScore .teamCode{color:#ffd257}
+.halfScore .scoreSep{color:#67caff;font-size:.8em}
+.halfStory{font-size:clamp(18px,2.6vw,26px);font-weight:900;line-height:1.18;color:#eaf6ff;text-shadow:2px 2px #000}
+.halfStats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.halfStat{border:2px solid rgba(103,202,255,.35);background:rgba(0,0,0,.24);border-radius:10px;padding:8px 10px}
+.halfStatLabel{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#ffd257;font-weight:1000;margin-bottom:2px}
+.halfStatValue{font-size:clamp(15px,2vw,20px);font-weight:1000;color:#fff;text-shadow:1px 1px #000}
+.halfFocus{border-left:5px solid #ffd257;padding:7px 10px;background:rgba(255,210,87,.08);border-radius:8px;font-size:clamp(15px,2vw,21px);line-height:1.22;font-weight:900;color:#fff;text-shadow:1px 1px #000}
+@media(max-width:760px){
+  .halfStats{grid-template-columns:1fr}
+  .halfScore{font-size:30px;flex-wrap:wrap}
+}
+
+
+/* Halftime fit polish */
+.cineCard.halftimeCine{width:min(760px,94vw);max-height:90vh}
+.cineCard.halftimeCine .cineImage{height:min(22vh,150px)!important;min-height:96px;background-size:contain}
+.cineCard.halftimeCine .cineText{padding:10px 18px 12px}
+.cineCard.halftimeCine .cineTitle{font-size:clamp(18px,2.5vw,28px);margin-bottom:6px}
+.cineCard.halftimeCine .cineBody{font-size:16px;line-height:1.15}
+.cineCard.halftimeCine .tapNote{margin-top:6px}
+.cineCard.halftimeCine .halftimeCard{gap:7px;max-width:720px}
+.cineCard.halftimeCine .halfScore{font-size:clamp(28px,4.1vw,42px);gap:9px;line-height:1}
+.cineCard.halftimeCine .halfStory{font-size:clamp(15px,2vw,20px);line-height:1.15}
+.cineCard.halftimeCine .halfStats{gap:6px}
+.cineCard.halftimeCine .halfStat{padding:6px 8px;border-radius:8px}
+.cineCard.halftimeCine .halfStatLabel{font-size:9px;margin-bottom:1px}
+.cineCard.halftimeCine .halfStatValue{font-size:clamp(13px,1.7vw,16px);line-height:1.15}
+.cineCard.halftimeCine .halfFocus{font-size:clamp(13px,1.8vw,16px);line-height:1.18;padding:6px 9px}
+@media(max-height:760px){
+  .cineCard.halftimeCine .cineImage{height:min(16vh,110px)!important;min-height:76px}
+  .cineCard.halftimeCine .halfScore{font-size:30px}
+  .cineCard.halftimeCine .halfStory{font-size:15px}
+  .cineCard.halftimeCine .halfStatValue{font-size:13px}
+  .cineCard.halftimeCine .halfFocus{font-size:13px}
+}
+
+
+/* FINAL SAFE HOME + SPLASH PATCH */
+.startScreen,
+.splashScreen,
+.homeScreen{
+  width:min(1220px,100%)!important;
+  min-height:calc(100vh - 16px)!important;
+  border:3px solid #8a6e25!important;
+  border-radius:16px!important;
+  background:#020814!important;
+  overflow:hidden!important;
+  position:relative!important;
+}
+.startLogoImg{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  z-index:1!important;
+  display:block!important;
+}
+.startShade{
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  background:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.18) 52%,rgba(0,0,0,.42))!important;
+  pointer-events:none!important;
+}
+.splashTap{
+  position:absolute!important;
+  left:50%!important;
+  bottom:28px!important;
+  transform:translateX(-50%)!important;
+  z-index:5!important;
+  min-width:min(580px,88vw)!important;
+  text-align:center!important;
+  background:rgba(2,8,20,.88)!important;
+  border:3px solid rgba(255,210,87,.96)!important;
+  border-radius:999px!important;
+  padding:12px 18px!important;
+  color:#fff6d6!important;
+  font-weight:1000!important;
+  text-transform:uppercase!important;
+  letter-spacing:.08em!important;
+  text-shadow:2px 2px #000!important;
+  box-shadow:0 0 24px rgba(255,210,87,.24),0 5px 0 rgba(0,0,0,.45)!important;
+}
+.homeButtonBar{
+  position:absolute!important;
+  left:50%!important;
+  bottom:44px!important;
+  transform:translateX(-50%)!important;
+  z-index:8!important;
+  width:min(760px,88vw)!important;
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:18px!important;
+  background:rgba(2,8,20,.72)!important;
+  border:2px solid rgba(255,210,87,.65)!important;
+  border-radius:18px!important;
+  padding:12px!important;
+  box-shadow:0 0 26px rgba(0,0,0,.55)!important;
+}
+.homeButtonBar .btn{
+  min-height:70px!important;
+  font-size:clamp(17px,2.2vw,25px)!important;
+}
+.homeHow{
+  position:absolute!important;
+  right:18px!important;
+  top:18px!important;
+  z-index:9!important;
+  width:48px!important;
+  height:48px!important;
+  border-radius:999px!important;
+  border:3px solid rgba(255,210,87,.92)!important;
+  background:rgba(2,8,20,.78)!important;
+  color:#fff6d6!important;
+  font-weight:1000!important;
+  font-size:20px!important;
+  cursor:pointer!important;
+}
+.homeMiniHint{
+  position:absolute!important;
+  left:18px!important;
+  right:18px!important;
+  bottom:12px!important;
+  z-index:8!important;
+  text-align:center!important;
+  color:#dbeafe!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  text-transform:uppercase!important;
+  letter-spacing:.08em!important;
+  text-shadow:2px 2px #000!important;
+}
+.logoMissingMsg{
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  padding:20px!important;
+  font-size:clamp(26px,5vw,64px)!important;
+  font-weight:1000!important;
+  color:#ffd257!important;
+  text-transform:uppercase!important;
+  letter-spacing:.08em!important;
+  text-shadow:4px 4px #000!important;
+}
+@media(max-width:700px){
+  .homeButtonBar{
+    grid-template-columns:1fr!important;
+    bottom:36px!important;
+    gap:10px!important;
+    width:92vw!important;
+  }
+  .homeButtonBar .btn{min-height:56px!important;font-size:16px!important}
+  .homeMiniHint{display:none!important}
+  .splashTap{font-size:12px!important;bottom:18px!important;min-width:90vw!important}
+}
+
+
+/* FINAL SPLASH POSITION PATCH */
+.splashScreen .splashTap{
+  top:auto!important;
+  bottom:4px!important;
+  transform:translateX(-50%)!important;
+}
+@media(max-width:700px){
+  .splashScreen .splashTap{bottom:4px!important;}
+}
+
+
+
+/* =========================================================
+   CLASH CUP 2026 RESPONSIVE PASS
+   Desktop stays as-is. These rules only activate on tablet
+   and phone screens. Phone portrait is the main mobile mode:
+   field first, play update second, action buttons third.
+========================================================= */
+
+/* Tablet: touch-friendly, but still close to the desktop layout */
+@media (min-width:701px) and (max-width:1100px){
+  #app{
+    padding:8px;
+  }
+
+  .screen{
+    width:min(980px,100%)!important;
+  }
+
+  .startScreen,
+  .splashScreen,
+  .homeScreen{
+    min-height:calc(100dvh - 16px)!important;
+  }
+
+  .homeButtonBar{
+    width:min(720px,86vw)!important;
+  }
+
+  .matchScreen .field{
+    height:clamp(150px,24dvh,220px)!important;
+    max-width:920px!important;
+  }
+
+  .matchScreen .playPanel{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  .matchScreen .choiceGrid,
+  .matchScreen .penGrid{
+    grid-template-columns:repeat(3,1fr)!important;
+  }
+
+  .matchScreen .btn{
+    min-height:52px!important;
+  }
+
+  .cineCard{
+    width:min(860px,94vw)!important;
+  }
+}
+
+/* Phone portrait: no-scroll normal gameplay layout */
+@media (max-width:700px) and (orientation:portrait){
+  html,
+  body{
+    width:100%;
+    min-height:100%;
+    overflow-x:hidden;
+  }
+
+  #app{
+    padding:0!important;
+    min-height:100dvh!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+  }
+
+  /* Start / splash screens become big app-style hero screens */
+  .startScreen,
+  .splashScreen,
+  .homeScreen{
+    width:100vw!important;
+    min-height:100dvh!important;
+    border:0!important;
+    border-radius:0!important;
+    overflow:hidden!important;
+  }
+
+  .startLogoImg{
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+
+  .startShade{
+    background:
+      linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.10) 38%,rgba(0,0,0,.70))!important;
+  }
+
+  .splashTap{
+    left:12px!important;
+    right:12px!important;
+    bottom:max(12px,env(safe-area-inset-bottom))!important;
+    transform:none!important;
+    width:auto!important;
+    min-width:0!important;
+    border-radius:18px!important;
+    padding:11px 12px!important;
+    font-size:12px!important;
+    line-height:1.2!important;
+  }
+
+  .homeButtonBar{
+    left:11px!important;
+    right:11px!important;
+    bottom:max(14px,env(safe-area-inset-bottom))!important;
+    transform:none!important;
+    width:auto!important;
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+    border-radius:18px!important;
+    padding:10px!important;
+  }
+
+  .homeButtonBar .btn{
+    min-height:56px!important;
+    font-size:16px!important;
+  }
+
+  .homeHow{
+    top:max(12px,env(safe-area-inset-top))!important;
+    right:12px!important;
+  }
+
+  .homeMiniHint{
+    display:none!important;
+  }
+
+  /* Match screen: field -> play updates -> action buttons */
+  .matchScreen{
+    width:100vw!important;
+    max-width:100vw!important;
+    height:100dvh!important;
+    min-height:100dvh!important;
+    border:0!important;
+    border-radius:0!important;
+    overflow:hidden!important;
+    display:flex!important;
+    flex-direction:column!important;
+  }
+
+  .matchScreen .topbar{
+    position:relative!important;
+    top:auto!important;
+    flex:0 0 auto!important;
+    padding:max(5px,env(safe-area-inset-top)) 8px 5px!important;
+    min-height:34px!important;
+  }
+
+  .matchScreen .title{
+    font-size:14px!important;
+    letter-spacing:.04em!important;
+  }
+
+  .matchScreen .subtitle{
+    font-size:9px!important;
+    line-height:1.1!important;
+    max-width:52vw!important;
+    overflow:hidden!important;
+  }
+
+  .matchScreen .content{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    padding:5px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    overflow:hidden!important;
+  }
+
+  .matchScreen .verticalMatch{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    gap:5px!important;
+    overflow:hidden!important;
+  }
+
+  .matchScreen .scoreCard{
+    flex:0 0 auto!important;
+    display:flex!important;
+    flex-direction:column!important;
+    gap:4px!important;
+    padding:5px!important;
+  }
+
+  .matchScreen .compactMatch{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:4px!important;
+  }
+
+  .matchScreen .fieldWrap{
+    order:1!important;
+  }
+
+  .matchScreen .playPanel{
+    order:2!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:4px!important;
+    margin:0!important;
+  }
+
+  .matchScreen .playBox{
+    min-height:0!important;
+    padding:5px 7px!important;
+    border-radius:8px!important;
+  }
+
+  .matchScreen .playLabel{
+    font-size:8px!important;
+    margin-bottom:1px!important;
+  }
+
+  .matchScreen .playText{
+    font-size:11.5px!important;
+    line-height:1.15!important;
+    display:-webkit-box!important;
+    -webkit-line-clamp:2!important;
+    -webkit-box-orient:vertical!important;
+    overflow:hidden!important;
+  }
+
+  .matchScreen .field{
+    height:clamp(124px,25dvh,170px)!important;
+    min-height:0!important;
+    max-width:100%!important;
+    border-width:2px!important;
+    border-radius:8px!important;
+  }
+
+  .matchScreen .miniLegend{
+    display:none!important;
+  }
+
+  .matchScreen .matchStatusStrip{
+    order:3!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    font-size:8px!important;
+    line-height:1!important;
+    gap:3px!important;
+    padding:0 1px!important;
+  }
+
+  .matchScreen .matchStatusStrip span{
+    max-width:33%!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+  }
+
+  .matchScreen .compactZones{
+    order:4!important;
+    display:grid!important;
+    grid-template-columns:repeat(5,1fr)!important;
+    gap:2px!important;
+    margin-top:0!important;
+  }
+
+  .matchScreen .zone{
+    height:16px!important;
+    font-size:7px!important;
+    line-height:1!important;
+    padding:1px!important;
+    border-radius:5px!important;
+  }
+
+  .matchScreen .miniScoreHud{
+    left:5px!important;
+    top:5px!important;
+    padding:2px 5px!important;
+    gap:4px!important;
+    border-width:1px!important;
+  }
+
+  .matchScreen .miniScoreHud b{
+    font-size:13px!important;
+  }
+
+  .matchScreen .hudTeam{
+    font-size:8px!important;
+  }
+
+  .matchScreen .hudMinute{
+    min-width:40px!important;
+    font-size:10px!important;
+    padding:0 3px!important;
+  }
+
+  .matchScreen .zoneLabel{
+    font-size:9px!important;
+    padding:2px 6px!important;
+  }
+
+  .matchScreen .playBanner{
+    left:4px!important;
+    right:4px!important;
+    bottom:2px!important;
+  }
+
+  .matchScreen .playChip{
+    font-size:8px!important;
+    padding:2px 5px!important;
+  }
+
+  .matchScreen .controlsDock{
+    flex:0 0 auto!important;
+    position:relative!important;
+    bottom:auto!important;
+    z-index:3!important;
+    padding:6px!important;
+    border-radius:10px!important;
+  }
+
+  .matchScreen .controlsDock .row{
+    gap:4px!important;
+  }
+
+  .matchScreen .controlsDock b{
+    font-size:12px!important;
+    line-height:1.1!important;
+  }
+
+  .matchScreen .controlsDock .pill{
+    font-size:8px!important;
+    padding:2px 5px!important;
+  }
+
+  .matchScreen .controlsDock p.small{
+    display:none!important;
+  }
+
+  .matchScreen .choiceGrid,
+  .matchScreen .penGrid{
+    grid-template-columns:1fr!important;
+    gap:6px!important;
+  }
+
+  .matchScreen .choiceGrid.two{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  .matchScreen .btn{
+    min-height:46px!important;
+    padding:6px 8px!important;
+    border-radius:9px!important;
+    font-size:12px!important;
+  }
+
+  .matchScreen .moveName{
+    font-size:13px!important;
+  }
+
+  .matchScreen .moveDesc{
+    display:none!important;
+  }
+
+  /* Normal mobile play should not need these onscreen. */
+  .matchScreen .logDetails,
+  .matchScreen .footerBtns{
+    display:none!important;
+  }
+
+  /* Mobile cinematic/event screens: big image with text overlay */
+  .overlay{
+    position:fixed!important;
+    inset:0!important;
+    padding:0!important;
+    align-items:stretch!important;
+    justify-content:stretch!important;
+    overflow:hidden!important;
+  }
+
+  .cineCard,
+  .cineCard.slim,
+  .cineCard.halftimeCine{
+    width:100vw!important;
+    height:100dvh!important;
+    max-height:none!important;
+    border:0!important;
+    border-radius:0!important;
+    display:block!important;
+    position:relative!important;
+    background:#020814!important;
+  }
+
+  .cineImage,
+  .cineImage.vertical,
+  .cineCard.halftimeCine .cineImage{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    aspect-ratio:auto!important;
+    background-size:cover!important;
+    background-position:center center!important;
+    background-repeat:no-repeat!important;
+  }
+
+  .cineImage:after{
+    height:55%!important;
+    background:linear-gradient(transparent,rgba(2,8,20,.94))!important;
+  }
+
+  .cineText,
+  .cineCard.halftimeCine .cineText{
+    position:absolute!important;
+    left:10px!important;
+    right:10px!important;
+    bottom:max(10px,env(safe-area-inset-bottom))!important;
+    z-index:3!important;
+    max-height:40dvh!important;
+    overflow:auto!important;
+    padding:10px 12px!important;
+    border:2px solid rgba(255,210,87,.78)!important;
+    border-radius:14px!important;
+    background:rgba(2,8,20,.86)!important;
+    box-shadow:0 0 24px rgba(0,0,0,.55)!important;
+  }
+
+  .cineTitle,
+  .cineCard.halftimeCine .cineTitle{
+    font-size:18px!important;
+    margin-bottom:5px!important;
+  }
+
+  .cineBody,
+  .cineCard.halftimeCine .cineBody{
+    font-size:14px!important;
+    line-height:1.2!important;
+  }
+
+  .tapNote{
+    font-size:10px!important;
+    margin-top:7px!important;
+  }
+}
+
+/* Very small phones: squeeze slightly more without changing gameplay order */
+@media (max-width:380px) and (orientation:portrait){
+  .matchScreen .field{
+    height:clamp(112px,23dvh,145px)!important;
+  }
+
+  .matchScreen .playText{
+    font-size:11px!important;
+    -webkit-line-clamp:2!important;
+  }
+
+  .matchScreen .btn{
+    min-height:42px!important;
+    font-size:11px!important;
+  }
+
+  .matchScreen .moveName{
+    font-size:12px!important;
+  }
+
+  .matchScreen .zone{
+    height:14px!important;
+    font-size:6.5px!important;
+  }
+}
+
+/* Phone landscape: playable fallback, but portrait remains preferred */
+@media (max-height:520px) and (orientation:landscape){
+  .overlay{
+    padding:6px!important;
+  }
+
+  .cineCard{
+    max-height:94dvh!important;
+    width:min(760px,94vw)!important;
+  }
+
+  .cineImage{
+    height:42dvh!important;
+  }
+
+  .cineText{
+    padding:8px 10px!important;
+  }
+
+  .cineBody{
+    font-size:13px!important;
+  }
+
+  .matchScreen .field{
+    height:96px!important;
+  }
+
+  .matchScreen .playPanel{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  .matchScreen .moveDesc,
+  .matchScreen .logDetails,
+  .matchScreen .footerBtns{
+    display:none!important;
+  }
+}
+
+
+/* Guided tutorial polish */
+.tutorialScreen .content{padding:10px}
+.tutorialLayout{display:grid;grid-template-columns:.72fr 1.28fr;gap:12px;align-items:stretch}
+.tutorialCoach{display:flex;flex-direction:column;gap:10px;justify-content:space-between;min-height:100%}
+.tutorialPortrait{aspect-ratio:4/5;border-radius:16px;background-size:cover;background-position:center top;border:3px solid #8a6e25;box-shadow:0 0 22px rgba(255,210,87,.16);position:relative;overflow:hidden;background-color:#020814}
+.tutorialPortrait:after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(transparent,rgba(2,8,20,.96))}
+.tutorialName{font-size:12px;color:var(--gold);font-weight:1000;text-transform:uppercase;letter-spacing:.08em;text-shadow:2px 2px #000}
+.tutorialTitle{font-size:clamp(22px,4vw,38px);line-height:1.05;color:var(--gold);font-weight:1000;text-transform:uppercase;text-shadow:3px 3px #000;margin:2px 0 8px}
+.tutorialText{font-size:clamp(16px,2.2vw,22px);line-height:1.25;font-weight:850;color:#eef6ff;text-shadow:1px 1px #000}
+.tutorialStepNote{font-size:12px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.07em;margin-top:8px}
+.tutorialDemo{display:flex;flex-direction:column;gap:8px}
+.tutorialFocus{outline:4px solid rgba(255,210,87,.95);box-shadow:0 0 22px rgba(255,210,87,.28)!important;border-radius:12px}
+.tutorialDemo .field{height:150px!important;max-width:none!important}
+.tutorialDemo .miniLegend{font-size:10px;flex-wrap:wrap}
+.tutorialMockControls{border:2px solid #8a6e25;border-radius:12px;background:linear-gradient(180deg,rgba(21,55,95,.96),rgba(5,16,32,.98));padding:9px}
+.tutorialPenaltyGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tutorialBottom{display:flex;gap:8px;justify-content:space-between;margin-top:10px;flex-wrap:wrap}
+.tutorialBottom .btn{flex:1;min-width:135px}
+.tutorialHomeBtn{grid-column:1/-1!important;background:linear-gradient(180deg,#64748b,#334155)!important;box-shadow:0 5px 0 #111827,inset 0 0 0 2px rgba(255,255,255,.12)!important;color:#fff!important}
+.tutorialPrompt .cineCard{max-width:760px}
+.tutorialPrompt .cineText .footerBtns{display:flex!important}
+.tutorialChoiceGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.tutorialCaptainPick{border:3px solid rgba(255,210,87,.85);border-radius:16px;overflow:hidden;background:#020814;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.5),0 0 20px rgba(255,210,87,.12);min-height:210px;position:relative}
+.tutorialCaptainPick:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.5)}
+.tutorialCaptainImg{height:170px;background-size:cover;background-position:center top}
+.tutorialCaptainLabel{padding:10px;background:rgba(2,8,20,.92);color:#ffd257;font-weight:1000;text-transform:uppercase;text-align:center;letter-spacing:.06em;text-shadow:2px 2px #000}
+.tutorialSkipLine{display:flex;justify-content:center;margin-top:6px}
+.tutorialSkipLine .btn{width:min(260px,100%)}
+@media(max-width:700px){.tutorialChoiceGrid{grid-template-columns:1fr}.tutorialCaptainPick{min-height:170px}.tutorialCaptainImg{height:128px}}
+@media(max-width:800px){.tutorialLayout{grid-template-columns:1fr}.tutorialPortrait{aspect-ratio:16/6}.tutorialCoach{min-height:auto}.tutorialDemo .field{height:122px!important}.tutorialBottom .btn{min-width:0}.tutorialText{font-size:16px}.tutorialTitle{font-size:24px}}
+@media(max-height:760px){.tutorialDemo .field{height:110px!important}.tutorialPortrait{display:none}.tutorialText{font-size:15px}.tutorialTitle{font-size:22px}.tutorialBottom .btn{min-height:40px}}
+
+
+/* Tutorial v2: captain coach layer + interactive practice */
+.tutorialDemo{position:relative}
+.tutorialSpeechBox{margin-top:10px;border:2px solid rgba(255,210,87,.7);background:rgba(2,8,20,.78);border-radius:12px;padding:10px 12px;color:#eef6ff;font-weight:850;line-height:1.28;text-shadow:1px 1px #000}
+.tutorialResult{margin-top:8px;border:2px solid rgba(74,222,128,.65);background:rgba(6,55,36,.65);border-radius:10px;padding:8px 10px;color:#eafff3;font-weight:900;text-shadow:1px 1px #000}
+.tutorialFloatingCoach{position:absolute;z-index:12;display:grid;grid-template-columns:74px minmax(160px,260px);gap:8px;align-items:end;pointer-events:none;filter:drop-shadow(0 8px 10px rgba(0,0,0,.55))}
+.tutorialFloatPortrait{height:94px;border:3px solid rgba(255,210,87,.92);border-radius:14px;background-size:cover;background-position:center top;background-color:#020814;box-shadow:0 0 18px rgba(255,210,87,.24)}
+.tutorialFloatBubble{background:rgba(2,8,20,.92);border:2px solid rgba(255,210,87,.86);border-radius:14px;padding:9px 11px;color:#fff;font-size:12px;line-height:1.25;font-weight:900;text-shadow:1px 1px #000}
+.tutorialFloatingCoach.field{right:14px;top:68px}
+.tutorialFloatingCoach.play{right:14px;top:4px}
+.tutorialFloatingCoach.next{right:18px;bottom:176px}
+.tutorialFloatingCoach.actions,.tutorialFloatingCoach.score{right:16px;bottom:108px}
+.tutorialFloatingCoach.log{left:16px;bottom:70px}
+.tutorialFloatingCoach.penalty{right:16px;bottom:112px}
+.tutorialFloatingCoach.ready{right:20px;top:56px}
+.tutorialMockControls .btn{pointer-events:auto}
+.howTutorialBox{margin-top:12px;border:2px solid rgba(255,210,87,.55);border-radius:14px;padding:12px;background:rgba(2,8,20,.28)}
+@media(max-width:900px){.tutorialFloatingCoach{grid-template-columns:56px minmax(140px,1fr);left:10px!important;right:10px!important;bottom:78px!important;top:auto!important}.tutorialFloatPortrait{height:70px}.tutorialFloatBubble{font-size:11px}.tutorialSpeechBox{font-size:14px}}
+@media(max-height:760px){.tutorialFloatingCoach{display:none}.tutorialSpeechBox{font-size:13px;padding:8px}.tutorialResult{font-size:13px;padding:7px}}
+
+
+/* Tutorial v3: captain under words + locked guided actions */
+.tutorialFloatingCoach{display:none!important}
+.tutorialCoach > div:first-child{display:flex;flex-direction:column}
+.tutorialCoach .tutorialName{order:1}
+.tutorialCoach .tutorialTitle{order:2}
+.tutorialCoach .tutorialText{order:3}
+.tutorialCoach .tutorialSpeechBox{order:4}
+.tutorialCoach .tutorialPortrait{order:5;height:190px!important;aspect-ratio:auto!important;margin-top:12px;background-size:cover;background-position:center top;flex:0 0 auto;display:block!important}
+.tutorialCoach .tutorialStepNote{order:6;margin-top:10px}
+.tutorialLockedHint{font-size:12px;color:#ffd257;font-weight:1000;text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
+.tutorialMockControls .btn:disabled{opacity:.38;filter:grayscale(.8);cursor:not-allowed}
+.tutorialBottom .btn:disabled{opacity:.42;filter:grayscale(.8);cursor:not-allowed}
+@media(max-height:760px){.tutorialCoach .tutorialPortrait{display:block!important;height:130px!important;margin-top:8px}.tutorialSpeechBox{font-size:13px;padding:8px}.tutorialStepNote{font-size:11px}}
+@media(max-width:800px){.tutorialCoach .tutorialPortrait{height:140px!important;background-size:cover}.tutorialCoach{min-height:auto}}
+
+
+/* Tutorial v4: both captains intro + no guide choice */
+.tutorialIntroGrid{display:grid;grid-template-columns:1fr minmax(240px,.8fr) 1fr;gap:14px;align-items:stretch;margin:14px 0}
+.tutorialIntroCaptain{min-height:280px;border:3px solid rgba(255,210,87,.85);border-radius:18px;background-size:cover;background-position:center top;background-color:#020814;box-shadow:0 0 24px rgba(255,210,87,.16);position:relative;overflow:hidden}
+.tutorialIntroCaptain:after{content:"";position:absolute;inset:auto 0 0 0;height:48%;background:linear-gradient(transparent,rgba(2,8,20,.96))}
+.tutorialIntroCaptainLabel{position:absolute;left:10px;right:10px;bottom:10px;z-index:2;text-align:center;color:#ffd257;font-weight:1000;text-transform:uppercase;letter-spacing:.06em;text-shadow:2px 2px #000;background:rgba(2,8,20,.82);border:2px solid rgba(255,210,87,.55);border-radius:12px;padding:8px}
+.tutorialIntroCenter{display:flex;flex-direction:column;justify-content:center;gap:12px;text-align:center;border:2px solid rgba(255,210,87,.55);border-radius:18px;background:rgba(2,8,20,.52);padding:14px}
+.tutorialIntroCenter .btn{width:100%}
+@media(max-width:760px){.tutorialIntroGrid{grid-template-columns:1fr 1fr}.tutorialIntroCenter{grid-column:1/-1;order:3}.tutorialIntroCaptain{min-height:210px}.tutorialIntroCaptainLabel{font-size:12px}.tutorialPrompt .cineCard{max-height:94vh;overflow:auto}}
+@media(max-width:430px){.tutorialIntroCaptain{min-height:170px}.tutorialIntroGrid{gap:8px}.tutorialIntroCenter{padding:10px}}
+
+
+/* Campaign defense choices */
+.defenseGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.defenseGrid .btn{min-height:54px}
+@media(max-width:760px){.defenseGrid{grid-template-columns:1fr}.defenseGrid .btn{min-height:48px}}
+
+
+
+/* HOME SCREEN BUTTON POLISH - smaller buttons placed lower so Clash Cup title art is visible */
+@media (min-width:701px){
+  .homeButtonBar{
+    width:min(620px,82vw)!important;
+    bottom:26px!important;
+    gap:14px!important;
+    padding:8px!important;
+    border-radius:16px!important;
+    background:rgba(2,8,20,.62)!important;
+  }
+  .homeButtonBar .btn{
+    min-height:50px!important;
+    height:54px!important;
+    padding:8px 12px!important;
+    font-size:clamp(14px,1.55vw,20px)!important;
+    border-radius:12px!important;
+    line-height:1.05!important;
+  }
+  .homeMiniHint{
+    bottom:3px!important;
+    font-size:10px!important;
+    opacity:.92!important;
+  }
+}
+@media (min-width:701px) and (max-height:760px){
+  .homeButtonBar{
+    width:min(590px,80vw)!important;
+    bottom:20px!important;
+    padding:7px!important;
+  }
+  .homeButtonBar .btn{
+    min-height:46px!important;
+    height:50px!important;
+    font-size:14px!important;
+  }
+  .homeMiniHint{display:none!important;}
+}
+@media (max-width:700px) and (orientation:portrait){
+  .homeButtonBar{
+    bottom:max(10px,env(safe-area-inset-bottom))!important;
+    padding:8px!important;
+    gap:8px!important;
+    background:rgba(2,8,20,.66)!important;
+  }
+  .homeButtonBar .btn{
+    min-height:48px!important;
+    height:50px!important;
+    padding:8px 10px!important;
+    font-size:14px!important;
+  }
+}
+
+
+/* HOME SCREEN FINAL OVERRIDE - tiny bottom buttons so full Clash Cup 2026 title stays visible */
+@media (min-width:701px){
+  .homeButtonBar{
+    width:min(470px,66vw)!important;
+    bottom:10px!important;
+    gap:10px!important;
+    padding:6px!important;
+    border-radius:12px!important;
+    background:rgba(2,8,20,.46)!important;
+    border:1px solid rgba(255,210,87,.52)!important;
+    box-shadow:0 0 18px rgba(0,0,0,.42)!important;
+  }
+  .homeButtonBar .btn{
+    min-height:34px!important;
+    height:38px!important;
+    padding:5px 9px!important;
+    font-size:clamp(11px,1.05vw,15px)!important;
+    border-radius:9px!important;
+    line-height:1!important;
+    letter-spacing:.08em!important;
+  }
+  .homeMiniHint{
+    display:none!important;
+  }
+}
+@media (min-width:701px) and (max-height:760px){
+  .homeButtonBar{
+    width:min(440px,62vw)!important;
+    bottom:8px!important;
+    gap:8px!important;
+    padding:5px!important;
+  }
+  .homeButtonBar .btn{
+    min-height:30px!important;
+    height:34px!important;
+    padding:4px 8px!important;
+    font-size:12px!important;
+  }
+}
+@media (max-width:700px) and (orientation:portrait){
+  .homeButtonBar{
+    width:min(340px,86vw)!important;
+    bottom:max(8px,env(safe-area-inset-bottom))!important;
+    gap:6px!important;
+    padding:5px!important;
+    border-radius:12px!important;
+    background:rgba(2,8,20,.52)!important;
+    border:1px solid rgba(255,210,87,.48)!important;
+  }
+  .homeButtonBar .btn{
+    min-height:34px!important;
+    height:38px!important;
+    padding:5px 7px!important;
+    font-size:11px!important;
+    border-radius:9px!important;
+    letter-spacing:.06em!important;
+  }
+  .homeMiniHint{display:none!important;}
+}
+
+</style>
+</head>
+<body><div id="app"></div>
+<script>
+const ASSETS = {
+  // Clean current asset names
+  "clashCupLogo": "assets/clashCupLogo.png",
+  "commentatorHalftime": "assets/commentatorHalftime.png",
+  "commentatorStart": "assets/commentatorHalftime.png",
+  "bigSave": "assets/bigSave.png",
+  "keeperGoalKick": "assets/keeperGoalKick.png",
+  "tutorialGuidePt": "assets/tutorialGuidePt.png",
+  "tutorialGuideAr": "assets/tutorialGuideAr.png",
+  "tutorialGuideBra": "assets/tutorialGuideBra.png",
+
+  "goalPt": "assets/goalPt.png",
+  "goalAr": "assets/goalAr.png",
+  "goalBra": "assets/goalBra.png",
+
+  "specialPt": "assets/specialPt.png",
+  "specialAr": "assets/specialAr.png",
+  "specialBra": "assets/specialBra.png",
+
+  "winPt": "assets/winPt.png",
+  "winAr": "assets/winAr.png",
+  "winBra": "assets/winBra.png",
+
+  "refOffside": "assets/refOffside.png",
+  "refGoalKick": "assets/refGoalKick.png",
+  "refCorner": "assets/refCorner.png",
+  "refFoul": "assets/refFoul.png",
+  "refFreeKick": "assets/refFreeKick.png",
+  "refPenalty": "assets/refPenalty.png",
+  "refYellow": "assets/refYellow.png",
+
+  "penPt": "assets/penPt.png",
+  "penAr": "assets/penAr.png",
+
+  "starPt": "assets/starPt.png",
+  "starAr": "assets/starAr.png",
+  "starBra": "assets/starBra.png",
+  "starFra": "assets/starFra.png",
+  "starEng": "assets/starEng.png",
+  "starEsp": "assets/starEsp.png",
+  "starGer": "assets/starGer.png",
+  "starNed": "assets/starNed.png",
+  "starCro": "assets/starCro.png",
+  "starUru": "assets/starUru.png",
+  "starMex": "assets/starMex.png",
+  "starUsa": "assets/starUsa.png",
+  "starJpn": "assets/starJpn.png",
+  "starMar": "assets/starMar.png",
+
+  "flagPt": "assets/flagPt.png",
+  "flagAr": "assets/flagAr.png",
+  "flagBra": "assets/flagBra.png",
+  "flagFra": "assets/flagFra.png",
+  "flagEng": "assets/flagEng.png",
+  "flagEsp": "assets/flagEsp.png",
+  "flagGer": "assets/flagGer.png",
+  "flagNed": "assets/flagNed.png",
+  "flagCro": "assets/flagCro.png",
+  "flagUru": "assets/flagUru.png",
+  "flagMex": "assets/flagMex.png",
+  "flagUsa": "assets/flagUsa.png",
+  "flagJpn": "assets/flagJpn.png",
+  "flagMar": "assets/flagMar.png",
+
+  // Backward-compatible aliases so old generic filenames are no longer required.
+  "ptCaptain": "assets/starPt.png",
+  "arCaptain": "assets/starAr.png",
+  "ptPlayer": "assets/starPt.png",
+  "arPlayer": "assets/starAr.png",
+  "goalie": "assets/bigSave.png",
+  "missPt": "assets/bigSave.png",
+  "missAr": "assets/bigSave.png",
+  "refHalftime": "assets/commentatorHalftime.png"
+};
+const ZONES = ['Own Third','Own Half','Midfield','Attacking Third','Danger Zone'];
+const MATCH_TURNS = 18;
+const teams = {
+  P: {name:'Portugal', short:'Portugal', flag:'🇵🇹', color:'red', normalShot:'Power Shot', special:'Meteor Strike', stats:{game:77, shot:83, power:90, setup:79, special:92}},
+  A: {name:'Argentina', short:'Argentina', flag:'🇦🇷', color:'blue', normalShot:'Placed Strike', special:'Maestro Curve', stats:{game:86, shot:89, power:84, setup:90, special:94}},
+};
+
+const TEAM_LIBRARY = {
+  portugal:{name:'Portugal', flag:'🇵🇹', star:ASSETS.starPt, flagImg:ASSETS.flagPt, goalImg:ASSETS.goalPt, specialImg:ASSETS.specialPt, winImg:ASSETS.winPt, normalShot:'Power Shot', special:'Meteor Strike', style:'Power / Captain Finish', tier:92, stats:{game:79, shot:84, power:91, setup:79, special:92}},
+  argentina:{name:'Argentina', flag:'🇦🇷', star:ASSETS.starAr, flagImg:ASSETS.flagAr, goalImg:ASSETS.goalAr, specialImg:ASSETS.specialAr, winImg:ASSETS.winAr, normalShot:'Placed Strike', special:'Maestro Curve', style:'Technique / Calm Finish', tier:92, stats:{game:86, shot:89, power:84, setup:90, special:94}},
+  brazil:{name:'Brazil', flag:'🇧🇷', star:ASSETS.starBra, flagImg:ASSETS.flagBra, goalImg:ASSETS.goalBra, specialImg:ASSETS.specialBra, winImg:ASSETS.winBra, normalShot:'Golden Shot', special:'Golden Strike', style:'Brilliant / Emotional', tier:94, stats:{game:87, shot:88, power:86, setup:89, special:94}},
+  france:{name:'France', flag:'🇫🇷', star:ASSETS.starFra, flagImg:ASSETS.flagFra, normalShot:'Burst Shot', special:'Lightning Run', style:'Speed / Clinical', tier:92, stats:{game:86, shot:88, power:87, setup:84, special:92}},
+  england:{name:'England', flag:'🏴', star:ASSETS.starEng, flagImg:ASSETS.flagEng, normalShot:'Captain Strike', special:'Calm Finish', style:'Composed / Striker', tier:88, stats:{game:84, shot:87, power:86, setup:82, special:88}},
+  spain:{name:'Spain', flag:'🇪🇸', star:ASSETS.starEsp, flagImg:ASSETS.flagEsp, normalShot:'Tiki Shot', special:'Threaded Needle', style:'Technical / Possession', tier:89, stats:{game:87, shot:84, power:79, setup:90, special:89}},
+  germany:{name:'Germany', flag:'🇩🇪', star:ASSETS.starGer, flagImg:ASSETS.flagGer, normalShot:'Precision Shot', special:'Relentless Press', style:'Disciplined / Relentless', tier:89, stats:{game:86, shot:85, power:86, setup:84, special:89}},
+  netherlands:{name:'Netherlands', flag:'🇳🇱', star:ASSETS.starNed, flagImg:ASSETS.flagNed, normalShot:'Angle Shot', special:'Total Attack', style:'Space / Direct', tier:86, stats:{game:84, shot:84, power:84, setup:83, special:86}},
+  croatia:{name:'Croatia', flag:'🇭🇷', star:ASSETS.starCro, flagImg:ASSETS.flagCro, normalShot:'Maestro Shot', special:'Veteran Calm', style:'Veteran / Patient', tier:84, stats:{game:84, shot:82, power:79, setup:87, special:84}},
+  uruguay:{name:'Uruguay', flag:'🇺🇾', star:ASSETS.starUru, flagImg:ASSETS.flagUru, normalShot:'Grit Shot', special:'Final Bite', style:'Physical / Gritty', tier:83, stats:{game:82, shot:84, power:86, setup:78, special:83}},
+  mexico:{name:'Mexico', flag:'🇲🇽', star:ASSETS.starMex, flagImg:ASSETS.flagMex, normalShot:'Counter Shot', special:'Guardian Wall', style:'Keeper / Resilient', tier:82, stats:{game:82, shot:80, power:78, setup:80, special:86, keeper:10}},
+  usa:{name:'USA', flag:'🇺🇸', star:ASSETS.starUsa, flagImg:ASSETS.flagUsa, normalShot:'Direct Shot', special:'No Fear Run', style:'Athletic / Direct', tier:78, stats:{game:79, shot:79, power:81, setup:77, special:78}},
+  japan:{name:'Japan', flag:'🇯🇵', star:ASSETS.starJpn, flagImg:ASSETS.flagJpn, normalShot:'Quick Shot', special:'Perfect Pattern', style:'Quick / Precise', tier:79, stats:{game:81, shot:78, power:75, setup:84, special:79}},
+  morocco:{name:'Morocco', flag:'🇲🇦', star:ASSETS.starMar, flagImg:ASSETS.flagMar, normalShot:'Belief Shot', special:'Atlas Wall', style:'Defensive / Belief', tier:80, stats:{game:80, shot:78, power:81, setup:77, special:80}}
+};
+
+const CAMPAIGN_LINES = {
+  portugal:{pre:'We respect every team that reaches this stage. But when the whistle blows, we play to win.', win:'You played with heart. That was a true match.', lose:'You were better today. We will train harder and return stronger.'},
+  argentina:{pre:'The game will ask questions of both teams. Let the ball decide who answers best.', win:'You pushed us to the edge. That is why this victory matters.', lose:'You played beautifully. We gave everything, but today belonged to you.'},
+  brazil:{pre:'Football should have rhythm, courage, and joy. Show us what you can do.', win:'You stood against our rhythm longer than most. Respect.', lose:'You broke our rhythm and earned the victory.'},
+  france:{pre:'One opening is all we need. Stay sharp, or the match will turn quickly.', win:'You gave us a real fight. But the moment came, and we took it.', lose:'You closed every lane and punished every mistake. Well played.'},
+  england:{pre:'Big matches are won by calm minds. Let’s see who holds steady.', win:'You made us earn every inch. That was a proper match.', lose:'You kept your nerve when it mattered. Respect.'},
+  spain:{pre:'The ball reveals the truth. If you chase too hard, it will escape you.', win:'Patience opened the door. You made us work for it.', lose:'You interrupted our rhythm and wrote your own story.'},
+  germany:{pre:'We do not panic. We do not stop. You will have to beat us completely.', win:'You fought hard, but we stayed disciplined until the end.', lose:'You matched our discipline and found the final answer. Well earned.'},
+  netherlands:{pre:'Space is everything. Give us room, and we will use it.', win:'You defended bravely, but one lane was enough.', lose:'You denied us space and made your chance count.'},
+  croatia:{pre:'We have seen long matches, loud crowds, and cruel endings. We fear none of it.', win:'Experience carried us through, but you made us suffer.', lose:'You showed patience beyond your years. That was worthy football.'},
+  uruguay:{pre:'We fight for every ball. Nothing will be given freely.', win:'You had skill, but we had bite until the final whistle.', lose:'You survived the fight and found the goal. Respect.'},
+  mexico:{pre:'You may find a path to goal. Finishing past me is another matter.', win:'You tested me again and again. But today, the goal was guarded.', lose:'You finally found the shot I could not reach. Well played.'},
+  usa:{pre:'We are here to prove we belong with anyone. No fear.', win:'You gave us a mountain to climb. We climbed it.', lose:'You showed the level we are chasing. We will come back stronger.'},
+  japan:{pre:'Speed is not rushing. Precision is not hesitation. We will move together.', win:'Small spaces became big chances. You made us earn every one.', lose:'You broke our pattern and stayed composed. Respect.'},
+  morocco:{pre:'We have carried belief through harder roads than this. We are ready.', win:'Belief held firm. You fought well, but we did not bend.', lose:'You found a way through our wall. That deserves respect.'}
+};
+
+const GROUP_POOL = ['usa','mexico','japan','morocco','uruguay','croatia','netherlands'];
+const SEMI_POOL = ['spain','england','germany','netherlands','croatia','france'];
+const FINAL_POOL = ['brazil','france','germany','spain','portugal','argentina'];
+let campaignDraft = null;
+let mockBrazilUnlocked = false;
+
+function storageGet(key, fallback=false){
+  try { return localStorage.getItem(key)==='1'; } catch(e){ return fallback || mockBrazilUnlocked; }
+}
+function storageSet(key, val){
+  try { localStorage.setItem(key, val?'1':'0'); } catch(e){ if(key==='cc26BrazilUnlocked') mockBrazilUnlocked=!!val; }
+}
+function storageGetNum(key, fallback=0){
+  try {
+    const raw = localStorage.getItem(key);
+    const parsed = parseInt(raw || '', 10);
+    return Number.isFinite(parsed) ? parsed : fallback;
+  } catch(e){ return fallback; }
+}
+function setStorageNum(key, val){ try { localStorage.setItem(key, String(val)); } catch(e){} }
+function getTeamStars(teamId){ return clamp(storageGetNum(`cc26Stars_${teamId}`,0),0,3); }
+function setTeamStars(teamId, stars){ setStorageNum(`cc26Stars_${teamId}`, clamp(stars,0,3)); }
+function teamStarsText(teamId){ const n=getTeamStars(teamId); return '★'.repeat(n) + '☆'.repeat(3-n); }
+function hasVeteranExperience(){ return ['portugal','argentina','brazil'].every(id=>getTeamStars(id)>=1); }
+function legendSpecialName(teamId){ return ({portugal:"Captain's Header", argentina:'Golden Left', brazil:'Golazo'})[teamId] || ''; }
+function hasLegendSpecial(teamId){ return storageGet(`cc26LegendSpecial_${teamId}`, false); }
+function unlockLegendSpecial(teamId){ storageSet(`cc26LegendSpecial_${teamId}`, true); }
+function displaySpecialName(teamId){ return hasLegendSpecial(teamId) && legendSpecialName(teamId) ? legendSpecialName(teamId) : ((TEAM_LIBRARY[teamId] && TEAM_LIBRARY[teamId].special) || 'Captain Special'); }
+function hasSeenTutorial(){ return storageGet('cc26TutorialSeen', false); }
+function markTutorialSeen(){ storageSet('cc26TutorialSeen', true); }
+function experienceBoost(side,key){
+  if(state.playMode!=='campaign' || !state.campaign || side!=='P') return 0;
+  const stars = getTeamStars(teamId(side));
+  const veteranBonus = hasVeteranExperience() ? 2 : 0;
+  if(state.campaign.difficulty==='legend'){
+    let boost = stars*3 + veteranBonus;
+    if(key==='special') boost += stars;
+    if(key==='setup' && teamId(side)==='argentina') boost += Math.min(2,stars);
+    if(key==='power' && teamId(side)==='portugal' && hasLegendSpecial(teamId(side))) boost += 2;
+    if(key==='shot' && teamId(side)==='brazil' && hasLegendSpecial(teamId(side))) boost += 2;
+    return boost;
+  }
+  if(state.campaign.difficulty==='hero'){
+    return stars>0 ? 1 + Math.floor(stars/2) : 0;
+  }
+  return 0;
+}
+function isLegendMoveActive(side){ const id=teamId(side); return !!legendSpecialName(id) && hasLegendSpecial(id); }
+function isBrazilUnlocked(){ return storageGet('cc26BrazilUnlocked', false); }
+function setSideTeam(side, teamId){
+  const t = TEAM_LIBRARY[teamId] || TEAM_LIBRARY.portugal;
+  teams[side] = {
+    id:teamId, name:t.name, short:t.name, flag:t.flag, color:side==='P'?'red':'blue',
+    normalShot:t.normalShot, special:displaySpecialName(teamId), style:t.style, tier:t.tier,
+    stats:{...t.stats}
+  };
+  portraits[side] = {
+    captain:t.star || ASSETS.starPt,
+    player:t.star || ASSETS.starPt,
+    goalie:ASSETS.bigSave
+  };
+}
+function setTeamsForMatch(playerId='portugal', opponentId='argentina'){
+  setSideTeam('P', playerId);
+  setSideTeam('A', opponentId);
+}
+function tuneCampaignMatch(){
+  if(!state.campaign) return;
+  const bump = (side, amount) => {
+    Object.keys(teams[side].stats).forEach(k=>{
+      if(typeof teams[side].stats[k]==='number') teams[side].stats[k]=clamp(teams[side].stats[k]+amount,45,99);
+    });
+  };
+  if(state.campaign.difficulty==='hero'){
+    bump('P',18);
+    bump('A',-14);
+    const current = campaignCurrent?.();
+    if(current && current.type==='group') bump('A',-5);
+  } else {
+    bump('A',5);
+  }
+}
+function teamImg(id){ return (TEAM_LIBRARY[id] && TEAM_LIBRARY[id].star) || ASSETS.starPt; }
+function flagImg(id){ return (TEAM_LIBRARY[id] && TEAM_LIBRARY[id].flagImg) || teamImg(id); }
+function campaignLine(id, key){ return (CAMPAIGN_LINES[id] && CAMPAIGN_LINES[id][key]) || 'May the best team win.'; }
+function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=rnd(i+1); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function pickUnique(pool, used, count=1){
+  const available = shuffle(pool.filter(x=>!used.has(x)));
+  const picks = available.slice(0,count);
+  picks.forEach(x=>used.add(x));
+  return count===1 ? picks[0] : picks;
+}
+function buildCampaignRoute(playerId){
+  const used = new Set([playerId]);
+  const group = pickUnique(GROUP_POOL, used, 3).map((id,i)=>({stage:'Group Match '+(i+1), type:'group', opponent:id}));
+  const semi = {stage:'Semifinal', type:'semi', opponent:pickUnique(SEMI_POOL, used, 1)};
+  const final = {stage:'Final', type:'final', opponent:pickUnique(FINAL_POOL, used, 1)};
+  return [...group, semi, final];
+}
+function campaignDifficultyName(){ return state.campaign?.difficulty==='legend' ? 'Legend Mode' : 'Hero Mode'; }
+function playerWon(){ return state.score.P > state.score.A; }
+function campaignCurrent(){ return state.campaign.route[state.campaign.matchIndex]; }
+function campaignStageLabel(){ return campaignCurrent()?.stage || 'Campaign'; }
+function campaignOpponentId(){ return campaignCurrent()?.opponent || 'argentina'; }
+function campaignOpponent(){ return TEAM_LIBRARY[campaignOpponentId()] || TEAM_LIBRARY.argentina; }
+function campaignIsKnockout(){ const c=campaignCurrent(); return c && c.type !== 'group'; }
+function campaignIsFinal(){ const c=campaignCurrent(); return c && c.type === 'final'; }
+function campaignHiddenAssist(side){
+  if(!state.campaign || state.campaign.difficulty==='legend') return 0;
+  if(side==='P'){
+    if(state.score.P + 1 < state.score.A) return 20;
+    if(state.score.P < state.score.A) return 14;
+    return 7;
+  }
+  if(side==='A' && state.score.A > state.score.P) return -7;
+  return 0;
+}
+
+const portraits = {
+  P: {captain: ASSETS.starPt, player: ASSETS.starPt, goalie: ASSETS.bigSave},
+  A: {captain: ASSETS.starAr, player: ASSETS.starAr, goalie: ASSETS.bigSave},
+  G: ASSETS.bigSave
+};
+let state;
+let audioCtx = null;
+
+function initState(){
+  state = {
+    mode:'splash',
+    splashReady:false,
+    playMode:'faceoff',
+    minute:0, turn:0, maxTurns:MATCH_TURNS, finalMinute:null,
+    score:{P:0,A:0},
+    possession: chance(.5)?'P':'A', zone:2, carrier:'player',
+    meter:{P:0,A:0}, cool:{P:0,A:0},
+    cards:{P:0,A:0}, cardTimer:{P:0,A:0},
+    halftimeShown:false,
+    halftimeTie:false,
+    freeKickUsed:false,
+    penaltyUsed:{P:false,A:false},
+    injuryUsed:false,
+    rally:{P:0,A:0},
+    aiThinking:false,
+    style:{P:{last:null,streak:0,shots:0,setups:0,captainForces:0,variety:0},A:{last:null,streak:0,shots:0,setups:0,captainForces:0,variety:0}},
+    brazilMood:{P:0,A:0},
+    victory:null,
+    campaign:null,
+    stats:{
+      P:{shots:0, goals:0, corners:0, offsides:0, yellows:0, saves:0, goalKicks:0, freeKicks:0, penalties:0, specials:0, specialGoals:0, specialMisses:0, chances:0},
+      A:{shots:0, goals:0, corners:0, offsides:0, yellows:0, saves:0, goalKicks:0, freeKicks:0, penalties:0, specials:0, specialGoals:0, specialMisses:0, chances:0}
+    },
+    events:[],
+    anim:null,
+    preKickoff:true,
+    phase:'idle',
+    pending:null,
+    log:['<b>Kickoff:</b> Portugal and Argentina square off.'],
+    dialogue:{name:'Commentary', img:ASSETS.commentatorStart, text:'Loading Clash Cup 2026.'},
+    playLast:'Kickoff pending.',
+    playNow:'Loading Clash Cup 2026.',
+    cinematic:null,
+    pen:null
+  };
+}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function rnd(n){return Math.floor(Math.random()*n)}
+function chance(p){return Math.random()<p}
+function other(s){return s==='P'?'A':'P'}
+function team(s){return teams[s]}
+function sideName(s){return teams[s].name}
+function teamCode(s){ const id=teams[s]?.id || (teams[s]?.name||'').toLowerCase(); const map={portugal:'POR',argentina:'ARG',brazil:'BRA',france:'FRA',england:'ENG',spain:'ESP',germany:'GER',netherlands:'NED',croatia:'CRO',uruguay:'URU',mexico:'MEX',usa:'USA',japan:'JPN',morocco:'MAR'}; return map[id] || (teams[s]?.name||s).slice(0,3).toUpperCase(); }
+
+function displayMinute(){
+  const m = Math.round(state.minute||0);
+  return m<=90 ? `${String(m).padStart(2,'0')}'` : `90+${Math.min(8,m-90)}'`;
+}
+const BASIC_COLORS = {
+  red:{name:'Red',fill:'#c91527',hi:'#ff6f78',text:'#ffffff',keeper:'#9f1321'},
+  blue:{name:'Blue',fill:'#1477d4',hi:'#67caff',text:'#ffffff',keeper:'#1165b3'},
+  green:{name:'Green',fill:'#139447',hi:'#ffd43b',text:'#ffffff',keeper:'#0b6b35'},
+  yellow:{name:'Yellow',fill:'#ffd447',hi:'#fff7a8',text:'#111827',keeper:'#f2b900'}
+};
+function tokenColorKey(side){
+  const id = teamId(side);
+  if(state.playMode!=='campaign') return side==='P'?'red':'blue';
+
+  if(id==='portugal') return 'red';
+  if(id==='argentina') return 'blue';
+  if(id==='brazil') return 'green';
+
+  const playerId = state.campaign?.team || teamId('P');
+  if(playerId==='portugal') return 'blue';
+  if(playerId==='argentina') return 'red';
+  if(playerId==='brazil') return 'yellow';
+
+  return side==='P'?'red':'blue';
+}
+function teamVisual(side){
+  const c = BASIC_COLORS[tokenColorKey(side)] || BASIC_COLORS.blue;
+  return {...c, glow:'#ffd257'};
+}
+function teamColorName(side){ return teamVisual(side).name; }
+function teamId(s){ return teams[s]?.id || (teams[s]?.name||'').toLowerCase(); }
+function isTeam(s,id){ return teamId(s)===id; }
+function libraryForSide(side){ return TEAM_LIBRARY[teamId(side)] || TEAM_LIBRARY.portugal; }
+function starArt(side){ return libraryForSide(side).star || ASSETS.starPt; }
+function goalArt(side){ return libraryForSide(side).goalImg || libraryForSide(side).star || ASSETS.goalPt; }
+function specialArt(side){ return libraryForSide(side).specialImg || libraryForSide(side).star || ASSETS.specialPt; }
+function victoryArt(side){ return libraryForSide(side).winImg || libraryForSide(side).star || ASSETS.winPt; }
+function missArt(side){ return ASSETS.bigSave; }
+function penaltyArt(side){ 
+  if(isTeam(side,'portugal')) return ASSETS.penPt;
+  if(isTeam(side,'argentina')) return ASSETS.penAr;
+  return ASSETS.refPenalty;
+}
+function noteAction(s, action){
+  if(!state.style) state.style={P:{},A:{}};
+  const st = state.style[s] || (state.style[s]={last:null,streak:0,shots:0,setups:0,captainForces:0,variety:0});
+  if(st.last===action) st.streak=(st.streak||0)+1; else { st.variety=(st.variety||0)+1; st.streak=1; }
+  st.last=action;
+  if(action==='shot') st.shots=(st.shots||0)+1;
+  if(action==='setup') st.setups=(st.setups||0)+1;
+  if(action==='captain') st.captainForces=(st.captainForces||0)+1;
+  return st;
+}
+function repetitionPenalty(s, action){
+  const st = state.style?.[s]; if(!st || st.last!==action) return 0;
+  if(action==='shot') return Math.max(0, st.streak-1) * 10;
+  if(action==='captain') return Math.max(0, st.streak-1) * 8;
+  return Math.max(0, st.streak-2) * 4;
+}
+function setupMemoryBonus(s){
+  const st=state.style?.[s]; if(!st) return 0;
+  return st.last==='setup' ? 8 : st.last==='captain' ? 5 : 0;
+}
+function playstyleShotMod(s, kind, isSpecial){
+  const id=teamId(s), st=state.style?.[s] || {};
+  let mod=0;
+  if(kind==='shot') mod -= repetitionPenalty(s,'shot');
+  if(kind==='shot' && st.last==='shot' && st.streak>=2) mod -= 8;
+  if(kind==='shot' && id==='portugal') mod += 4;
+  if(kind==='shot' && id==='argentina' && !setupMemoryBonus(s)) mod -= 6;
+  if(kind==='setup') mod += setupMemoryBonus(s);
+  if(isSpecial){
+    if(id==='portugal') mod += 6 + (setupMemoryBonus(s)?4:0);
+    if(id==='argentina') mod += 4 + (setupMemoryBonus(s)?8:0);
+    if(id==='brazil') mod += 5 + brazilMoodBonus(s,'special');
+    if(st.last==='shot' && st.streak>=2) mod -= 8;
+  }
+  if(state.playMode==='campaign' && state.campaign?.difficulty==='hero'){
+    if(s==='P') mod += 10;
+    if(s==='A') mod -= 14;
+  }
+  if(state.playMode==='campaign' && state.campaign?.difficulty==='legend'){
+    if(s==='A') mod += 4;
+  }
+  return mod;
+}
+function playstyleSetupMod(s, source){
+  const id=teamId(s), st=state.style?.[s] || {};
+  let mod=0;
+  if(id==='argentina') mod += 9;
+  if(id==='portugal' && source==='cross') mod += 5;
+  if(id==='brazil') mod += brazilMoodBonus(s,'setup');
+  if(source==='captain' || source==='freeKick') mod -= repetitionPenalty(s,'captain');
+  if(state.playMode==='campaign' && state.campaign?.difficulty==='hero'){
+    if(s==='P') mod += 14;
+    if(s==='A') mod -= 10;
+  }
+  return mod;
+}
+function brazilMoodBonus(s,key){
+  if(!isTeam(s,'brazil')) return 0;
+  const mood = state.brazilMood?.[s] || 0;
+  if(key==='build') return mood*5;
+  if(key==='setup') return mood*6;
+  if(key==='shot' || key==='power' || key==='special') return mood*7;
+  return mood*5;
+}
+function adjustBrazilMood(s, delta, hint=''){
+  if(!isTeam(s,'brazil')) return;
+  if(!state.brazilMood) state.brazilMood={P:0,A:0};
+  const old=state.brazilMood[s]||0;
+  state.brazilMood[s]=clamp(old+delta,-2,2);
+  if(state.brazilMood[s]!==old && Math.abs(state.brazilMood[s])===2){
+    const msg = state.brazilMood[s]>0 ? `${sideName(s)} are playing with joy now.` : `${sideName(s)} look emotional and shaky.`;
+    log(`<b>Momentum:</b> ${msg}`);
+  }
+}
+function keeperSaveMod(defender, kind){
+  let mod=0;
+  const id=teamId(defender);
+  if(id==='mexico') mod += 10;
+  if(id==='morocco') mod += 4;
+  if(id==='brazil') mod -= brazilMoodBonus(defender,'shot');
+  return mod;
+}
+
+function addMeter(s,amt){state.meter[s]=clamp(state.meter[s]+amt,0,100)}
+function specialReady(s){return state.meter[s]>=100 && state.cool[s]===0}
+function carded(s){return state.cardTimer[s]>0}
+function rallyBonus(s,key){
+  if(!state.rally || state.rally[s]<=0) return 0;
+  if(key==='build') return 12;
+  if(key==='setup') return 10;
+  if(key==='shot' || key==='power' || key==='special') return 6;
+  if(key==='game') return 8;
+  return 6;
+}
+function effectiveStat(s,key){ const base = teams[s].stats[key] || 0; return base - (carded(s)?8:0) + rallyBonus(s,key) + campaignHiddenAssist(s) + brazilMoodBonus(s,key) + experienceBoost(s,key); }
+function decayTurnEffects(){
+  state.cardTimer.P=Math.max(0,state.cardTimer.P-1);
+  state.cardTimer.A=Math.max(0,state.cardTimer.A-1);
+  state.rally.P=Math.max(0,state.rally.P-1);
+  state.rally.A=Math.max(0,state.rally.A-1);
+}
+function yellowAllowed(){
+  if(state.turn <= 5) return false;
+  const tiedNow = state.score.P === state.score.A;
+  const lateTiedGame = state.minute >= 70 && tiedNow;
+  const tiedAtHalfSecondHalf = state.halftimeTie && state.minute >= 45;
+  return lateTiedGame || tiedAtHalfSecondHalf;
+}
+
+function freeKickCount(){
+  return state.events.filter(e=>e.type==='freeKick').length;
+}
+function foulCount(){
+  return state.events.filter(e=>e.type==='foul').length;
+}
+function freeKickAllowed(){
+  if(freeKickCount() >= 2) return false;
+  if(state.turn <= 4) return false;
+  if(state.minute < 18) return false;
+  return true;
+}
+function freeKickChance(){
+  if(!freeKickAllowed()) return 0;
+  if(freeKickCount()===0 && state.minute>=55) return 0.55;
+  if(freeKickCount()===0 && state.minute>=35) return 0.34;
+  if(freeKickCount()===0) return 0.18;
+  return state.minute>=60 ? 0.12 : 0.06;
+}
+function penaltyAlreadyUsed(attacker){
+  if(typeof state.penaltyUsed === 'object' && state.penaltyUsed !== null) return !!state.penaltyUsed[attacker];
+  return !!state.penaltyUsed;
+}
+function penaltyAllowed(attacker, source='general'){
+  if(penaltyAlreadyUsed(attacker)) return false;
+  if(state.zone < 3) return false;
+  if(source==='cross'){
+    return state.turn > 5 && state.minute >= 18;
+  }
+  return state.turn > 10 && state.minute >= 70 && state.score.P === state.score.A;
+}
+function crossPenaltyChance(attacker){
+  let c = state.zone >= 4 ? 0.22 : 0.16;
+  if(state.minute >= 70) c += 0.03;
+  if(state.score[attacker] < state.score[other(attacker)]) c += 0.02;
+  return clamp(c, 0.10, 0.28);
+}
+function injuryRallyAllowed(){
+  return false;
+}
+function injuryRallyChance(){
+  return 0;
+}
+function rallyTarget(){
+  if(state.score.P < state.score.A) return 'P';
+  if(state.score.A < state.score.P) return 'A';
+  return chance(.5) ? 'P' : 'A';
+}
+function triggerRally(side){
+  return;
+}
+
+function recordEvent(type, teamSide=null, detail={}){
+  const ev = {type, team:teamSide, minute:state.minute, ...detail};
+  state.events.push(ev);
+  if(!teamSide || !state.stats[teamSide]) return ev;
+  const st = state.stats[teamSide];
+  if(type==='shot') st.shots++;
+  if(type==='goal') st.goals++;
+  if(type==='corner') st.corners++;
+  if(type==='offside') st.offsides++;
+  if(type==='yellow') st.yellows++;
+  if(type==='save') st.saves++;
+  if(type==='goalKick') st.goalKicks++;
+  if(type==='freeKick') st.freeKicks++;
+  if(type==='penalty') st.penalties++;
+  if(type==='special'){ st.specials++; }
+  if(type==='specialGoal'){ st.specialGoals++; }
+  if(type==='specialMiss'){ st.specialMisses++; }
+  if(type==='chance') st.chances++;
+  return ev;
+}
+function countEvents(type, side=null, maxMinute=45){
+  return state.events.filter(e => e.type===type && (side?e.team===side:true) && e.minute<=maxMinute).length;
+}
+function generateHalftimeRecap(){
+  const nP=sideName('P'), nA=sideName('A'), cP=teamCode('P'), cA=teamCode('A');
+  const pGoals=state.score.P, aGoals=state.score.A;
+  const pShots=countEvents('shot','P'), aShots=countEvents('shot','A');
+  const pCorners=countEvents('corner','P'), aCorners=countEvents('corner','A');
+  const pFreeKicks=countEvents('freeKick','P'), aFreeKicks=countEvents('freeKick','A');
+  const pYellows=countEvents('yellow','P'), aYellows=countEvents('yellow','A');
+  const pOffsides=countEvents('offside','P'), aOffsides=countEvents('offside','A');
+  const pSpecials=countEvents('special','P'), aSpecials=countEvents('special','A');
+  const pSaves=countEvents('save','P'), aSaves=countEvents('save','A');
+
+  let story = '';
+  if(pGoals===aGoals){
+    story = `The match is still right there for either side.`;
+  } else {
+    const leader = pGoals>aGoals ? nP : nA;
+    const trailer = pGoals>aGoals ? nA : nP;
+    story = `${leader} lead at the break, but ${trailer} are one big chance away from changing everything.`;
+  }
+
+  let chanceLine = '';
+  if(pShots+aShots===0) chanceLine = 'No clean looks yet';
+  else if(pShots>aShots+1) chanceLine = `${cP} pressure`;
+  else if(aShots>pShots+1) chanceLine = `${cA} pressure`;
+  else chanceLine = 'Balanced chances';
+
+  let rhythm = 'Settled match';
+  if(pFreeKicks+aFreeKicks>0) rhythm = 'Free kick changed rhythm';
+  else if(pYellows+aYellows>0) rhythm = 'Referee managing tension';
+  else if(pOffsides+aOffsides>0) rhythm = 'High line matters';
+  else if(pSpecials+aSpecials>0) rhythm = 'Captain moment used';
+  else if(pSaves+aSaves>0) rhythm = 'Keepers standing firm';
+
+  return `<div class="halftimeCard">
+    <div class="halfScore"><span class="teamCode">${cP}</span><span>${pGoals}</span><span class="scoreSep">—</span><span>${aGoals}</span><span class="teamCode">${cA}</span></div>
+    <div class="halfStory">${story}</div>
+    <div class="halfStats">
+      <div class="halfStat"><div class="halfStatLabel">Shots</div><div class="halfStatValue">${cP} ${pShots} — ${aShots} ${cA}</div></div>
+      <div class="halfStat"><div class="halfStatLabel">Corners</div><div class="halfStatValue">${cP} ${pCorners} — ${aCorners} ${cA}</div></div>
+      <div class="halfStat"><div class="halfStatLabel">Match rhythm</div><div class="halfStatValue">${rhythm}</div></div>
+    </div>
+    <div class="halfFocus"><b>Second-half focus:</b> Watch the danger zone. One clean final ball could decide this.</div>
+  </div>`;
+}
+function triggerYellow(offender, beneficiary, reason='Late challenge'){
+  state.cards[offender]++;
+  state.cardTimer[offender]=3;
+  recordEvent('yellow', offender, {reason});
+  if(state.possession===offender) state.zone = clamp(state.zone-1,0,4);
+  if(beneficiary){ state.possession = beneficiary; state.zone = clamp(state.zone+1,0,4); state.carrier = randomCarrier(state.zone>=3); }
+  log(`<b>Yellow Card:</b> ${sideName(offender)} are cautioned.`);
+  showCinematic([{img:ASSETS.refYellow,title:'Yellow Card',text:`${sideName(offender)} are booked.
+${reason}. They back off a little.`,sound:'click',vertical:true}], ()=>{
+    speak(beneficiary || offender,'player', beneficiary ? `${sideName(beneficiary)} have space after the caution.` : `${sideName(offender)} must play more carefully now.`);
+    state.phase='idle'; render();
+  });
+}
+function cleanText(msg){ return String(msg||'').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim(); }
+function log(msg){
+  state.log.unshift(msg); state.log = state.log.slice(0,18);
+  const clean=cleanText(msg);
+  if(clean) state.playLast=clean;
+}
+function speak(side, role, text, nameOverride=null){
+  let img = role==='commentator' ? ASSETS.commentatorHalftime : role==='goalie' ? ASSETS.bigSave : portraits[side][role] || portraits[side].captain || starArt(side);
+  let name = nameOverride || (role==='commentator' ? 'Commentator' : role==='captain' ? `${team(side).name} Captain` : role==='goalie' ? 'Goalkeeper' : `${team(side).name} Player`);
+  state.dialogue = {img, name, text};
+  state.playNow = cleanText(`${name}: ${text}`);
+}
+
+function ensureAudio(){
+  if(!audioCtx){
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if(Ctx) audioCtx = new Ctx();
+  }
+  if(audioCtx && audioCtx.state==='suspended') audioCtx.resume();
+}
+function noiseBuffer(duration=0.4){
+  const sr = audioCtx.sampleRate; const len = Math.floor(sr*duration); const buffer = audioCtx.createBuffer(1,len,sr); const data = buffer.getChannelData(0);
+  for(let i=0;i<len;i++) data[i] = (Math.random()*2-1)*(1-i/len);
+  return buffer;
+}
+function tone(freq,start,duration,type='sine',gain=0.12){
+  const osc = audioCtx.createOscillator(); const g = audioCtx.createGain(); osc.type=type; osc.frequency.setValueAtTime(freq,start); osc.connect(g); g.connect(audioCtx.destination);
+  g.gain.setValueAtTime(0.0001,start); g.gain.exponentialRampToValueAtTime(gain,start+0.01); g.gain.exponentialRampToValueAtTime(0.0001,start+duration);
+  osc.start(start); osc.stop(start+duration+0.02); return osc;
+}
+function playGoalSound(){ if(!audioCtx) return; const now=audioCtx.currentTime; tone(392,now,0.22,'square',0.12); tone(523,now+0.12,0.28,'square',0.14); tone(659,now+0.28,0.5,'square',0.16); const src=audioCtx.createBufferSource(); const filter=audioCtx.createBiquadFilter(); const g=audioCtx.createGain(); src.buffer=noiseBuffer(0.9); filter.type='bandpass'; filter.frequency.value=900; g.gain.value=0.08; src.connect(filter); filter.connect(g); g.connect(audioCtx.destination); src.start(now); src.stop(now+0.9); }
+function playSpecialSound(){ if(!audioCtx) return; const now=audioCtx.currentTime; const osc=audioCtx.createOscillator(); const g=audioCtx.createGain(); osc.type='sawtooth'; osc.connect(g); g.connect(audioCtx.destination); osc.frequency.setValueAtTime(180,now); osc.frequency.exponentialRampToValueAtTime(980,now+0.45); g.gain.setValueAtTime(0.0001,now); g.gain.exponentialRampToValueAtTime(0.12,now+0.05); g.gain.exponentialRampToValueAtTime(0.0001,now+0.55); osc.start(now); osc.stop(now+0.6); }
+function playMissSound(){ if(!audioCtx) return; const now=audioCtx.currentTime; tone(330,now,0.18,'triangle',0.09); tone(247,now+0.14,0.28,'triangle',0.08); }
+function playClick(){ if(!audioCtx) return; const now=audioCtx.currentTime; tone(700,now,0.05,'square',0.05); }
+function playSound(name){ ensureAudio(); if(!audioCtx) return; if(name==='goal') playGoalSound(); else if(name==='special') playSpecialSound(); else if(name==='miss') playMissSound(); else playClick(); }
+
+function showCinematic(steps, callback){ state.cinematic = {steps, index:0, callback}; render(); if(steps[0].sound) playSound(steps[0].sound); }
+function nextCinematic(){ ensureAudio(); const cine = state.cinematic; if(!cine) return; cine.index++; if(cine.index < cine.steps.length){ render(); const s=cine.steps[cine.index]; if(s.sound) playSound(s.sound); return; } const cb = cine.callback; state.cinematic=null; if(cb) cb(); render(); }
+
+function triggerVictoryCelebration(side, shootout=false){
+  state.victory = {winner:side, shootout};
+  const title = shootout ? 'Shootout Victory!' : 'Victory!';
+  const body = shootout ? `${sideName(side)} win the penalty shootout and erupt in celebration.` : `${sideName(side)} win the match and celebrate together.`;
+  showCinematic([{img:victoryArt(side), title, text:body, sound:'goal', vertical:true}], ()=>{
+    speak(side,'captain', shootout ? `${sideName(side)} have won it from the spot!` : `${sideName(side)} take the win!`);
+    render();
+  });
+}
+
+function tokenPos(){
+  const z = state.zone;
+  const clampX = x => clamp(x, 34, 636);
+  const attackX = state.possession==='P' ? [95,225,350,500,596][z] : [575,470,350,205,92][z];
+
+  const p = {
+    pK:[8,62], aK:[664,62],
+    pP:[132,108], pCap:[222,48], pW:[168,22], pD:[78,72],
+    aP:[536,108], aCap:[448,48], aW:[502,22], aD:[590,72]
+  };
+
+  if(state.possession==='P'){
+    p.pP=[clampX(attackX),108];
+    p.pCap=[clampX(attackX+4),48];
+    p.pW=[clampX(attackX-58),22];
+    p.pD=[clampX(attackX-160),72];
+
+    p.aD=[clampX(attackX+94),72];
+    p.aP=[clampX(attackX+132),108];
+    p.aCap=[clampX(attackX+66),48];
+    p.aW=[clampX(attackX+30),22];
+  } else {
+    p.aP=[clampX(attackX),108];
+    p.aCap=[clampX(attackX-4),48];
+    p.aW=[clampX(attackX+58),22];
+    p.aD=[clampX(attackX+160),72];
+
+    p.pD=[clampX(attackX-94),72];
+    p.pP=[clampX(attackX-132),108];
+    p.pCap=[clampX(attackX-66),48];
+    p.pW=[clampX(attackX-30),22];
+  }
+  return p;
+}
+function ballPos(){ if(state.preKickoff) return [339,75]; return ballPosFor(state.possession,state.carrier,state.zone); }
+function tokenPosFor(zone){
+  const base = {
+    P: {defender:[78,62], player:[130,104], captain:[220,44], striker:[260,94], winger:[175,30], keeper:[8,62]},
+    A: {defender:[590,62], player:[536,102], captain:[448,44], striker:[405,94], winger:[495,30], keeper:[664,62]}
+  };
+  const shift = [0,40,80,120,165][zone];
+  return {
+    pCap:[base.P.captain[0]+shift*0.78, base.P.captain[1]], pP:[base.P.player[0]+shift*0.76, base.P.player[1]], pW:[base.P.winger[0]+shift*0.72, base.P.winger[1]], pD:[base.P.defender[0]+shift*0.52, base.P.defender[1]], pK:base.P.keeper,
+    aCap:[base.A.captain[0]-shift*0.78, base.A.captain[1]], aP:[base.A.player[0]-shift*0.76, base.A.player[1]], aW:[base.A.winger[0]-shift*0.72, base.A.winger[1]], aD:[base.A.defender[0]-shift*0.52, base.A.defender[1]], aK:base.A.keeper
+  }
+}
+function carrierKey(side, carrier){
+  if(carrier==='captain') return side==='P'?'pCap':'aCap';
+  if(carrier==='winger') return side==='P'?'pW':'aW';
+  if(carrier==='striker') return side==='P'?'pP':'aP';
+  if(carrier==='keeper') return side==='P'?'pK':'aK';
+  if(carrier==='defender') return side==='P'?'pD':'aD';
+  return side==='P'?'pP':'aP';
+}
+function ballPosFor(side, carrier, zone){ const p = tokenPosFor(zone); const key = carrierKey(side, carrier); return [p[key][0]+4,p[key][1]+4]; }
+function snapshotPlay(){ return {possession:state.possession, carrier:state.carrier, zone:state.zone, ball:ballPos()}; }
+function goalMouth(defendingSide){ return defendingSide==='P' ? [6,82] : [672,82]; }
+function setAnim(kind, before, label, toOverride=null){ const to = toOverride || ballPos(); state.anim = {kind, label, from:before?.ball || to, to, possession:state.possession, stamp:Date.now()}; }
+
+
+function splashScreen(){
+  const readyText = state.splashReady ? 'Tap anywhere to continue' : 'Loading Clash Cup 2026...';
+  return `<div class="screen startScreen splashScreen" onclick="continueFromSplash()">
+    <div class="logoMissingMsg">Clash Cup 2026</div>
+    <img class="startLogoImg" src="${ASSETS.clashCupLogo}" alt="Clash Cup 2026 logo" onerror="this.style.display='none'">
+    <div class="startShade"></div>
+    <div class="splashTap">${readyText}</div>
+  </div>`;
+}
+function continueFromSplash(){
+  if(!state.splashReady) return;
+  if(hasSeenTutorial()) state.mode='menu';
+  else { state.tutorialPromptContext='first'; state.mode='tutorialPrompt'; }
+  render();
+}
+function menuScreen(){
+  const unlocked = isBrazilUnlocked();
+  return `<div class="screen startScreen homeScreen">
+    <div class="logoMissingMsg">Clash Cup 2026</div>
+    <img class="startLogoImg" src="${ASSETS.clashCupLogo}" alt="Clash Cup 2026 logo" onerror="this.style.display='none'">
+    <div class="startShade"></div>
+    <button class="homeHow" onclick="showHow()" aria-label="How to play">?</button>
+    <div class="homeButtonBar">
+      <button class="btn gold" onclick="startFaceoff()">Faceoff Mode</button>
+      <button class="btn red" onclick="showCampaignTeams()">Campaign Mode</button>
+    </div>
+    <div class="homeMiniHint">${unlocked?'Brazil unlocked for Campaign Mode.':'Win Campaign with Portugal or Argentina to unlock Brazil.'}</div>
+  </div>`;
+}
+function showHow(){
+  state.mode='how'; render();
+}
+function openTutorialPrompt(context='how'){
+  state.tutorialPromptContext=context;
+  state.mode='tutorialPrompt';
+  render();
+}
+function howScreen(){ return `<div class="screen"><div class="topbar"><div class="title">How It Works</div><div class="subtitle">Match Rules</div></div><div class="content"><div class="card gold"><p><b>1.</b> Tap <b>Next Play</b> to continue the match.</p><p><b>2.</b> When the attack reaches the danger area, the offense chooses:</p><ul><li><b>Pass / Cross</b> to create a better chance</li><li><b>Take Shot</b> to try to score now</li><li><b>Captain Special</b> when the meter is ready</li></ul><p><b>3.</b> In Campaign, when the opponent threatens, choose Hold Shape, Press / Steal, or Hard Tackle. Hard Tackle can stop danger but risks a yellow card.</p><p><b>4.</b> Use the <b>Match Log</b> if you miss what happened.</p><p><b>5.</b> Penalties are a duel: the shooter picks a side and the goalkeeper guesses.</p><div class="howTutorialBox"><p><b>Need help?</b> Let a captain guide you through the field, choices, log, and penalties.</p><button class="btn gold" onclick="openTutorialPrompt('how')">Start Tutorial</button></div><div class="footerBtns"><button class="btn gray" onclick="state.mode='menu';render()">Back</button></div></div></div></div>` }
+
+
+function tutorialPromptScreen(){
+  return `<div class="overlay tutorialPrompt"><div class="cineCard"><div class="cineText"><div class="cineTitle">Clash Cup Tutorial</div><div class="cineBody">The Portugal Captain and Argentina Captain will guide you through the basics.</div><div class="tutorialIntroGrid"><div class="tutorialIntroCaptain" style="background-image:url('${ASSETS.tutorialGuidePt || ASSETS.starPt}')"><div class="tutorialIntroCaptainLabel">Portugal Captain</div></div><div class="tutorialIntroCenter"><div class="tutorialText">Learn how to read the field, advance the play, choose attacks, check the log, and take penalties.</div><button class="btn gold" onclick="startTutorial(true)">Begin Tutorial</button><button class="btn gray" onclick="skipTutorialFirstTime()">Skip for Now</button></div><div class="tutorialIntroCaptain" style="background-image:url('${ASSETS.tutorialGuideAr || ASSETS.starAr}')"><div class="tutorialIntroCaptainLabel">Argentina Captain</div></div></div><div class="tapNote">You can replay the tutorial later from the ? How It Works page.</div></div></div></div>`;
+}
+function skipTutorialFirstTime(){
+  if(state.tutorialPromptContext==='first') markTutorialSeen();
+  state.mode = state.tutorialPromptContext==='how' ? 'how' : 'menu';
+  state.tutorialPromptContext=null;
+  render();
+}
+const TUTORIAL_STEPS = [
+  {guide:'P', focus:'field', title:'Read the Field', text:'We will guide you together. The gold glow and arrow show who has the ball. The zone label tells you where the attack is. Red is Portugal. Blue is Argentina.'},
+  {guide:'A', focus:'play', title:'Watch the Play Update', text:'Last Play tells what just happened. Current Play tells what is happening now. You do not control every pass — you step in for the big moments.'},
+  {guide:'P', focus:'next', title:'Tap Watch Match', text:'In Campaign Mode, Watch Match moves the game forward until something important happens. Tap the highlighted button now.', required:'next'},
+  {guide:'A', focus:'defense', title:'Defend the Danger', text:'When the opponent threatens, you can defend. Hold Shape is safe. Press / Steal can win the ball. Hard Tackle is risky and can draw a yellow card. Tap Press / Steal now.', required:'steal'},
+  {guide:'A', focus:'pass', title:'Press Pass / Cross', text:'Pass / Cross builds a better chance before shooting. Only the Pass / Cross button is active right now.', required:'pass'},
+  {guide:'P', focus:'shot', title:'Press Take Shot', text:'Take Shot is the direct option. A shot can score, be saved, go wide, hit the crossbar, or create a corner.', required:'shot'},
+  {guide:'A', focus:'special', title:'Press Captain Special', text:'Captain Special is the big moment when the meter is ready. Unlocked Legend Specials are guaranteed goals.', required:'special'},
+  {guide:'P', focus:'log', title:'Use the Match Log', text:'Open the Match Log if you missed what happened. It keeps the story of goals, saves, corners, cards, penalties, and close calls.'},
+  {guide:'A', focus:'penalty', title:'Penalty Practice', text:'For penalties, the shooter chooses a side and the goalkeeper guesses. Tap the highlighted Middle button to practice.', required:'middle'},
+  {guide:'P', focus:'ready', title:'You Are Ready', text:'The captains have shown you the basics. Faceoff Mode is pass-the-phone. Campaign Mode lets you pick a country and chase the cup. You can replay this tutorial anytime from the ? How It Works page.'}
+];
+function startTutorial(firstTime=false){
+  initState();
+  state.mode='tutorial';
+  state.playMode='tutorial';
+  state.splashReady=true;
+  state.tutorialFirstTime=!!firstTime;
+  state.tutorialGuideChoice='BOTH';
+  state.tutorialStep=0;
+  setTeamsForMatch('portugal','argentina');
+  setupTutorialState();
+  render();
+}
+function setupTutorialState(){
+  const step = TUTORIAL_STEPS[state.tutorialStep || 0] || TUTORIAL_STEPS[0];
+  state.score={P:1,A:1};
+  state.minute=56;
+  state.turn=10;
+  state.maxTurns=18;
+  state.meter={P:82,A:64};
+  state.cool={P:0,A:0};
+  state.tutorialResult='';
+  state.tutorialStepDone = !step.required;
+  const isAttackStep = ['pass','shot','special'].includes(step.focus);
+  state.possession = (step.guide==='A' || step.focus==='penalty') ? 'A' : 'P';
+  state.zone = isAttackStep ? 4 : step.focus==='penalty' ? 2 : 2;
+  state.carrier = isAttackStep ? 'captain' : step.focus==='penalty' ? 'player' : 'captain';
+  state.phase = isAttackStep ? 'danger' : 'idle';
+  state.preKickoff=false;
+  state.playLast = step.focus==='play' ? 'Portugal moved the ball into midfield.' : 'Argentina defended the last attack.';
+  state.playNow = ['pass','shot','special'].includes(step.focus) ? `${sideName(state.possession)} are in the Danger Zone. Follow the captain's instruction.` : step.focus==='penalty' ? 'Penalty practice: pick the highlighted direction, then the keeper guesses.' : 'Watch the glowing player and follow the next play.';
+  state.log = ['<b>Tutorial:</b> The captains are showing how Clash Cup works.','<b>Field:</b> Gold glow means possession.','<b>Tip:</b> Open Match Log when you miss a play.'];
+  setAnim('tutorial', {ball:[339,75]}, 'Tutorial possession', ballPosFor(state.possession,state.carrier,state.zone));
+}
+function tutorialNext(){
+  if((state.tutorialStep||0) >= TUTORIAL_STEPS.length-1){ finishTutorial(); return; }
+  state.tutorialStep=(state.tutorialStep||0)+1;
+  setupTutorialState();
+  render();
+}
+function tutorialBack(){
+  state.tutorialStep=Math.max(0,(state.tutorialStep||0)-1);
+  setupTutorialState();
+  render();
+}
+function finishTutorial(){ markTutorialSeen(); state.mode='menu'; render(); }
+function tutorialCoachName(side){ return side==='P' ? 'Portugal Captain' : 'Argentina Captain'; }
+function tutorialCoachImg(side){ return side==='P' ? (ASSETS.tutorialGuidePt || ASSETS.starPt) : (ASSETS.tutorialGuideAr || ASSETS.starAr); }
+function tutorialFocusHint(focus){
+  return ({
+    field:'Look here: possession, zone, and player positions.',
+    play:'These boxes tell the story of the match.',
+    next:'Tap only the highlighted Watch Match button.',
+    defense:'Tap only Press / Steal. Defense choices appear when the opponent threatens.',
+    pass:'Tap only Pass / Cross. The other choices are locked for this lesson.',
+    shot:'Tap only Take Shot. The other choices are locked for this lesson.',
+    special:'Tap only Captain Special. The other choices are locked for this lesson.',
+    log:'Open this when you want to review what happened.',
+    penalty:'Tap only Middle for this practice penalty.',
+    ready:'You know enough to play. Go win the cup!'
+  })[focus] || 'Follow the highlighted area.';
+}
+function tutorialButtonResult(html){ return html ? `<div class="tutorialResult">${html}</div>` : ''; }
+function tutorialUseNextPlay(){
+  const step = TUTORIAL_STEPS[state.tutorialStep||0] || {};
+  if(step.required && step.required!=='next') return;
+  state.playLast='You tapped Next Play.';
+  state.playNow='The match advances until a real attacking choice appears.';
+  state.tutorialResult='Good. In Campaign Mode, Watch Match skips quiet buildup and stops when there is a real decision.';
+  state.tutorialStepDone=true;
+  state.log.push('<b>Practice:</b> Next Play advanced the match.');
+  render();
+}
+function tutorialChooseAction(choice){
+  const step = TUTORIAL_STEPS[state.tutorialStep||0] || {};
+  if(step.required && step.required!==choice) return;
+  if(choice==='pass'){
+    state.tutorialResult='Good. Pass / Cross builds a better chance before shooting.';
+    state.playLast=`${sideName(state.possession)} used Pass / Cross to create space.`;
+    state.playNow='The next chance should be stronger.';
+    state.log.push('<b>Practice:</b> Pass / Cross improved the attack.');
+  } else if(choice==='shot'){
+    state.tutorialResult='Good. Take Shot is the fastest way to try for goal. It can score, miss, be saved, hit the bar, or create a corner.';
+    state.playLast=`${sideName(state.possession)} took a shot.`;
+    state.playNow='A shot is the fastest way to try for goal.';
+    state.log.push('<b>Practice:</b> Shot attempt created a goal chance.');
+  } else {
+    state.tutorialResult='Good. Captain Special is the biggest attack. Once a Legend Special is unlocked, it is a guaranteed goal.';
+    state.playLast=`${sideName(state.possession)} captain stepped up for the special.`;
+    state.playNow='The crowd rises for the captain.';
+    state.log.push('<b>Practice:</b> Captain Special used.');
+  }
+  state.tutorialStepDone=true;
+  render();
+}
+function tutorialChooseDefense(choice){
+  const step = TUTORIAL_STEPS[state.tutorialStep||0] || {};
+  if(step.required && step.required!==choice) return;
+  const msg = choice==='hold'
+    ? 'Good. Hold Shape is the safe defensive choice. You block space and avoid fouls.'
+    : choice==='steal'
+      ? 'Good. Press / Steal is the balanced choice: you can win the ball back, but there is some risk.'
+      : 'Good. Hard Tackle can stop danger, but it carries the highest yellow-card risk.';
+  state.playLast='You chose a defensive response.';
+  state.playNow='The captain explains how defense works.';
+  state.tutorialResult=msg;
+  state.tutorialStepDone=true;
+  state.log.push('<b>Practice:</b> Defensive choices help you interact when the opponent attacks.');
+  render();
+}
+function tutorialPenaltyChoice(dir){
+  const step = TUTORIAL_STEPS[state.tutorialStep||0] || {};
+  if(step.required && step.required!==dir) return;
+  const label = dir.charAt(0).toUpperCase()+dir.slice(1);
+  state.tutorialResult=`Good. You chose ${label}. If the keeper guesses wrong, it is very likely a goal. If the keeper guesses right, the keeper has a better chance.`;
+  state.playLast=`Penalty practice: shooter chose ${label}.`;
+  state.playNow='In Faceoff, pass the phone so the goalkeeper can guess.';
+  state.tutorialStepDone=true;
+  state.log.push(`<b>Practice:</b> Penalty aimed ${label}.`);
+  render();
+}
+function tutorialFloatingCoach(step, guide){
+  const focus=step.focus || 'field';
+  return `<div class="tutorialFloatingCoach ${focus}"><div class="tutorialFloatPortrait" style="background-image:url('${tutorialCoachImg(guide)}')"></div><div class="tutorialFloatBubble"><b>${tutorialCoachName(guide)}:</b><br>${tutorialFocusHint(focus)}</div></div>`;
+}
+function tutorialMockControls(focus){
+  const step = TUTORIAL_STEPS[state.tutorialStep||0] || {};
+  const req = step.required;
+  const isInteractive = !!req;
+  const dis = (name) => (req && req!==name) || (state.tutorialStepDone && req) ? 'disabled' : '';
+  const nextDisabled = focus==='next' && state.tutorialStepDone ? 'disabled' : '';
+  const lockHint = isInteractive && !state.tutorialStepDone ? '<div class="tutorialLockedHint">Only the highlighted choice is active.</div>' : '';
+  const focusClass = ['next','pass','shot','special','penalty','defense'].includes(focus) ? 'tutorialFocus' : '';
+  if(focus==='penalty'){
+    return `<div class="tutorialMockControls tutorialFocus"><div class="row"><b>Penalty Practice</b><span class="pill">Try it</span></div><p class="small">Shooter chooses a side. For this lesson, tap Middle.</p><div class="tutorialPenaltyGrid"><button class="btn" ${dis('left')} onclick="tutorialPenaltyChoice('left')">Left</button><button class="btn gold" ${dis('middle')} onclick="tutorialPenaltyChoice('middle')">Middle</button><button class="btn" ${dis('right')} onclick="tutorialPenaltyChoice('right')">Right</button></div>${lockHint}${tutorialButtonResult(state.tutorialResult)}</div>`;
+  }
+  if(focus==='defense'){
+    return `<div class="tutorialMockControls tutorialFocus"><div class="row"><b>Opponent Danger</b><span class="pill">Try it</span></div><p class="small">Argentina are attacking. For this lesson, tap Press / Steal.</p><div class="defenseGrid"><button class="btn" ${dis('hold')} onclick="tutorialChooseDefense('hold')"><div class="moveName">Hold Shape</div><div class="moveDesc">Safe, fewer fouls.</div></button><button class="btn gold" ${dis('steal')} onclick="tutorialChooseDefense('steal')"><div class="moveName">Press / Steal</div><div class="moveDesc">Win it back.</div></button><button class="btn red" ${dis('tackle')} onclick="tutorialChooseDefense('tackle')"><div class="moveName">Hard Tackle</div><div class="moveDesc">Risk a yellow.</div></button></div>${lockHint}${tutorialButtonResult(state.tutorialResult)}</div>`;
+  }
+  if(['pass','shot','special'].includes(focus)){
+    return `<div class="tutorialMockControls tutorialFocus"><div class="row"><b>${sideName(state.possession)} threaten the goal</b><span class="pill">Try it</span></div><p class="small">Follow the captain's instruction. Locked buttons will not respond.</p><div class="choiceGrid"><button class="btn ${req==='pass'?'gold':''}" ${dis('pass')} onclick="tutorialChooseAction('pass')"><div class="moveName">Pass / Cross</div><div class="moveDesc">Build a better chance.</div></button><button class="btn ${req==='shot'?'gold':''}" ${dis('shot')} onclick="tutorialChooseAction('shot')"><div class="moveName">Take Shot</div><div class="moveDesc">Try to score now.</div></button><button class="btn red ${req==='special'?'gold':''}" ${dis('special')} onclick="tutorialChooseAction('special')"><div class="moveName">Captain Special</div><div class="moveDesc">Use when the meter is ready.</div></button></div>${lockHint}${tutorialButtonResult(state.tutorialResult)}</div>`;
+  }
+  return `<div class="tutorialMockControls ${focusClass}"><div class="row"><b>Campaign Flow</b><span class="pill">${focus==='next'?'Try it':'Demo'}</span></div><p class="small">Campaign uses Watch Match to skip quiet buildup and stop at real decisions.</p><button class="btn gold" ${nextDisabled || (focus!=='next'?'disabled':'')} onclick="tutorialUseNextPlay()">Watch Match</button>${lockHint}${tutorialButtonResult(state.tutorialResult)}</div>`;
+}
+function renderTutorial(){
+  const i=state.tutorialStep||0;
+  const step=TUTORIAL_STEPS[i];
+  const guide=step.guide || state.tutorialGuideChoice || 'P';
+  const playFocus = step.focus==='play';
+  const fieldFocus = step.focus==='field';
+  const logFocus = step.focus==='log';
+  const ready = i>=TUTORIAL_STEPS.length-1;
+  const logHtml = (state.log||[]).map(x=>`<div class="logItem">${x}</div>`).join('');
+  const mustDo = step.required && !state.tutorialStepDone;
+  const note = mustDo ? 'Do the highlighted action to unlock Next.' : 'Tap Next when ready.';
+  const nextDisabled = mustDo ? 'disabled' : '';
+  return `<div class="screen tutorialScreen"><div class="topbar"><div class="title">Clash Cup Tutorial</div><div class="subtitle">Step ${i+1} of ${TUTORIAL_STEPS.length}<br>${tutorialCoachName(guide)}</div></div><div class="content"><div class="tutorialLayout"><div class="card gold tutorialCoach"><div><div class="tutorialName">${tutorialCoachName(guide)}</div><div class="tutorialTitle">${step.title}</div><div class="tutorialText">${step.text}</div><div class="tutorialSpeechBox"><b>${tutorialCoachName(guide)}:</b> ${tutorialFocusHint(step.focus)}</div><div class="tutorialPortrait" style="background-image:url('${tutorialCoachImg(guide)}')"></div><div class="tutorialStepNote">${note}</div></div><div class="tutorialBottom"><button class="btn gray" onclick="finishTutorial()">Exit</button></div></div><div class="tutorialDemo"><div class="card scoreCard compactMatch ${playFocus?'tutorialFocus':''}"><div class="playPanel"><div class="playBox"><div class="playLabel">Last Play</div><div class="playText">${state.playLast}</div></div><div class="playBox"><div class="playLabel">Current Play</div><div class="playText">${state.playNow}</div></div></div><div class="${fieldFocus?'tutorialFocus':''}">${fieldHTML()}</div><div class="matchStatusStrip"><span>Portugal special 82%</span><span>Score 1-1</span><span>Argentina special 64%</span></div><div class="zones compactZones">${ZONES.map((z,idx)=>`<div class="zone ${idx===state.zone?'active':''}">${z}</div>`).join('')}</div></div>${tutorialMockControls(step.focus)}<details class="logDetails ${logFocus?'tutorialFocus':''}" ${logFocus?'open':''}><summary>Match Log</summary><div class="eventLog">${logHtml}</div></details><div class="tutorialBottom"><button class="btn gray" onclick="tutorialBack()" ${i===0?'disabled':''}>Back</button><button class="btn gold" onclick="tutorialNext()" ${nextDisabled}>${ready?'Finish Tutorial':'Next'}</button></div></div></div></div></div>`;
+}
+
+
+function showCampaignTeams(){ state.mode='campaignTeams'; render(); }
+function renderCampaignTeams(){
+  const unlocked = isBrazilUnlocked();
+  const card = (id, locked=false) => {
+    const t=TEAM_LIBRARY[id];
+    const stars = teamStarsText(id);
+    const legendMove = hasLegendSpecial(id) ? legendSpecialName(id) : 'Locked';
+    const veteranLine = hasVeteranExperience() ? '<br>Veteran bonus active for Legend Mode.' : '';
+    const choiceArt = id==='portugal' ? (ASSETS.tutorialGuidePt || t.star) : id==='argentina' ? (ASSETS.tutorialGuideAr || t.star) : id==='brazil' ? (ASSETS.tutorialGuideBra || t.star) : t.star;
+    return `<div class="campaignCard ${locked?'locked':''}"><div class="starThumb" style="background-image:url('${choiceArt}')"></div><div class="campaignTitle">${t.flag} ${t.name}</div><div class="campaignMeta">${t.style}<br>${locked?'Locked: win Campaign Mode with Portugal or Argentina to unlock Brazil.':`Experience: ${stars}<br>Legend Special: ${legendMove}${veteranLine}`}</div><button class="btn ${locked?'gray':'gold'}" onclick="selectCampaignTeam('${id}')">${locked?'Locked':'Choose '+t.name}</button></div>`;
+  };
+  return `<div class="screen"><div class="topbar"><div class="title">Campaign Mode</div><div class="subtitle">Choose Your Team</div></div><div class="content"><div class="campaignGrid">${card('portugal')}${card('argentina')}${card('brazil',!unlocked)}</div><div class="footerBtns"><button class="btn gray" onclick="state.mode='menu';render()">Back</button></div></div></div>`;
+}
+function selectCampaignTeam(id){
+  if(id==='brazil' && !isBrazilUnlocked()){
+    showCinematic([{img:ASSETS.tutorialGuideBra || ASSETS.starBra,title:'Brazil Locked',text:'Win Campaign Mode with Portugal or Argentina to unlock Brazil.',sound:'click',vertical:true}], ()=>{ state.mode='campaignTeams'; render(); });
+    return;
+  }
+  campaignDraft={team:id}; state.mode='campaignDifficulty'; render();
+}
+function renderCampaignDifficulty(){
+  const t=TEAM_LIBRARY[campaignDraft?.team || 'portugal'];
+  const stars = teamStarsText(campaignDraft?.team || 'portugal'); const legendMove = hasLegendSpecial(campaignDraft?.team || 'portugal') ? legendSpecialName(campaignDraft?.team || 'portugal') : 'Locked'; return `<div class="screen"><div class="topbar"><div class="title">Campaign Mode</div><div class="subtitle">${t.flag} ${t.name}</div></div><div class="content"><div class="card gold"><div class="campaignTitle">Choose Difficulty</div><p><b>Hero Mode</b> gives you a fair match with light comeback help.</p><p><b>Legend Mode</b> is tougher, but team experience and veteran unlocks improve your chances. Unlocked Legend Specials are guaranteed goals.</p><p class="small">Current experience: ${stars}. Legend Special: ${legendMove}.</p><div class="choiceGrid"><button class="btn gold" onclick="startCampaignRun('hero')"><div class="moveName">Hero Mode</div><div class="moveDesc">Fair, dramatic, forgiving.</div></button><button class="btn red" onclick="startCampaignRun('legend')"><div class="moveName">Legend Mode</div><div class="moveDesc">Harder tournament run. Stars help.</div></button></div></div><div class="footerBtns"><button class="btn gray" onclick="showCampaignTeams()">Back</button></div></div></div>`;
+}
+function startCampaignRun(diff){
+  const teamId = campaignDraft?.team || 'portugal';
+  initState();
+  state.mode='campaignRoute';
+  state.playMode='campaign';
+  state.campaign={team:teamId,difficulty:diff,points:0,matchIndex:0,route:buildCampaignRoute(teamId),results:[],last:null,complete:false};
+  render();
+}
+function renderCampaignRoute(){
+  const c=state.campaign;
+  const team=TEAM_LIBRARY[c.team];
+  const rows=c.route.map((m,i)=>{
+    const o=TEAM_LIBRARY[m.opponent];
+    const r=c.results?.[i];
+    const resultScore = r && r.shootout && r.penScore ? `${r.score} pens ${r.penScore}` : (r ? r.score : '');
+    const status = r ? `${r.playerWin?'✅':r.draw?'➖':'❌'} ${resultScore}` : (i===c.matchIndex?'Next':'Locked');
+    return `<div class="stageRow"><div class="stageFlag" style="background-image:url('${flagImg(m.opponent)}')"></div><div><b>${m.stage}</b><br><span class="small">${o.flag} ${o.name} — ${o.style}</span></div><span class="pill">${status}</span></div>`;
+  }).join('');
+  return `<div class="screen"><div class="topbar"><div class="title">Campaign Route</div><div class="subtitle">${team.flag} ${team.name} · ${c.difficulty==='legend'?'Legend':'Hero'} Mode</div></div><div class="content"><div class="card gold"><div class="campaignTitle">Road to the Cup</div><p class="small">Opponents are randomized each run. Group stage uses points. Knockout matches must be won.</p><div class="stageList">${rows}</div><div class="footerBtns"><button class="btn gold" onclick="startCampaignMatch()">Start ${c.route[c.matchIndex].stage}</button><button class="btn gray" onclick="state.mode='menu';render()">Main Menu</button></div></div></div></div>`;
+}
+
+function startFaceoff(){ 
+  initState(); 
+  state.mode='match';
+  state.playMode='faceoff';
+  setTeamsForMatch('portugal','argentina'); 
+  const s=state.possession; 
+  const pId = teamId('P');
+  const aId = teamId('A');
+  const pLine = campaignLine(pId,'pre');
+  const aLine = campaignLine(aId,'pre');
+  state.log=[`<b>Kickoff:</b> ${sideName(s)} start with possession.`]; 
+  speak('P','commentator',`${sideName('P')} vs ${sideName('A')}. ${sideName(s)} will kick us off.`,'Match Commentary'); 
+  render();
+  showCinematic([
+    {img:ASSETS.commentatorStart,title:'Match Commentary',text:`Welcome to Clash Cup 2026.\n${sideName('P')} vs ${sideName('A')}.\n${sideName(s)} will kick off first.`,sound:'click'},
+    {img:teamImg(pId),title:`${sideName('P')} Star`,text:pLine,sound:'click',vertical:true},
+    {img:teamImg(aId),title:`${sideName('A')} Star`,text:aLine + '\nLet the best side prove it on the pitch.',sound:'click',vertical:true}
+  ], ()=>{
+    const before={ball:[339,75]}; 
+    state.preKickoff=false; 
+    state.carrier='player'; 
+    state.zone=2; 
+    setAnim('kickoff', before, `${sideName(s)} kickoff`, ballPosFor(s,'player',2)); 
+    speak(s,'captain',`${sideName(s)} start with the ball. Watch the next play and step in when it matters.`); 
+    render(); 
+  }); 
+}
+
+function startCampaignMatch(){
+  const c=state.campaign;
+  const current=c.route[c.matchIndex];
+  const playerId=c.team;
+  const opponentId=current.opponent;
+  initState();
+  state.mode='match';
+  state.playMode='campaign';
+  state.campaign=c;
+  state.maxTurns = c.difficulty==='legend' ? 20 : 18;
+  setTeamsForMatch(playerId, opponentId);
+  tuneCampaignMatch();
+  state.possession=chance(.58)?'P':'A';
+  state.zone=2; state.carrier='player'; state.preKickoff=true;
+  state.log=[`<b>${current.stage}:</b> ${sideName('P')} vs ${sideName('A')}.`];
+  const playerLine = campaignLine(playerId,'pre');
+  const oppLine = campaignLine(opponentId,'pre');
+  render();
+  showCinematic([
+    {img:teamImg(playerId),title:`${sideName('P')} Star`,text:playerLine,vertical:true,sound:'click'},
+    {img:teamImg(opponentId),title:`${sideName('A')} Star`,text:oppLine + '\nMay the best team win.',vertical:true,sound:'click'}
+  ], ()=>{
+    state.preKickoff=false;
+    setAnim('kickoff', {ball:[339,75]}, `${sideName(state.possession)} kickoff`, ballPosFor(state.possession,'player',2));
+    speak(state.possession,'captain',`${sideName(state.possession)} start the match.`);
+    render();
+  });
+}
+function campaignAutoChoice(){
+  ensureAudio();
+  if(state.aiThinking) return;
+  state.aiThinking=true;
+  const s=state.possession;
+  const phrase = state.phase==='danger' ? `${sideName(s)} slow down for the final decision.` :
+    state.phase==='finish' ? `${sideName(s)} prepare to finish the chance.` :
+    state.phase==='corner' ? `${sideName(s)} gather around the corner flag.` :
+    state.phase==='freekick' ? `${sideName(s)} stand over the free kick.` : `${sideName(s)} read the pitch.`;
+  speak(s,'player',phrase,'Match Commentary');
+  render();
+  setTimeout(()=>{ state.aiThinking=false; campaignAutoChoiceNow(); }, 1800);
+}
+function campaignAutoChoiceNow(){
+  ensureAudio();
+  const phase=state.phase;
+  if(state.playMode!=='campaign' || state.possession!=='A'){ render(); return; }
+  const s=state.possession;
+  if(phase==='danger'){
+    const st=state.style?.[s] || {};
+    if(specialReady(s) && chance(st.last==='shot' && st.streak>=2 ? .22 : .38)){
+      speak(s,'captain',`${sideName(s)} captain steps into the moment. The AI chooses the special attack.`,'Match Commentary');
+      return chooseDanger('special');
+    }
+    if(chance(isTeam(s,'argentina') ? .68 : .58)){
+      speak(s,'player',`${sideName(s)} slow the attack down and look for the cleaner pass.`,'Match Commentary');
+      return chooseDanger('setup');
+    }
+    speak(s,'player',`${sideName(s)} decide the opening is good enough and take the shot.`,'Match Commentary');
+    return chooseDanger('shot');
+  }
+  if(phase==='finish'){
+    speak(s,'player',`${sideName(s)} have created the chance. The finish is coming now.`,'Match Commentary');
+    resolveFinish(); return;
+  }
+  if(phase==='corner'){
+    const opts=['header','kick','captain'];
+    const pick=opts[rnd(opts.length)];
+    speak(s,'player',`${sideName(s)} choose their corner routine: ${pick==='captain'?'pass to the captain':pick}.`,'Match Commentary');
+    chooseCorner(pick); return;
+  }
+  if(phase==='freekick'){
+    const pick=chance(.55)?'pass':'shoot';
+    speak(s,'captain',`${sideName(s)} ${pick==='shoot'?'go straight for goal':'use the free kick to set up the next chance'}.`,'Match Commentary');
+    chooseFreeKick(pick); return;
+  }
+  render();
+}
+function campaignPostMatchExchange(winnerSide, draw=false, shootout=false){
+  const playerId=state.campaign.team, oppId=campaignOpponentId();
+  const playerWonMatch = winnerSide==='P';
+  const steps=[];
+  if(draw){
+    steps.push({img:teamImg(playerId),title:`${sideName('P')} Star`,text:'Nothing separated us today. We will keep fighting.',vertical:true,sound:'click'});
+    steps.push({img:teamImg(oppId),title:`${sideName('A')} Star`,text:'A fair result. We both had chances to win.',vertical:true});
+  } else if(playerWonMatch){
+    steps.push({img:teamImg(oppId),title:`${sideName('A')} Star`,text:campaignLine(oppId,'lose'),vertical:true,sound:'click'});
+    steps.push({img:teamImg(playerId),title:`${sideName('P')} Star`,text:campaignLine(playerId,'win'),vertical:true});
+  } else {
+    steps.push({img:teamImg(playerId),title:`${sideName('P')} Star`,text:campaignLine(playerId,'lose'),vertical:true,sound:'click'});
+    steps.push({img:teamImg(oppId),title:`${sideName('A')} Star`,text:campaignLine(oppId,'win'),vertical:true});
+  }
+  showCinematic(steps, ()=>{ state.phase='campaignBetween'; render(); });
+}
+function campaignFinishMatch(winnerSide=null, shootout=false){
+  const c=state.campaign, current=campaignCurrent();
+  const draw = !winnerSide;
+  const playerWin = winnerSide==='P';
+  if(current.type==='group'){
+    if(draw) c.points += 1;
+    else if(playerWin) c.points += 3;
+  }
+  const result={stage:current.stage,type:current.type,winner:winnerSide,draw,playerWin,score:`${state.score.P}-${state.score.A}`,shootout,penScore:(shootout&&state.pen&&state.pen.score)?`${state.pen.score.P}-${state.pen.score.A}`:null};
+  c.last=result;
+  if(!c.results) c.results=[];
+  c.results[c.matchIndex]=result;
+  if(current.type==='final' && playerWin){
+    const teamId=c.team;
+    const rewards=[];
+    const veteranBefore = hasVeteranExperience();
+    const oldStars = getTeamStars(teamId);
+    const newStars = Math.min(3, oldStars + 1);
+    if(newStars>oldStars){
+      setTeamStars(teamId, newStars);
+      rewards.push(`${TEAM_LIBRARY[teamId].name} experience is now ${teamStarsText(teamId)}.`);
+    }
+    if(teamId==='portugal' || teamId==='argentina') storageSet('cc26BrazilUnlocked', true);
+    if(c.difficulty==='legend' && !hasLegendSpecial(teamId) && legendSpecialName(teamId)){
+      unlockLegendSpecial(teamId);
+      rewards.push(`Legend Special unlocked: ${legendSpecialName(teamId)}.`);
+    }
+    if(!veteranBefore && hasVeteranExperience()) rewards.push('World Cup Veterans unlocked. Team experience now helps in Legend Mode.');
+    c.rewards = rewards;
+  }
+  campaignPostMatchExchange(winnerSide, draw, shootout);
+}
+function campaignAutoShootout(){
+  const pPower = 55 + Math.round(effectiveStat('P','special')/5) + (state.campaign.difficulty==='hero'?10:0);
+  const aPower = 52 + Math.round(effectiveStat('A','special')/5) + (state.campaign.difficulty==='legend'?6:0);
+  let p=0,a=0;
+  for(let i=0;i<5;i++){ if(chance(clamp(pPower,45,82)/100)) p++; if(chance(clamp(aPower,45,82)/100)) a++; }
+  let guard=0;
+  while(p===a && guard<10){ if(chance(clamp(pPower,45,82)/100)) p++; if(chance(clamp(aPower,45,82)/100)) a++; guard++; }
+  if(p===a){ if(chance(.52)) p++; else a++; }
+  state.pen={score:{P:p,A:a},history:[]};
+  campaignFinishMatch(p>a?'P':'A', true);
+}
+function campaignBetweenControls(){
+  const c=state.campaign, last=c.last;
+  const penText = last && last.shootout && last.penScore ? ` Won on penalties ${last.penScore}.` : '';
+  if(!last) return `<div><button class="btn gold" onclick="startCampaignMatch()">Continue Campaign</button></div>`;
+  if(last.type==='group'){
+    if(c.matchIndex < 2){
+      return `<div><b>${last.draw?'Match Drawn':last.playerWin?'Match Won':'Match Lost'}</b><p class="small">Group points: ${c.points}. The tournament continues.</p><button class="btn gold" onclick="campaignNext()">Next Match</button></div>`;
+    }
+    if(c.points>=4){
+      return `<div><b>Group Stage Complete</b><p class="small">${c.points} points. You advance to the Semifinal.</p><button class="btn gold" onclick="campaignNext()">Advance</button></div>`;
+    }
+    if(c.points===3){
+      return `<div><b>Group Playoff</b><p class="small">Three points keeps you alive. You advance by tiebreaker into the Semifinal.</p><button class="btn gold" onclick="campaignNext()">Advance by Tiebreaker</button></div>`;
+    }
+    return `<div><div class="bigEnd">Tournament Over</div><p class="small">You were eliminated in the group stage with ${c.points} points.</p><div class="centerBottom"><button class="btn red" onclick="resetCampaign()">Reset Tournament</button></div></div>`;
+  }
+  if(last.type==='semi' && !last.playerWin){
+    return `<div><div class="bigEnd">Tournament Over</div><p class="small">You were eliminated in the Semifinal.${penText}</p><div class="centerBottom"><button class="btn red" onclick="resetCampaign()">Reset Tournament</button></div></div>`;
+  }
+  if(last.type==='final' && !last.playerWin){
+    return `<div><div class="bigEnd">GAME OVER</div><p class="small">You fell in the Final.${penText}</p><div class="centerBottom"><button class="btn red" onclick="resetCampaign()">Reset Tournament</button></div></div>`;
+  }
+  if(last.type==='final' && last.playerWin){
+    const teamId=c.team;
+    const rewardLines = (c.rewards||[]).map(r=>`<p class="small">${r}</p>`).join('');
+    const specialLine = hasLegendSpecial(teamId) && legendSpecialName(teamId) ? `<p class="small">Current team special: ${legendSpecialName(teamId)}.</p>` : '';
+    const extra = teamId==='brazil'
+      ? '<p class="small">Brazil are champions again.</p>'
+      : '<p class="small">Brazil is now unlocked for future campaigns.</p>';
+    return `<div><div class="bigEnd">Champions</div><p class="small">${sideName('P')} won the Clash Cup!${penText}</p>${rewardLines}${specialLine}${extra}<div class="centerBottom"><button class="btn gold" onclick="resetCampaign()">Play Campaign Again</button></div></div>`;
+  }
+  return `<div><b>Match Won</b><p class="small">You advance.${penText}</p><button class="btn gold" onclick="campaignNext()">Next Match</button></div>`;
+}
+function campaignNext(){
+  state.campaign.matchIndex++;
+  state.mode='campaignRoute';
+  state.phase='idle';
+  render();
+}
+function resetCampaign(){ campaignDraft=null; initState(); state.mode='campaignTeams'; render(); }
+function campaignFulltimeControls(){
+  const c=campaignCurrent();
+  if(c.type==='group'){
+    const winner = state.score.P===state.score.A ? null : (state.score.P>state.score.A?'P':'A');
+    return `<div><b>Full Time</b><p class="small">${sideName('P')} ${state.score.P}-${state.score.A} ${sideName('A')}</p><button class="btn gold" onclick="campaignFinishMatch(${winner?`'${winner}'`:'null'},false)">Continue</button></div>`;
+  }
+  if(state.score.P===state.score.A){
+    return `<div><b>Full Time Level</b><p class="small">Knockout match tied ${state.score.P}-${state.score.A}. Campaign penalties resolve automatically.</p><button class="btn red" onclick="campaignAutoShootout()">Automatic Penalty Shootout</button></div>`;
+  }
+  const winner = state.score.P>state.score.A?'P':'A';
+  return `<div><b>Full Time</b><p class="small">${sideName(winner)} win ${state.score.P}-${state.score.A}.</p><button class="btn gold" onclick="campaignFinishMatch('${winner}',false)">Continue</button></div>`;
+}
+
+
+function fieldHTML(){
+  const p = tokenPos(); 
+  const anim = state.anim;
+  const action = anim?.kind || 'idle';
+  const activeClass = (side, role) => state.possession===side && state.carrier===role ? 'active' : '';
+  const possColor = state.possession==='P' ? 'red' : 'blue';
+  const arrow = state.possession==='P' ? '›' : '‹';
+  const arrowX = state.possession==='P' ? 575 : 125;
+  const carrierArrow = side => side==='P' ? '▶' : '◀';
+  const svgToken = (side,role,x,y,label) => {
+    const active = state.possession===side && state.carrier===role;
+    const v = teamVisual(side);
+    const isCaptain = label==='★';
+    return `<g class="svgToken ${side==='P'?'red':'blue'} ${active?'active':''}" transform="translate(${x+15} ${y+15})">${active?`<text class="carrierArrow" y="-25">${carrierArrow(side)}</text>`:''}<circle class="outer" r="15" fill="${v.fill}" stroke="#fff" stroke-width="2.5"></circle><text class="${isCaptain?'captainStar':''}" y="${isCaptain?'-1':'1'}" style="fill:${v.text}">${label}</text></g>`;
+  };
+  const svgKeeper = (side,x,y) => {
+    const active = state.possession===side && state.carrier==='keeper';
+    const v = teamVisual(side);
+    return `<g class="svgToken svgKeeper ${side==='P'?'red':'blue'} ${active?'active':''}" transform="translate(${x} ${y})">${active?`<text class="carrierArrow" x="15" y="-10">${carrierArrow(side)}</text>`:''}<rect class="outer" x="0" y="0" width="30" height="36" rx="7" fill="${v.keeper||v.fill}"></rect><text x="15" y="19" style="fill:${v.text}">GK</text></g>`;
+  };
+  return `<div class="fieldWrap"><div class="field" data-action="${action}"><div class="miniScoreHud"><span class="hudTeam red">${teamCode('P')}</span><b>${state.score.P}</b><span class="hudMinute">${displayMinute()}</span><b>${state.score.A}</b><span class="hudTeam blue">${teamCode('A')}</span></div>
+  <svg class="pitchSvg" viewBox="0 0 700 172" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Animated soccer field">
+    <defs>
+      <linearGradient id="grass" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#188947"/><stop offset="100%" stop-color="#0c5d2a"/></linearGradient>
+      <pattern id="stripe" width="40" height="172" patternUnits="userSpaceOnUse"><rect width="20" height="172" fill="rgba(255,255,255,.08)"/></pattern>
+    </defs>
+    <rect x="0" y="0" width="700" height="172" rx="10" fill="url(#grass)"></rect>
+    <rect x="0" y="0" width="700" height="172" fill="url(#stripe)"></rect>
+    <rect x="3" y="3" width="694" height="166" rx="10" fill="none" stroke="#e9f7ff" stroke-width="3"></rect>
+    <line x1="350" y1="3" x2="350" y2="169" stroke="rgba(255,255,255,.72)" stroke-width="3" stroke-dasharray="9 7"></line>
+    <circle cx="350" cy="86" r="31" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.5"></circle>
+    <rect x="0" y="34" width="105" height="104" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.7)" stroke-width="3"></rect>
+    <rect x="595" y="34" width="105" height="104" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.7)" stroke-width="3"></rect>
+    <rect x="0" y="58" width="22" height="58" fill="rgba(255,80,92,.18)" stroke="#ff6471" stroke-width="3"></rect>
+    <rect x="678" y="58" width="22" height="58" fill="rgba(103,202,255,.18)" stroke="#67caff" stroke-width="3"></rect>
+    <text class="goalName red" x="42" y="124">${sideName('P').toUpperCase()} GOAL</text>
+    <text class="goalName blue" x="658" y="124">${sideName('A').toUpperCase()} GOAL</text>
+    <text class="svgArrow" x="${arrowX}" y="83">${arrow}</text>
+    <foreignObject x="205" y="7" width="290" height="26"><div xmlns="http://www.w3.org/1999/xhtml" class="zoneLabel" style="position:static;transform:none;text-align:center">${ZONES[state.zone]} • ${sideName(state.possession)} POSSESSION</div></foreignObject>
+    ${svgKeeper('P',p.pK[0],p.pK[1])}
+    ${svgToken('P','player',p.pP[0],p.pP[1],'A')}
+    ${svgToken('P','captain',p.pCap[0],p.pCap[1],'★')}
+    ${svgToken('P','winger',p.pW[0],p.pW[1],'W')}
+    ${svgToken('P','defender',p.pD[0],p.pD[1],'D')}
+    ${svgKeeper('A',p.aK[0],p.aK[1])}
+    ${svgToken('A','player',p.aP[0],p.aP[1],'A')}
+    ${svgToken('A','captain',p.aCap[0],p.aCap[1],'★')}
+    ${svgToken('A','winger',p.aW[0],p.aW[1],'W')}
+    ${svgToken('A','defender',p.aD[0],p.aD[1],'D')}
+    <foreignObject x="10" y="137" width="680" height="28"><div xmlns="http://www.w3.org/1999/xhtml" class="playBanner" style="position:static"><span class="playChip possChip ${possColor}">${sideName(state.possession)} possession</span><span class="playChip">${anim?.label || 'Glow shows the player with possession'}</span></div></foreignObject>
+  </svg>
+  </div><div class="miniLegend"><span>${teamColorName('P')}: ${sideName('P')}</span><span>${teamColorName('A')}: ${sideName('A')}</span><span>Gold glow + arrow: possession</span><span>GK keeper · ★ captain · D defender · A attacker · W winger</span></div></div>`;
+}
+
+function renderMatch(){
+  const controls = controlsHTML();
+  const logHtml = state.log.map(x=>`<div class="logItem">${x}</div>`).join('');
+  const overlay = state.cinematic ? cinematicHTML() : '';
+  const statusP = `${teamCode('P')} special ${state.cool.P>0?'CD '+state.cool.P:specialReady('P')?'ready':Math.round(state.meter.P)+'%'}`;
+  const statusA = `${teamCode('A')} special ${state.cool.A>0?'CD '+state.cool.A:specialReady('A')?'ready':Math.round(state.meter.A)+'%'}`;
+  const yellows = `${teamCode('P')} Y${state.cards.P}${state.rally.P>0?' R'+state.rally.P:''} · ${teamCode('A')} Y${state.cards.A}${state.rally.A>0?' R'+state.rally.A:''}`;
+  return `<div class="screen matchScreen">${overlay}<div class="topbar"><div class="title">Clash Cup 2026</div><div class="subtitle">${state.playMode==='campaign'?campaignStageLabel():'Faceoff Mode'}<br>${sideName('P')} vs ${sideName('A')}</div></div><div class="content"><div class="verticalMatch"><div class="card scoreCard compactMatch"><div class="playPanel"><div class="playBox"><div class="playLabel">Last Play</div><div class="playText">${state.playLast||'Kickoff pending.'}</div></div><div class="playBox"><div class="playLabel">Current Play</div><div class="playText">${state.playNow||state.dialogue.text}</div></div></div>${fieldHTML()}<div class="matchStatusStrip"><span>${statusP}</span><span>${yellows}</span><span>${statusA}</span></div><div class="zones compactZones">${ZONES.map((z,i)=>`<div class="zone ${i===state.zone?'active':''}">${z}</div>`).join('')}</div></div><div class="card gold controlsDock">${controls}</div><details class="logDetails"><summary>Match Log</summary><div class="eventLog">${logHtml}</div></details><div class="footerBtns"><button class="btn gray" onclick="restartCurrentMatch()">Restart Match</button><button class="btn gold" onclick="state.mode='menu';render()">Main Menu</button></div></div></div></div>`;
+}
+
+function nextPlayDelay(){
+  if(state.aiThinking) return;
+  if(state.phase==='idle'){
+    state.aiThinking=true;
+    speak(state.possession,'player',`${sideName(state.possession)} read the pitch and look for the next opening.`,'Match Commentary');
+    render();
+    setTimeout(()=>{ state.aiThinking=false; nextPlay(); }, playBeatDelayMs());
+    return;
+  }
+  nextPlay();
+}
+
+function controlsHTML(){
+  if(state.aiThinking) return `<div><div class="row"><b>Reading the play...</b><span class="pill">AI beat</span></div><p class="small">The next move is developing.</p><button class="btn gray" disabled>Thinking...</button></div>`;
+  if(state.phase==='campaignBetween') return campaignBetweenControls();
+  if(state.playMode==='campaign' && state.possession==='A' && state.phase==='danger') return defenseControls();
+  if(state.playMode==='campaign' && state.possession==='A' && ['finish','corner','freekick'].includes(state.phase)) return `<div><div class="row"><b>${sideName('A')} attack automatically</b><span class="pill">AI turn</span></div><p class="small">The opponent makes its own choice. Tap to watch the result.</p><button class="btn red" onclick="campaignAutoChoice()">Watch Opponent Play</button></div>`;
+  if(state.phase==='danger') return dangerControls();
+  if(state.phase==='finish') return finishControls();
+  if(state.phase==='corner') return cornerControls();
+  if(state.phase==='freekick') return freeKickControls();
+  if(state.phase==='fulltime') return fulltimeControls();
+  if(state.phase.startsWith('pen')) return penaltyControls();
+  return `<div><div class="row"><b>Watch the next play</b><span class="pill">${displayMinute()}</span></div><p class="small">Let the play develop. In Campaign, Watch Match skips quiet buildup and stops when a real choice appears.</p><button class="btn gold" onclick="campaignOrNextPlay()">${state.playMode==='campaign'?'Watch Match':'Next Play'}</button></div>`;
+}
+function campaignOrNextPlay(){
+  if(state.playMode==='campaign') return campaignWatchMatch();
+  return nextPlayDelay();
+}
+function campaignWatchMatch(){
+  if(state.aiThinking) return;
+  state.aiThinking=true;
+  speak(state.possession,'player','Watch the match flow until a real decision appears.','Match Commentary');
+  render();
+  setTimeout(()=>{ state.aiThinking=false; campaignAutoAdvanceLoop(0); }, 650);
+}
+function campaignAutoAdvanceLoop(count=0){
+  if(state.playMode!=='campaign'){ nextPlayDelay(); return; }
+  if(state.cinematic || state.phase!=='idle' || count>=5){ render(); return; }
+  nextPlay();
+  if(state.cinematic || state.phase!=='idle'){ render(); return; }
+  setTimeout(()=>campaignAutoAdvanceLoop(count+1), 360);
+}
+function defenseControls(){
+  const late = state.minute>=70 || state.score.P<state.score.A;
+  const urgency = late ? 'Time is getting tight. You can take a bigger risk to win it back.' : 'Choose how to defend the danger.';
+  return `<div><div class="row"><b>${sideName('A')} threaten your goal</b><span class="pill">Defensive choice</span></div><p class="small">${urgency}</p><div class="defenseGrid"><button class="btn" onclick="resolveDefense('hold')"><div class="moveName">Hold Shape</div><div class="moveDesc">Safest. Blocks space and avoids cards.</div></button><button class="btn gold" onclick="resolveDefense('steal')"><div class="moveName">Press / Steal</div><div class="moveDesc">Balanced. Win the ball and counter.</div></button><button class="btn red" onclick="resolveDefense('tackle')"><div class="moveName">Hard Tackle</div><div class="moveDesc">High reward, yellow-card risk.</div></button></div></div>`;
+}
+function resolveDefense(choice){
+  ensureAudio();
+  if(state.playMode!=='campaign' || state.possession!=='A' || state.phase!=='danger'){ render(); return; }
+  const before=snapshotPlay();
+  const late = state.minute>=70 || state.score.P<state.score.A;
+  let steal=0, foul=0, block=0;
+  if(choice==='hold'){ steal=.16; foul=.02; block=.66; }
+  else if(choice==='steal'){ steal=late?.58:.48; foul=late?.14:.10; block=.18; }
+  else { steal=late?.64:.56; foul=late?.34:.26; block=.10; }
+  const roll=Math.random();
+  recordEvent('defense','P',{choice,minute:state.minute});
+  if(roll < foul){
+    log(`<b>Defensive Risk:</b> ${sideName('P')} foul while trying to stop the attack.`);
+    if(choice==='tackle' && state.zone>=4 && chance(late?.20:.12)){ triggerPenalty('A'); return; }
+    if(choice==='tackle' || chance(.55)){ triggerYellow('P','A', choice==='tackle'?'Hard tackle to stop the attack':'Aggressive pressing foul'); return; }
+    triggerFreeKick('A','P'); return;
+  }
+  if(roll < foul + steal){
+    state.possession='P';
+    state.carrier=randomCarrier(late);
+    state.zone=late ? 3 : 2;
+    state.phase=late ? 'danger' : 'idle';
+    addMeter('P', late?12:9); addMeter('A',4);
+    setAnim('turnover', before, `${sideName('P')} win the ball`, ballPosFor('P',state.carrier,state.zone));
+    log(`<b>Steal:</b> ${sideName('P')} win the ball back${late?' and counter fast.':'.'}`);
+    speak('P','player', late?'We stole it! Counter now!':'Good pressure. We win the ball and reset.','Defensive Stop');
+    render(); return;
+  }
+  if(roll < foul + steal + block){
+    state.possession='P';
+    state.zone=2;
+    state.carrier=randomCarrier(false);
+    state.phase='idle';
+    addMeter('P',8); addMeter('A',5);
+    setAnim('turnover', before, `${sideName('P')} hold shape`, ballPosFor('P',state.carrier,state.zone));
+    log(`<b>Blocked:</b> ${sideName('P')} hold shape and stop the danger.`);
+    speak('P','player','We stayed organized and blocked the lane.','Defensive Stop');
+    render(); return;
+  }
+  log(`<b>Pressure:</b> ${sideName('A')} survive the defensive pressure.`);
+  speak('A','player',`${sideName('A')} keep the attack alive. Your defense has to survive the final action.`,'Opponent Attack');
+  campaignAutoChoice();
+}
+function dangerControls(){
+  const s=state.possession; return `<div><div class="row"><b>${sideName(s)} threaten the goal</b><span class="pill">Human offense choice</span></div><p class="small">Choose the attack. The defense reacts automatically.</p><div class="choiceGrid"><button class="btn" onclick="chooseDanger('setup')"><div class="moveName">Pass / Cross</div><div class="moveDesc">Build a better chance. Crosses may draw a penalty, but setup passes do not directly create corners.</div></button><button class="btn" onclick="chooseDanger('shot')"><div class="moveName">Take Shot</div><div class="moveDesc">Quick chance, but repeated rushed shots get easier to read.</div></button><button class="btn red ${specialReady(s)?'':'disabled'}" ${specialReady(s)?'':'disabled'} onclick="chooseDanger('special')"><div class="moveName">Captain Special</div><div class="moveDesc">${team(s).special}</div></button></div></div>`;
+}
+function finishControls(){ return `<div><div class="row"><b>Better chance created</b><span class="pill">Tap to resolve</span></div><p class="small">The chance is ready. Tap to finish the play.</p><button class="btn gold" onclick="resolveFinish()">Resolve Finish</button></div>`; }
+function cornerControls(){ const s=state.possession; return `<div><div class="row"><b>Corner Kick</b><span class="pill">${sideName(s)} attack</span></div><p class="small">Choose the corner routine. Headers bring power, kicks bring precision, and captain passes create pressure.</p><div class="choiceGrid"><button class="btn" onclick="chooseCorner('header')"><div class="moveName">Cross for Header</div><div class="moveDesc">Powerful, but not automatic.</div></button><button class="btn" onclick="chooseCorner('kick')"><div class="moveName">Cross for Kick</div><div class="moveDesc">Sharper angle and timing.</div></button><button class="btn" onclick="chooseCorner('captain')"><div class="moveName">Pass to Captain</div><div class="moveDesc">Set up a better shot, but the pass can be read.</div></button></div></div>`; }
+function freeKickControls(){ const s=state.possession; return `<div><div class="row"><b>Free Kick</b><span class="pill">${sideName(s)} set piece</span></div><p class="small">Shoot now, or pass to create a cleaner chance.</p><div class="choiceGrid two"><button class="btn red" onclick="chooseFreeKick('shoot')"><div class="moveName">Shoot</div><div class="moveDesc">Go directly for goal.</div></button><button class="btn" onclick="chooseFreeKick('pass')"><div class="moveName">Pass / Set Up</div><div class="moveDesc">Look for a better shot.</div></button></div></div>`; }
+function fulltimeControls(){ if(state.playMode==='campaign') return campaignFulltimeControls(); const winner = state.score.P===state.score.A ? null : (state.score.P>state.score.A?'P':'A'); if(winner) return `<div><b>Final whistle.</b><p class="small">${sideName(winner)} win ${state.score.P}-${state.score.A}.</p><button class="btn gold" onclick="startFaceoff()">Play Again</button></div>`; return `<div><b>Full time level.</b><p class="small">It ends ${state.score.P}-${state.score.A}. The match goes to penalties: five kicks each, then sudden death if still tied.</p><button class="btn red" onclick="startPenalties()">Start Penalty Shootout</button></div>`; }
+function penaltyControls(){ const p=state.pen; if(!p) return ''; if(state.phase==='penShoot'){ let s=p.shooting; return `<div><b>${sideName(s)} Penalty ${p.round}</b><p class="small">Shooter secretly selects Left, Middle, or Right while the other player looks away.</p><div class="penGrid"><button class="btn" onclick="lockShot('left')">Left</button><button class="btn" onclick="lockShot('middle')">Middle</button><button class="btn" onclick="lockShot('right')">Right</button></div>`; } if(state.phase==='penLocked') return `<div><div class="locked">LOCKED IN</div><p class="small">Pass the phone to the goalkeeper player.</p><button class="btn gold" onclick="keeperGuess()">Continue</button></div>`; if(state.phase==='penKeeper') return `<div><b>Goalkeeper Guess</b><p class="small">Guess where the shot is going.</p><div class="penGrid"><button class="btn" onclick="resolvePenalty('left')">Left</button><button class="btn" onclick="resolvePenalty('middle')">Middle</button><button class="btn" onclick="resolvePenalty('right')">Right</button></div>`; if(state.phase==='penDone'){ const leader = p.score.P>p.score.A?'P':'A'; return `<div><b>Shootout finished.</b><p class="small">${sideName(leader)} win the shootout ${p.score.P}-${p.score.A}.</p><button class="btn gold" onclick="startFaceoff()">Play Again</button></div>`; } if(state.phase==='penResult'){ const nextLabel = p.history.length>=10 && p.score.P===p.score.A ? 'Sudden Death Kick' : 'Next Kick'; return `<div><b>Penalty Result</b><p class="small">${p.score.P}-${p.score.A} after ${p.history.length} kicks.</p><button class="btn gold" onclick="nextPenaltyKick()">${nextLabel}</button></div>`; } return ''; }
+function cinematicHTML(){ const step = state.cinematic.steps[state.cinematic.index]; const vert = step.vertical ? ' vertical' : ''; const slim = step.vertical ? ' slim' : ''; const half = step.title==='Halftime Report' ? ' halftimeCine' : ''; return `<div class="overlay" onclick="nextCinematic()"><div class="cineCard${slim}${half}"><div class="cineImage${vert}" style="background-image:url('${step.img}')"></div><div class="cineText"><div class="cineTitle">${step.title}</div><div class="cineBody">${step.text}</div><div class="tapNote">Tap anywhere to continue</div></div></div></div>`; }
+
+function stoppageMinutes(){
+  let s=0;
+  const goals = state.score.P + state.score.A;
+  if(countEvents('penalty','P') + countEvents('penalty','A') > 0) s += 1;
+  if(countEvents('freeKick','P') + countEvents('freeKick','A') > 0) s += 1;
+  if(countEvents('yellow','P') + countEvents('yellow','A') > 0) s += 1;
+  if(goals>=4) s += 1;
+  if(goals>=6) s += 1;
+  return clamp(s,0,8);
+}
+function finalTargetMinute(){
+  if(state.finalMinute==null) state.finalMinute = 90 + stoppageMinutes();
+  return state.finalMinute;
+}
+function matchMinuteStep(){
+  if(state.playMode==='faceoff') return 3 + rnd(3);
+  return 4 + rnd(4);
+}
+function playBeatDelayMs(){
+  return 1600;
+}
+function enterFulltime(){
+  state.phase='fulltime';
+  state.minute = finalTargetMinute();
+  if(state.playMode==='campaign'){
+    speak('P','commentator',`Full time: ${state.score.P}-${state.score.A}.`,'Final Whistle');
+    render(); return;
+  }
+  if(state.score.P!==state.score.A){
+    const winner = state.score.P>state.score.A?'P':'A';
+    triggerVictoryCelebration(winner,false); return;
+  }
+  speak('P','commentator',`Full time: ${state.score.P}-${state.score.A}.`,'Final Whistle');
+  render();
+}
+function nextPlay(){
+  ensureAudio();
+  if(state.cinematic) return;
+  if(state.phase!=='idle'){ render(); return; }
+  if(state.minute>=90 && state.minute>=finalTargetMinute()){ enterFulltime(); return; }
+  state.turn++;
+  const inc = matchMinuteStep();
+  let maxClock = state.finalMinute || 98;
+  let projected = clamp(state.minute + inc, 0, maxClock);
+  if(!state.halftimeShown && projected>=45){
+    state.minute = 45;
+    state.halftimeShown=true;
+    state.halftimeTie = state.score.P === state.score.A;
+    showCinematic([{img:ASSETS.commentatorHalftime,title:'Halftime Report',text:generateHalftimeRecap(),sound:'click'}], ()=>{
+      speak('P','commentator',`Halftime: ${sideName('P')} ${state.score.P} - ${state.score.A} ${sideName('A')}. The second half begins with everything still to play for.`,'Commentator');
+      state.phase='idle'; render();
+    });
+    return;
+  }
+  if(projected>=90 && state.finalMinute==null){
+    state.finalMinute = 90 + stoppageMinutes();
+    projected = Math.min(projected, state.finalMinute);
+  }
+  state.minute = projected;
+  state.cool.P=Math.max(0,state.cool.P-1);
+  state.cool.A=Math.max(0,state.cool.A-1);
+  decayTurnEffects();
+  if(state.zone>=3){
+    const s=state.possession;
+    if(penaltyAllowed(s,'general') && chance(0.12)){ triggerPenalty(s); return; }
+    state.phase='danger';
+    speak(s, state.carrier==='captain'?'captain':'player', s==='P'?'This is the moment. Put us through.':'We are close now. Pick the final action.');
+    render(); return;
+  }
+  simulateGame();
+  render();
+}
+
+function randomCarrier(close=false){ let r=Math.random(); if(close){ if(r<.45)return 'captain'; if(r<.72)return 'player'; if(r<.88)return 'winger'; return 'striker'; } if(r<.28)return 'captain'; if(r<.57)return 'player'; if(r<.79)return 'winger'; return 'striker'; }
+function simulateGame(){ const before=snapshotPlay(); const s=state.possession,d=other(s),ot=team(s),dt=team(d); state.carrier=randomCarrier(false); const acts=['short passing move','switch of play','dribble into space','long diagonal ball','one-two combination']; const act=acts[rnd(acts.length)]; const rallyChance = injuryRallyChance(); if(rallyChance>0 && chance(rallyChance)){ triggerRally(rallyTarget()); return; } const fkChance = freeKickChance(); if(fkChance>0 && chance(fkChance)){ setAnim('freekick', before, 'Foul: free kick'); triggerFreeKick(s,d); return; } if(yellowAllowed() && chance(0.08)){ setAnim('turnover', before, 'Whistle: late challenge'); triggerYellow(d,s,'A late sliding challenge'); return; } const atk = 50 + effectiveStat(s,'build')/3 + rnd(28) + (state.carrier==='captain'?8:0); const def = 50 + effectiveStat(d,'build')/3 + rnd(30); if(atk>=def){ const gain = (act.includes('long') || act.includes('one-two')) && chance(.45) ? 2 : 1; state.zone = clamp(state.zone + gain,0,4); state.carrier = randomCarrier(state.zone>=3); setAnim('advance', before, `${ot.name}: ${act}`); addMeter(s,10); addMeter(d,4); speak(s, state.carrier==='captain'?'captain':'player', `${ot.name} work a ${act}.\nThe attack moves into ${ZONES[state.zone]}.`); log(`<b>${ot.name}</b> advance to ${ZONES[state.zone]}.`); } else { state.possession=d; state.zone = state.zone>=3?1:2; state.carrier=randomCarrier(false); setAnim('turnover', before, `${dt.name} win it back`); addMeter(s,4); addMeter(d,11); speak(d,'player',`${dt.name} read the buildup and win it back.\nA counterattack starts the other way.`); log(`<b>${dt.name}</b> recover possession.`); } }
+
+function chooseDanger(choice){
+  ensureAudio();
+  const s=state.possession;
+  if(choice==='setup'){ noteAction(s,'setup'); return createSetup(0,'cross'); }
+  if(choice==='special'){ noteAction(s,'special'); return resolveShot('special'); }
+  noteAction(s,'shot'); return resolveShot('shot');
+}
+function createSetup(bonus=0, source='cross'){
+  const before=snapshotPlay();
+  const s=state.possession,d=other(s),ot=team(s),dt=team(d);
+  const captainForce = source==='captain' || source==='freeKick';
+  if(captainForce) noteAction(s,'captain');
+  if(state.zone>=3 && chance(captainForce?.08:.06)){
+    state.phase='idle'; recordEvent('offside', s);
+    showCinematic([{img:ASSETS.refOffside,title:'Offside',text:'Flag up! The run came too early.',sound:'click',vertical:true}], ()=>{
+      state.possession=d; state.zone=1; state.carrier=randomCarrier(false); setAnim('turnover', before, 'Offside: possession flips');
+      adjustBrazilMood(s,-1); adjustBrazilMood(d,1);
+      speak(d,'player',`${ot.name} time the run badly.\nOffside flips possession.`);
+      log(`<b>Offside:</b> ${ot.name} are called back.`); render();
+    }); return;
+  }
+  if(source==='cross' && state.zone>=3 && penaltyAllowed(s,'cross') && chance(crossPenaltyChance(s))){
+    log(`<b>Penalty Appeal:</b> ${ot.name} whip a cross into the area and draw contact.`);
+    triggerPenalty(s);
+    return;
+  }
+  const st = state.style?.[s] || {};
+  const setupScore = effectiveStat(s,'setup') + bonus + playstyleSetupMod(s,source) + (state.zone===4?8:0) + rnd(22);
+  const blockScore = effectiveStat(d,'build') + repetitionPenalty(s, captainForce?'captain':'setup') + rnd(28);
+  let cleanChance = clamp(.50 + (setupScore-blockScore)/100, .24, .82);
+  if(captainForce) cleanChance -= Math.min(.18, (st.captainForces||0)*.035);
+  if(state.playMode==='campaign' && state.campaign?.difficulty==='hero' && s==='P') cleanChance += .08;
+  cleanChance = clamp(cleanChance,.18,.88);
+  const r=Math.random();
+  if(r<cleanChance){
+    recordEvent('chance', s);
+    adjustBrazilMood(s,1);
+    state.carrier= captainForce ? 'captain' : randomCarrier(true);
+    const cleanBonus = source==='captain' ? 12 : source==='freeKick' ? 10 : (state.zone===4?11:8);
+    setAnim('advance', before, source==='cross'?'Cross into the box':source==='freeKick'?'Free kick layoff':'Pass to captain');
+    state.phase='finish';
+    state.pending={bonus: cleanBonus, special:false, source};
+    speak(s, captainForce?'captain':'player', source==='cross' ? 'The ball comes in cleanly. A better chance is opening.' : 'The pass arrives, but the finish still has to be earned.');
+    log(`<b>${ot.name}</b> create a shooting chance.`);
+  } else if(r<cleanChance+.16 && state.zone>=3){
+    const keptByAttack = chance(.42);
+    state.possession = keptByAttack ? s : d;
+    state.zone = keptByAttack ? Math.max(2,state.zone-1) : 2;
+    state.carrier=randomCarrier(false);
+    state.phase='idle';
+    const blockedLabel = source==='cross' ? 'Blocked cross in the box' : source==='freeKick' ? 'Free kick pass blocked' : 'Setup pass blocked';
+    setAnim('turnover', before, blockedLabel);
+    if(keptByAttack){
+      addMeter(s,5); addMeter(d,5);
+      speak(s,'player', source==='cross' ? 'The cross is blocked, but the attack keeps pressure. No corner unless the finish is deflected.' : 'The setup is blocked, but the attack keeps the ball.');
+      log(`<b>Blocked Setup:</b> ${ot.name} keep the ball, but no corner is awarded from the setup pass.`);
+    } else {
+      addMeter(s,3); addMeter(d,9);
+      speak(d,'player', source==='cross' ? `${dt.name} block the cross and clear it. Corner kicks only come from deflected shots now.` : `${dt.name} read the setup and clear it.`);
+      log(`<b>Blocked Setup:</b> ${dt.name} clear the pass. No corner.`);
+      adjustBrazilMood(d,1);
+    }
+    adjustBrazilMood(s,-1);
+  } else if(r<cleanChance+.29){
+    state.possession = chance(.55)?d:s;
+    state.zone = state.possession===s ? Math.max(2,state.zone-1) : 2;
+    state.carrier=randomCarrier(false);
+    state.phase='idle';
+    setAnim('turnover', before, 'Loose ball scramble');
+    speak(state.possession,'player',`The pass is messy. ${sideName(state.possession)} collect the loose ball.`);
+    log(`<b>Loose Ball:</b> The pass is not clean.`);
+    adjustBrazilMood(s,-1);
+  } else {
+    const overhit = chance(.45);
+    state.possession=d; state.zone=overhit?1:2; state.carrier=overhit?'keeper':randomCarrier(false);
+    state.phase='idle';
+    setAnim('turnover', before, overhit?'Overhit pass':'Intercepted pass');
+    speak(d,overhit?'goalie':'player', overhit ? 'Too much on the pass. Goalkeeper gathers it.' : `${dt.name} read that pass and cut it out.`, overhit?'Goalkeeper':null);
+    log(`<b>${dt.name}</b> stop the setup.`);
+    adjustBrazilMood(s,-1); adjustBrazilMood(d,1);
+  }
+  render();
+}
+function resolveFinish(){ const bonus = state.pending?.bonus || 8; state.pending=null; resolveShot('setup', bonus); }
+function chooseCorner(kind){ 
+  ensureAudio(); 
+  const s=state.possession;
+  if(kind==='header'){
+    noteAction(s,'setup');
+    state.carrier = s==='P' ? 'captain' : 'striker';
+    return resolveShot('cornerHeader', s==='P'?12:4);
+  }
+  if(kind==='kick'){
+    noteAction(s,'setup');
+    state.carrier = s==='A' ? 'captain' : 'player';
+    return resolveShot('cornerKick', s==='A'?12:4);
+  }
+  state.carrier='captain';
+  addMeter(s,10);
+  return createSetup(9,'captain');
+}
+function chooseFreeKick(kind){
+  ensureAudio();
+  const s=state.possession;
+  if(kind==='shoot'){
+    noteAction(s,'shot');
+    state.carrier='captain';
+    return resolveShot('freeKickShot', state.zone>=4?8:4);
+  }
+  state.carrier='captain';
+  addMeter(s,10);
+  return createSetup(9,'freeKick');
+}
+
+function triggerFreeKick(attacker, defender){
+  const before=snapshotPlay();
+  state.freeKickUsed=true;
+  recordEvent('foul', defender, {against:attacker});
+  state.zone = Math.max(state.zone, 3);
+  state.possession=attacker;
+  state.carrier='captain';
+  state.phase='freekick';
+  recordEvent('freeKick', attacker);
+  log(`<b>Free Kick:</b> ${sideName(attacker)} win a set piece.`);
+  showCinematic([
+    {img:ASSETS.refFoul,title:'Foul!',text:'The referee blows for the challenge and stops play.',sound:'click',vertical:true},
+    {img:ASSETS.refFreeKick,title:'Free Kick',text:`Free kick for ${sideName(attacker)}.
+Shoot, or pass to set up the better shot.`,vertical:true}
+  ], ()=>{
+    setAnim('freekick', before, `${sideName(attacker)} free kick`, ballPosFor(attacker,'captain',state.zone));
+    speak(attacker,'captain','Free kick. Shoot now, or set up the better chance.');
+    render();
+  });
+}
+function triggerPenalty(attacker){
+  const before=snapshotPlay();
+  const defender=other(attacker);
+  if(typeof state.penaltyUsed !== 'object' || state.penaltyUsed === null) state.penaltyUsed={P:false,A:false};
+  state.penaltyUsed[attacker]=true;
+  recordEvent('penalty', attacker);
+  const scored = chance(0.82);
+  showCinematic([
+    {img:ASSETS.refPenalty,title:'Penalty!',text:'The referee points straight to the spot!',sound:'click',vertical:true},
+    {img: penaltyArt(attacker),title:'From the Spot',text:`${sideName(attacker)} prepare for the penalty kick.
+The stadium goes silent.`,vertical:true},
+    scored
+      ? {img: goalArt(attacker),title:'Penalty Goal!',text:`He buries it!
+${sideName(attacker)} take the lead.`,sound:'goal'}
+      : {img: missArt(attacker),title:'Off the Post!',text:`The shot smashes the post!
+${sideName(defender)} break the other way.`,sound:'miss'}
+  ], ()=>{
+    if(scored){
+      state.score[attacker]++;
+      recordEvent('goal', attacker, {penalty:true});
+      addMeter(attacker,12); addMeter(defender,10);
+      log(`<b class="good">Penalty Goal:</b> ${sideName(attacker)} score. ${state.score.P}-${state.score.A}.`);
+      resetAfterGoal(defender);
+      setAnim('kickoff', before, `${sideName(defender)} restart`, ballPosFor(defender,'player',2));
+      speak(attacker,'captain','The pressure was huge, but the finish was calm.');
+    } else {
+      state.possession=defender;
+      state.zone=3;
+      state.carrier=randomCarrier(true);
+      state.phase='danger';
+      addMeter(defender,16);
+      log(`<b>Penalty Miss:</b> Off the post. ${sideName(defender)} counterattack.`);
+      setAnim('turnover', before, `${sideName(defender)} counterattack`, ballPosFor(defender,state.carrier,state.zone));
+      speak(defender,'player','Off the post! Counterattack now!');
+    }
+    render();
+  });
+}
+
+function resolveShot(kind, bonus=0){
+  const before=snapshotPlay();
+  const s=state.possession,d=other(s),ot=team(s),dt=team(d); state.phase='idle';
+  const isSpecial = kind==='special';
+  const shooterRole = isSpecial ? 'captain' : (state.carrier==='captain' ? 'captain' : 'player');
+  const zoneBase = [3,6,13,32,47][state.zone];
+  const stat = isSpecial ? effectiveStat(s,'special') : (kind==='setup' ? effectiveStat(s,'shot')+4 : kind==='freeKickShot' ? effectiveStat(s,'shot')+4 : kind==='cornerKick' ? effectiveStat(s,'shot')+3 : kind==='cornerHeader' ? effectiveStat(s,'power')+4 : effectiveStat(s,'power'));
+  let goalChance = zoneBase + Math.round((stat-78)/3) + bonus + playstyleShotMod(s,kind,isSpecial) - keeperSaveMod(d,kind);
+  const legendMove = isSpecial && isLegendMoveActive(s);
+  if(legendMove){
+    if(isTeam(s,'portugal')) goalChance += 18;
+    else if(isTeam(s,'argentina')) goalChance += 20;
+    else if(isTeam(s,'brazil')) goalChance += 19;
+  }
+  if(kind==='shot') goalChance = Math.min(goalChance,56);
+  if(kind==='setup') goalChance = Math.min(goalChance,64);
+  if(isSpecial) goalChance = Math.min(goalChance, legendMove?94:76);
+  if(kind==='cornerHeader' || kind==='cornerKick') goalChance = Math.min(goalChance,62);
+  if(kind==='freeKickShot') goalChance = Math.min(goalChance,55);
+  goalChance = clamp(goalChance, 6, legendMove?95:82);
+  let roll = rnd(100);
+  recordEvent('shot', s, {kind, special:isSpecial, zone:state.zone, goalChance});
+  if(isSpecial){ state.meter[s]=0; state.cool[s]=5; recordEvent('special', s, {zone:state.zone}); }
+  setAnim(isSpecial?'special':'shot', before, isSpecial?`${ot.name} captain special`:`${ot.name} shot`, goalMouth(d));
+  const wideMissGoalKick = ()=>{
+    recordEvent('goalKick', d); log(`<b>Goal Kick:</b> ${dt.name} restart after the miss.`);
+    adjustBrazilMood(s,-1); adjustBrazilMood(d,1);
+    showCinematic([{img:ASSETS.keeperGoalKick,title:'Shot Goes Wide!',text:'The shot drifts wide.\nThe keeper launches it back into play.',sound:'click',vertical:true}], ()=>{
+      addMeter(s,4); addMeter(d,8); state.possession=d; state.zone=1; state.carrier='keeper'; setAnim('goalKick', before, `${dt.name} goal kick`, ballPosFor(d,'keeper',1)); speak(d,'goalie','Goal kick. We settle it and play out from the back.','Goalkeeper'); render();
+    });
+  };
+  const cornerEvent = ()=>{
+    recordEvent('corner', s); log(`<b>Corner:</b> ${dt.name} concede a corner.`);
+    showCinematic([{img:ASSETS.refCorner,title:'Corner Kick',text:'Another chance from the flag.',sound:'click',vertical:true}], ()=>{
+      state.phase='corner'; state.carrier='winger'; setAnim('corner', before, `${ot.name} corner kick`, ballPosFor(s,'winger',4)); addMeter(s,8); addMeter(d,12); speak(d,'goalie','A touch sends it behind. Corner kick for the attack.','Goalkeeper'); render();
+    });
+  };
+  const goalResult = ()=>{
+    recordEvent('goal', s); if(isSpecial) recordEvent('specialGoal', s);
+    state.score[s]++; addMeter(s,18); addMeter(d,8);
+    adjustBrazilMood(s,2); adjustBrazilMood(d,-1);
+    log(`<b class="good">GOAL:</b> ${ot.name} score. ${state.score.P}-${state.score.A}.`);
+  };
+  const crossbarEvent = ()=>{
+    log(`<b>Crossbar:</b> ${ot.name} hit the bar. Close call!`);
+    addMeter(s,7); addMeter(d,7);
+    adjustBrazilMood(s,-1);
+    showCinematic([{
+      img: missArt(s),
+      title:'Off the Crossbar!',
+      text:`Close call!
+${ot.name} smash the ball against the crossbar, but it stays out.`,
+      sound:'miss'
+    }], ()=>{
+      const reboundAlive = state.zone>=4 && chance(.22);
+      if(reboundAlive){
+        state.possession=s;
+        state.zone=3;
+        state.carrier=randomCarrier(true);
+        state.phase='danger';
+        setAnim('shot', before, `${ot.name} crossbar rebound`, ballPosFor(s,state.carrier,state.zone));
+        speak(s,'player','It crashes off the bar! The rebound is still alive.');
+      } else {
+        state.possession=d;
+        state.zone=2;
+        state.carrier=randomCarrier(false);
+        state.phase='idle';
+        setAnim('turnover', before, `${dt.name} clear crossbar rebound`, ballPosFor(d,state.carrier,state.zone));
+        speak(d,'player','Off the bar! We clear the rebound.');
+      }
+      render();
+    });
+  };
+
+  if(isSpecial){
+    const success = legendMove ? true : roll < goalChance;
+    if(!success){ recordEvent('specialMiss', s); adjustBrazilMood(s,-1); }
+    showCinematic([
+      {img: specialArt(s), title: `${ot.name} Captain Special`, text: legendMove ? `${ot.special}!\nThe guaranteed legend finish is unleashed.` : `${ot.special}!\nThe captain unloads the signature move.`, sound:'special'},
+      success
+        ? {img: goalArt(s), title: 'GOOOAL!', text: legendMove ? `${ot.special} is unstoppable!\n${ot.name} turn legend into a goal!` : `${ot.special} breaks through!\n${ot.name} take the moment!`, sound:'goal'}
+        : {img: missArt(s), title: 'Denied!', text: `${ot.special} looked dangerous...\nbut the keeper or defense survives it.`, sound:'miss'}
+    ], ()=>{
+      if(success){ goalResult(); resetAfterGoal(d); setAnim('kickoff', before, `${dt.name} restart`, ballPosFor(d,'player',2)); }
+      else {
+        const near = roll < goalChance + 18;
+        if(near && chance(.55)){ cornerEvent(); return; }
+        state.possession=d; state.zone=1; state.carrier='keeper'; setAnim('save', before, `${dt.name} survive special`, ballPosFor(d,'keeper',1));
+      }
+      render();
+    });
+    return;
+  }
+
+  if(roll < goalChance){
+    goalResult();
+    const next = () => { resetAfterGoal(d); setAnim('kickoff', before, `${dt.name} restart`, ballPosFor(d,'player',2)); speak(s, shooterRole, `${ot.name} celebrate as the crowd roars!`); render(); };
+    showCinematic([{img: goalArt(s), title:'GOOOAL!', text:`${ot.name} find the net!\nThe finish beats the keeper.`, sound:'goal'}], next);
+    return;
+  }
+
+  const near = roll < goalChance + 18;
+  if(near && chance(.24)){ crossbarEvent(); return; }
+  if(near && chance(.55)){ cornerEvent(); return; }
+  if(near){ 
+    recordEvent('save', d); 
+    log(`<b>Big Save:</b> ${dt.name} keeper keeps it out.`); 
+    addMeter(s,6); addMeter(d,12); adjustBrazilMood(s,-1); adjustBrazilMood(d,1); 
+    showCinematic([{img:ASSETS.bigSave,title:'Big Save!',text:`${dt.name} keeper flies across and keeps it out.`,sound:'click',vertical:true}], ()=>{
+      state.possession=d; state.zone=1; state.carrier='keeper'; 
+      setAnim('save', before, `${dt.name} keeper save`, ballPosFor(d,'keeper',1)); 
+      speak(d,'goalie','The keeper judges it well and makes the save.','Goalkeeper'); 
+      render(); 
+    });
+    return; 
+  }
+  if(state.zone>=3 && chance(.25)){ cornerEvent(); return; }
+  wideMissGoalKick();
+}
+
+function resetAfterGoal(newPoss){ state.possession=newPoss; state.zone=2; state.carrier=randomCarrier(false); state.phase='idle'; state.minute=clamp(state.minute+1,0,90); }
+
+function startPenalties(){ state.phase='penShoot'; state.pen={round:1, shooting:'P', score:{P:0,A:0}, target:null, history:[]}; speak('P','captain','Penalty shootout. Five kicks each. If still tied, sudden death.'); render(); }
+function lockShot(dir){ ensureAudio(); state.pen.target=dir; state.phase='penLocked'; speak(state.pen.shooting,'captain','Shot selected and locked in.'); render(); }
+function keeperGuess(){ ensureAudio(); state.phase='penKeeper'; speak(other(state.pen.shooting),'goalie','Read the shooter and commit.','Goalkeeper'); render(); }
+function penaltyTaken(side){ return state.pen.history.filter(h=>h.s===side).length; }
+function shootoutOver(){
+  const p=state.pen, takenP=penaltyTaken('P'), takenA=penaltyTaken('A');
+  const remP=Math.max(0,5-takenP), remA=Math.max(0,5-takenA);
+  if(takenP<=5 && takenA<=5){
+    if(p.score.P > p.score.A + remA) return true;
+    if(p.score.A > p.score.P + remP) return true;
+    if(takenP===5 && takenA===5 && p.score.P!==p.score.A) return true;
+    return false;
+  }
+  if(takenP===takenA && takenP>=5 && p.score.P!==p.score.A) return true;
+  return false;
+}
+function resolvePenalty(guess){
+  ensureAudio();
+  const p=state.pen,s=p.shooting,target=p.target;
+
+  // Penalty shootout tuning:
+  // - Penalties should usually score.
+  // - Correct keeper guesses reduce the chance, but do not make saves automatic.
+  // - After 3 straight missed penalties, force the next kick to score so the shootout never reaches 4 misses in a row.
+  const straightMisses = p.history.slice(-3).filter(h=>!h.goal).length;
+  const forceGoal = straightMisses >= 3;
+  const previousKick = p.history[p.history.length-1];
+  const forceDecider = p.history.length >= 13 && p.history.length % 2 === 1 && previousKick;
+  let scoreChance = target===guess ? 58 : (guess==='middle'||target==='middle' ? 88 : 96);
+  scoreChance += s==='P'?3:5;
+  scoreChance = clamp(scoreChance, 55, 97);
+  let goal = forceGoal ? true : chance(scoreChance/100);
+  if(forceDecider) goal = !previousKick.goal;
+
+  const finish = ()=>{ p.history.push({s,target,guess,goal,scoreChance,forceGoal,forceDecider}); if(shootoutOver()){ state.phase='penDone'; const winner = p.score.P>p.score.A?'P':'A'; triggerVictoryCelebration(winner,true); } else { state.phase='penResult'; render(); } };
+  const intro = {img:s==='P'?ASSETS.penPt:ASSETS.penAr,title:'Penalty Kick',text:`${sideName(s)} step up from the spot.
+The keeper reads the body shape and commits.`,sound:'click',vertical:true};
+  if(goal){
+    p.score[s]++;
+    showCinematic([intro,{img:goalArt(s),title:'Penalty Goal!',text:`${sideName(s)} score from the spot.`,sound:'goal'}], ()=>{ speak(s,'captain',`He shoots ${target.toUpperCase()}!
+It is in.`); finish(); });
+  } else {
+    showCinematic([intro,{img:missArt(s),title:'Penalty Miss!',text:`No goal! The shootout pressure rises.`,sound:'miss'}], ()=>{ speak(other(s),'goalie',`He guessed ${guess.toUpperCase()} and the shot was ${target.toUpperCase()}.
+Saved!`,'Goalkeeper'); finish(); });
+  }
+}
+function nextPenaltyKick(){ const p=state.pen; p.shooting = p.history.length % 2 === 0 ? 'P' : 'A'; p.round = Math.floor(p.history.length/2)+1; p.target=null; state.phase='penShoot'; speak(p.shooting,'captain',`${sideName(p.shooting)} step up for penalty ${p.round}.`); render(); }
+
+function restartCurrentMatch(){ if(state.playMode==='campaign' && state.campaign) startCampaignMatch(); else startFaceoff(); }
+function render(){ const app=document.getElementById('app'); app.innerHTML = state.mode==='splash' ? splashScreen() : state.mode==='tutorialPrompt' ? tutorialPromptScreen() : state.mode==='tutorial' ? renderTutorial() : state.mode==='menu' ? menuScreen() : state.mode==='how' ? howScreen() : state.mode==='campaignTeams' ? renderCampaignTeams() : state.mode==='campaignDifficulty' ? renderCampaignDifficulty() : state.mode==='campaignRoute' ? renderCampaignRoute() : renderMatch(); }
+
+initState(); render();
+setTimeout(()=>{ if(state && state.mode==='splash'){ state.splashReady=true; render(); } }, 3000);
+</script></body></html>
