@@ -1,0 +1,10 @@
+{
+  "updated": "2026-06-24",
+  "note": "Edit this file after Messi or Ronaldo games. Keep the key format exactly: YYYY-MM-DD|Team1|Team2|Player",
+  "goals": {
+    "2026-06-16|Argentina|Algeria|Messi": 3,
+    "2026-06-22|Argentina|Austria|Messi": 2,
+    "2026-06-17|Portugal|DR Congo|Ronaldo": 0,
+    "2026-06-23|Portugal|Uzbekistan|Ronaldo": 2
+  }
+}
