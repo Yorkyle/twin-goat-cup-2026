@@ -294,7 +294,7 @@ section{margin-top:18px}.section-title{color:#fff;font-size:1.55rem;line-height:
 <div class="hero-bottom"><div class="hero-card"><strong>Schedule</strong><p id="dataStatus" style="margin-top:6px;font-weight:760">Loading schedule…</p></div></div>
 </header>
 
-<section><h2 class="section-title">Match Browser</h2><div class="section-card"><p class="eyebrow">Tap a filter</p><div class="filter-bar"><button class="filter-btn active" onclick="setFilter('upcoming',this)">Upcoming</button><button class="filter-btn" onclick="setFilter('graduation',this)">Graduation Weekend</button><button class="filter-btn" onclick="setFilter('finals',this)">Knockout</button><button class="filter-btn" onclick="setFilter('Argentina',this)">Argentina</button><button class="filter-btn" onclick="scrollToHighlights(this)">Highlights</button><button class="filter-btn" onclick="setFilter('Portugal',this)">Portugal</button></div><div id="matchGrid" class="match-grid"></div></div></section>
+<section><h2 class="section-title">Match Browser</h2><div class="section-card"><p class="eyebrow">Tap a filter</p><div class="filter-bar"><button class="filter-btn active" onclick="setFilter('upcoming',this)">Upcoming</button><button class="filter-btn" onclick="setFilter('past',this)">Past Games</button><button class="filter-btn" onclick="setFilter('finals',this)">Knockout</button><button class="filter-btn" onclick="setFilter('Argentina',this)">Argentina</button><button class="filter-btn" onclick="scrollToHighlights(this)">Highlights</button><button class="filter-btn" onclick="setFilter('Portugal',this)">Portugal</button></div><div id="matchGrid" class="match-grid"></div></div></section>
 
 
 <section id="highlightsSection"><h2 class="section-title">Missed the Match?</h2><div class="section-card"><p class="eyebrow">Highlight finder</p><div id="highlightFinder" class="highlight-finder-grid"></div></div></section>
@@ -363,8 +363,28 @@ const SCORE_PATCHES={
   "2026-06-16|Argentina|Algeria":[3,0],
   "2026-06-22|Argentina|Austria":[2,0],
   "2026-06-17|Portugal|DR Congo":[1,1],
-  "2026-06-23|Portugal|Uzbekistan":[5,0]
+  "2026-06-23|Portugal|Uzbekistan":[5,0],
+
+  // Manual completed-game test/results patches. These are date-independent on purpose
+  // so they still match if the public schedule lists the same teams on a different date.
+  "Germany|Paraguay":{ft:[1,1],pens:[3,4],decidedBy:"penalties"},
+  "Netherlands|Morocco":{ft:[1,1],pens:[2,3],decidedBy:"penalties"},
+  "Australia|Egypt":{ft:[1,1],pens:[2,4],decidedBy:"penalties"},
+  "Portugal|Croatia":{ft:[2,1],decidedBy:"regular"},
+  "Portugal|Spain":{ft:[0,1],decidedBy:"regular"},
+  "Argentina|Cape Verde":{ft:[3,2],decidedBy:"regular"},
+  "Switzerland|Colombia":{ft:[0,0],pens:[4,3],decidedBy:"penalties",winner:"Switzerland"}
 };
+
+/*
+  Score patches support either the original short format:
+  "YYYY-MM-DD|Team A|Team B":[scoreA,scoreB]
+
+  Or the safer knockout/penalty format:
+  "YYYY-MM-DD|Team A|Team B":{ft:[1,1],pens:[3,4],decidedBy:"penalties"}
+
+  Penalty shootout numbers are stored separately and are never added to full-time goals.
+*/
 
 const PLAYER_GOAL_PATCHES={
   "2026-06-16|Argentina|Algeria|Messi":3,
@@ -393,15 +413,98 @@ function reverseScorePatchKey(match){
   return (match.date||"")+"|"+b+"|"+a;
 }
 
+function scorePatchTeamKey(match){
+  const a=prettyTeam(match.team1);
+  const b=prettyTeam(match.team2);
+  return a+"|"+b;
+}
+
+function reverseScorePatchTeamKey(match){
+  const a=prettyTeam(match.team1);
+  const b=prettyTeam(match.team2);
+  return b+"|"+a;
+}
+
+function findScorePatchForMatch(match){
+  const exact=SCORE_PATCHES[scorePatchKey(match)];
+  if(exact) return {patch:exact,reversed:false};
+
+  const exactReverse=SCORE_PATCHES[reverseScorePatchKey(match)];
+  if(exactReverse) return {patch:exactReverse,reversed:true};
+
+  const teamOnly=SCORE_PATCHES[scorePatchTeamKey(match)];
+  if(teamOnly) return {patch:teamOnly,reversed:false};
+
+  const teamOnlyReverse=SCORE_PATCHES[reverseScorePatchTeamKey(match)];
+  if(teamOnlyReverse) return {patch:teamOnlyReverse,reversed:true};
+
+  return null;
+}
+
+function patchFullTimeScore(patch,reversed=false){
+  if(!patch) return null;
+  let ft=null;
+
+  if(Array.isArray(patch)){
+    ft=patch;
+  }else if(Array.isArray(patch.ft)){
+    ft=patch.ft;
+  }else if(Array.isArray(patch.score)){
+    ft=patch.score;
+  }else if(patch.scoreA!==undefined && patch.scoreB!==undefined){
+    ft=[patch.scoreA,patch.scoreB];
+  }
+
+  if(!ft || ft.length!==2) return null;
+  return reversed ? [ft[1],ft[0]] : [ft[0],ft[1]];
+}
+
+function patchPenaltyScore(patch,reversed=false){
+  if(!patch || Array.isArray(patch)) return null;
+  let pens=null;
+
+  if(Array.isArray(patch.pens)){
+    pens=patch.pens;
+  }else if(Array.isArray(patch.penalties)){
+    pens=patch.penalties;
+  }else if(Array.isArray(patch.pks)){
+    pens=patch.pks;
+  }else if(patch.pensA!==undefined && patch.pensB!==undefined){
+    pens=[patch.pensA,patch.pensB];
+  }
+
+  if(!pens || pens.length!==2) return null;
+  return reversed ? [pens[1],pens[0]] : [pens[0],pens[1]];
+}
+
 function applyScorePatches(matches){
   return matches.map(match=>{
-    const direct=SCORE_PATCHES[scorePatchKey(match)];
-    const reverse=SCORE_PATCHES[reverseScorePatchKey(match)];
-    if(!direct&&!reverse) return match;
+    const found=findScorePatchForMatch(match);
+    if(!found) return match;
+
+    const patch=found.patch;
+    const reversed=found.reversed;
+    const ft=patchFullTimeScore(patch,reversed);
+    if(!ft) return match;
 
     const patched={...match};
-    const ft=direct ? direct : [reverse[1],reverse[0]];
-    patched.score={...(patched.score||{}),ft};
+    patched.manualScorePatch=true;
+    const pens=patchPenaltyScore(patch,reversed);
+    patched.score={...(patched.score||{}),ft,manualPatch:true};
+
+    if(pens){
+      patched.score.pens=pens;
+      patched.pensA=pens[0];
+      patched.pensB=pens[1];
+      patched.decidedBy="penalties";
+    }else if(!patched.decidedBy){
+      patched.decidedBy="regular";
+    }
+
+    if(patch && !Array.isArray(patch) && patch.winner){
+      patched.winner=patch.winner;
+    }
+
     patched.status=patched.status||"Complete";
     return patched;
   });
@@ -625,18 +728,105 @@ function teamMatches(team){
   return sortByKickoff(allMatches.filter(m=>matchContainsTeam(m,team)));
 }
 
+function scoreStatusLooksComplete(match){
+  if(!match) return false;
+  const score=match.score || {};
+  const statusText=[
+    match.status,match.state,match.phase,match.decidedBy,match.decision,
+    score.status,score.state,score.phase,score.decidedBy,score.decision
+  ].filter(Boolean).join(" ").toLowerCase();
+
+  return /complete|completed|final|full.?time|finished|ft|aet|after extra|penalties|shootout/.test(statusText);
+}
+
+function matchIsSafelyPast(match){
+  if(!match) return false;
+  const kickoff=parseMatchDate(match);
+  if(Number.isNaN(kickoff.getTime())) return false;
+  // Give the game a normal match window before trusting a bare 0-0 from the fixture feed.
+  return Date.now()-kickoff.getTime() > 3*60*60*1000;
+}
+
+function scoreIsTrusted(match,ft){
+  if(!match || !ft) return false;
+  if(match.manualScorePatch || (match.score && match.score.manualPatch)) return true;
+  if(getPenaltyScore(match)) return true;
+  if(scoreStatusLooksComplete(match)) return true;
+  if(ft[0]!==0 || ft[1]!==0) return true;
+
+  // A 0-0 can be a real completed result, especially before a penalty shootout.
+  // Trust it once the match is safely past the expected full-time window.
+  return matchIsSafelyPast(match);
+}
+
+function getRegularScore(match){
+  if(!match) return null;
+
+  if(match.score && Array.isArray(match.score.ft) && match.score.ft.length===2){
+    const s1=Number(match.score.ft[0]);
+    const s2=Number(match.score.ft[1]);
+    const ft=(Number.isNaN(s1)||Number.isNaN(s2)) ? null : [s1,s2];
+    return scoreIsTrusted(match,ft) ? ft : null;
+  }
+
+  if(match.scoreA!==undefined && match.scoreB!==undefined){
+    const s1=Number(match.scoreA);
+    const s2=Number(match.scoreB);
+    const ft=(Number.isNaN(s1)||Number.isNaN(s2)) ? null : [s1,s2];
+    return scoreIsTrusted(match,ft) ? ft : null;
+  }
+
+  return null;
+}
+
+function getPenaltyScore(match){
+  if(!match) return null;
+  const score=match.score || {};
+  const candidates=[score.pens,score.penalties,score.pks,score.pk,score.shootout,match.pens,match.penalties,match.pks,match.pk,match.shootout];
+
+  for(const candidate of candidates){
+    if(Array.isArray(candidate) && candidate.length===2){
+      const p1=Number(candidate[0]);
+      const p2=Number(candidate[1]);
+      if(!Number.isNaN(p1) && !Number.isNaN(p2)) return [p1,p2];
+    }
+  }
+
+  if(match.pensA!==undefined && match.pensB!==undefined){
+    const p1=Number(match.pensA);
+    const p2=Number(match.pensB);
+    if(!Number.isNaN(p1) && !Number.isNaN(p2)) return [p1,p2];
+  }
+
+  if(score.pensA!==undefined && score.pensB!==undefined){
+    const p1=Number(score.pensA);
+    const p2=Number(score.pensB);
+    if(!Number.isNaN(p1) && !Number.isNaN(p2)) return [p1,p2];
+  }
+
+  return null;
+}
+
+function hasPenaltyShootout(match){
+  return !!getPenaltyScore(match);
+}
+
 function matchFinished(match){
-  return !!(match && match.score && match.score.ft && match.score.ft.length===2);
+  return !!getRegularScore(match);
+}
+
+function getDecisionType(match){
+  const decidedBy=String(match && (match.decidedBy || match.decided_by || match.decision) || "").toLowerCase();
+  if(decidedBy.includes("pen")) return "penalties";
+  if(hasPenaltyShootout(match)) return "penalties";
+  return "regular";
 }
 
 function teamResultInMatch(team,match){
   if(!matchFinished(match)) return "";
-  const s1=Number(match.score.ft[0]);
-  const s2=Number(match.score.ft[1]);
-  if(Number.isNaN(s1)||Number.isNaN(s2)) return "";
-  if(s1===s2) return "draw";
-  const teamWon = (match.team1===team && s1>s2) || (match.team2===team && s2>s1);
-  return teamWon ? "win" : "loss";
+  const winner=getMatchWinner(match);
+  if(!winner) return "draw";
+  return normalizePick(winner)===normalizePick(team) ? "win" : "loss";
 }
 
 function nextUnplayedMatch(team){
@@ -686,7 +876,7 @@ function computeTeamStatus(team, playerName){
         state:"eliminated",
         heading: team+" were eliminated in the "+roundLabel+".",
         detail: "Legacy Mode unlocked. The team is out, but the World Cup and rivalry continue.",
-        extra: "Last match: "+matchLabel(lastPlayed)
+        extra: "Last match: "+matchResultLabel(lastPlayed)
       };
     }
     if(result==="draw" || result==="win"){
@@ -694,7 +884,7 @@ function computeTeamStatus(team, playerName){
         state:"pending",
         heading: team+" have no scheduled match right now.",
         detail: "Results are in, but the public schedule may not have posted the next step yet.",
-        extra: lastPlayed ? "Last result logged: "+matchLabel(lastPlayed) : "Check back after the next update."
+        extra: lastPlayed ? "Last result logged: "+matchResultLabel(lastPlayed) : "Check back after the next update."
       };
     }
   }
@@ -775,23 +965,43 @@ function matchContainsTeam(m,t){return(m.team1||"").includes(t)||(m.team2||"").i
 function sortByKickoff(matches){return [...matches].sort((a,b)=>parseMatchDate(a)-parseMatchDate(b))}
 function displayRound(value){if(!value)return"Match";return String(value).replace(/Matchday\s*(\d+)/i,"Matchday $1")}
 function scoreText(match){
-  if(!matchFinished(match)) return "";
-  const s1=Number(match.score.ft[0]);
-  const s2=Number(match.score.ft[1]);
-  if(Number.isNaN(s1)||Number.isNaN(s2)) return "";
-  return prettyTeam(match.team1)+" "+s1+" - "+s2+" "+prettyTeam(match.team2);
+  const ft=getRegularScore(match);
+  if(!ft) return "";
+
+  const s1=ft[0];
+  const s2=ft[1];
+  const pens=getPenaltyScore(match);
+
+  if(pens){
+    return prettyTeam(match.team1)+" "+s1+" ("+pens[0]+") — "+s2+" ("+pens[1]+") "+prettyTeam(match.team2);
+  }
+
+  return prettyTeam(match.team1)+" "+s1+" — "+s2+" "+prettyTeam(match.team2);
+}
+
+function formatAdvancementText(match){
+  const winner=getMatchWinner(match);
+  if(!winner) return "";
+
+  if(getDecisionType(match)==="penalties"){
+    return prettyTeam(winner)+" advances on penalties.";
+  }
+
+  return prettyTeam(winner)+" advances.";
 }
 
 function createMatchCard(m,extra,team){
   let isFinal=(m.round||"").toLowerCase().includes("final");
   const score=scoreText(m);
   const playerText=team ? playerGoalText(m,team) : "";
+  const advancement=(matchFinished(m) && isKnockoutRound(m.round)) ? formatAdvancementText(m) : "";
   return '<article class="match-card '+(isFinal?'highlight ':'')+(extra||'')+'">'
     +((extra||'').includes("next-match")?'<div class="next-match-label">Next match</div>':'')
     +'<div class="match-top"><span class="time-pill">'+formatLocalDate(m)+'</span><span class="round-pill">'+displayRound(m.round||m.group||"Match")+'</span></div>'
     +'<p class="match-title">'+prettyTeam(m.team1)+' vs '+prettyTeam(m.team2)+'</p>'
     +'<p class="why-watch">'+(m.group?m.group+" • ":"")+(m.ground||"Venue TBD")+'</p>'
     +(score?'<div class="score-pill">'+score+'</div>':'')
+    +(advancement?'<div class="result-pill '+(getDecisionType(m)==="penalties"?'draw':'win')+'">'+advancement+'</div>':'')
     +(playerText?'<div class="player-goal-pill">'+playerText+'</div>':'')
     +'</article>';
 }
@@ -848,8 +1058,12 @@ function getFilteredMatches(){
       let kickoff=parseMatchDate(m);
       return kickoff>=now && kickoff<=twoWeeksOut;
     });
-  }else if(currentFilter==="graduation"){
-    matches=allMatches.filter(m=>m.date>="2026-06-13"&&m.date<="2026-06-14");
+  }else if(currentFilter==="past"){
+    matches=allMatches.filter(m=>{
+      let kickoff=parseMatchDate(m);
+      if(Number.isNaN(kickoff.getTime())) return matchFinished(m);
+      return kickoff<now || matchFinished(m);
+    });
   }else if(currentFilter==="Argentina"||currentFilter==="Portugal"){
     matches=allMatches.filter(m=>matchContainsTeam(m,currentFilter));
   }else if(currentFilter==="finals"){
@@ -864,6 +1078,9 @@ function getFilteredMatches(){
   matches=sortByKickoff(matches);
   if(currentFilter==="upcoming"){
     return matches.slice(0,8);
+  }
+  if(currentFilter==="past"){
+    return matches.reverse();
   }
   return matches;
 }
@@ -926,29 +1143,33 @@ function highlightScoreboardHTML(match){
     return '<div class="highlight-pending-score">Score will appear after full-time.</div>';
   }
 
-  const s1=Number(match.score.ft[0]);
-  const s2=Number(match.score.ft[1]);
-  if(Number.isNaN(s1)||Number.isNaN(s2)){
+  const ft=getRegularScore(match);
+  if(!ft){
     return '<div class="highlight-pending-score">Final score pending.</div>';
   }
+
+  const s1=ft[0];
+  const s2=ft[1];
+  const pens=getPenaltyScore(match);
+  const stageText=(match.group||match.round||"World Cup Match")+(formatAdvancementText(match) ? " • "+formatAdvancementText(match) : "");
 
   return `
     <div class="highlight-scoreboard">
       <div class="highlight-status">
         <span>World Cup 2026</span>
-        <span>Full-time</span>
+        <span>${pens ? "Full-time + penalties" : "Full-time"}</span>
       </div>
       <div class="highlight-score-rows">
         <div class="highlight-score-row">
           <span class="team-name">${escapeHTML(prettyTeam(match.team1))}</span>
-          <span class="team-score">${s1}</span>
+          <span class="team-score">${s1}${pens ? " ("+pens[0]+")" : ""}</span>
         </div>
         <div class="highlight-score-row">
           <span class="team-name">${escapeHTML(prettyTeam(match.team2))}</span>
-          <span class="team-score">${s2}</span>
+          <span class="team-score">${s2}${pens ? " ("+pens[1]+")" : ""}</span>
         </div>
       </div>
-      <div class="highlight-stage">${escapeHTML(match.group||match.round||"World Cup Match")}</div>
+      <div class="highlight-stage">${escapeHTML(stageText)}</div>
     </div>
   `;
 }
@@ -1065,6 +1286,12 @@ function trackerTemplate(side,label,team){
 }
 function matchLabel(m){
   return (m.date||"Date TBD")+" — "+prettyTeam(m.team1)+" vs "+prettyTeam(m.team2);
+}
+
+function matchResultLabel(m){
+  const score=scoreText(m);
+  const advancement=(matchFinished(m) && isKnockoutRound(m.round)) ? formatAdvancementText(m) : "";
+  return matchLabel(m)+(score ? " • "+score : "")+(advancement ? " • "+advancement : "");
 }
 
 function matchKey(m){
@@ -1208,11 +1435,26 @@ function getFinalMatch(){
 }
 
 function getMatchWinner(match){
-  if(!match || !match.score || !match.score.ft) return "";
-  const s1=Number(match.score.ft[0]);
-  const s2=Number(match.score.ft[1]);
-  if(Number.isNaN(s1)||Number.isNaN(s2)||s1===s2) return "";
-  return s1>s2 ? match.team1 : match.team2;
+  const ft=getRegularScore(match);
+  if(!ft) return "";
+
+  const s1=ft[0];
+  const s2=ft[1];
+
+  if(s1>s2) return match.team1;
+  if(s2>s1) return match.team2;
+
+  const pens=getPenaltyScore(match);
+  if(pens){
+    if(pens[0]>pens[1]) return match.team1;
+    if(pens[1]>pens[0]) return match.team2;
+  }
+
+  if(getDecisionType(match)==="penalties" && match.winner){
+    return match.winner;
+  }
+
+  return "";
 }
 
 function predictionScore(side){
@@ -1798,6 +2040,8 @@ function renderBracketEngine(side){
         const team2=prettyTeam(match.team2);
         const canPick=matchupIsKnown(match);
         const roundLabel=displayRound(match.round||"Knockout");
+        const completedScore=scoreText(match);
+        const completedAdvancement=(matchFinished(match) && isKnockoutRound(match.round)) ? formatAdvancementText(match) : "";
         const heading = roundLabel!==lastRound ? `<div class="bracket-round-heading">${escapeHTML(roundLabel)}</div>` : "";
         lastRound=roundLabel;
 
@@ -1807,6 +2051,8 @@ function renderBracketEngine(side){
             <div class="bracket-round">${escapeHTML(roundLabel)}</div>
             <div class="bracket-teams">${escapeHTML(team1)} vs ${escapeHTML(team2)}</div>
             <div class="bracket-meta">${escapeHTML(formatLocalDate(match))} • ${escapeHTML(match.ground||"Venue TBD")}</div>
+            ${completedScore ? `<div class="score-pill">${escapeHTML(completedScore)}</div>` : ""}
+            ${completedAdvancement ? `<div class="result-pill ${getDecisionType(match)==="penalties"?"draw":"win"}">${escapeHTML(completedAdvancement)}</div>` : ""}
             <select class="bracket-select ${isBracketSubmitted(side)?"locked":""}" data-side="${escapeHTML(side)}" data-key="${escapeHTML(key)}" onchange="saveBracketPickFromSelect(this)" ${(canPick && !isBracketSubmitted(side))?"":"disabled"}>
               ${optionHTML("","Pick winner",!picked)}
               ${canPick ? optionHTML(team1,team1,picked===team1) : ""}
@@ -1882,4 +2128,3 @@ loadSchedule();
 </script>
 </body>
 </html>
-
