@@ -2646,7 +2646,7 @@ function renderLegacyHall(){
 
     <div class="legacy-footer-actions">
       <button class="legacy-action secondary" onclick="showScreenByName('home')">Return to GOAT Cup</button>
-      <button class="legacy-action secondary" onclick="showLegacyUnlockNote()">Unlock Info</button>
+      <button class="legacy-action secondary" onclick="showLegacyUnlockNote()">Three Hallways</button>
       ${state.testAll ? `<button class="legacy-action secondary" onclick="resetLegacyAchievements()">Reset</button>` : ``}
     </div>
   `;
@@ -2659,11 +2659,13 @@ function resetLegacyAchievements(){
 }
 
 function showLegacyUnlockNote(){
-  const state=legacyUnlockState();
-  const message=state.testAll
-    ? `This is the test copy, so Ronaldo Hall, Messi Hall, and the Brothers Rotunda are all open for walkthrough testing. In the live version, the Brothers Rotunda opens after both hall achievements are earned, or when the World Cup ends.`
-    : `Ronaldo Hall: ${state.ronaldoOpen ? "open" : "locked"}. Messi Hall: ${state.messiOpen ? "open" : "locked"}. The center Brothers Rotunda opens after both hall achievements are earned, or when the World Cup ends.`;
-  showLegacyInspect("Three-Hall Unlock", "Three Hallways", message);
+  const state = legacyUnlockState();
+
+  const message = state.testAll
+    ? `The Road of Fire, the Road of Light, and the Brothers Rotunda are open. Begin with either road. Walk both halls, then enter the final chamber.`
+    : `The Road of Fire is ${state.ronaldoOpen ? "open" : "locked"}. The Road of Light is ${state.messiOpen ? "open" : "locked"}.`;
+
+  showLegacyInspect("The Hall Is Open", "Three Hallways", message);
 }
 
 function startLegacyHall(hall){
